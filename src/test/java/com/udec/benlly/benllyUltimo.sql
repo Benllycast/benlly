@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-03-2014 a las 21:55:14
+-- Tiempo de generación: 09-04-2014 a las 21:48:47
 -- Versión del servidor: 5.5.16
 -- Versión de PHP: 5.3.8
 
@@ -58,14 +58,6 @@ CREATE TABLE IF NOT EXISTS `log` (
   KEY `fk_log_recorridoorig1` (`recorridoorig_idrecorridoorig`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `log`
---
-
-INSERT INTO `log` (`idlog`, `fecha`, `hora`, `numero_dato`, `valor_obbtenido`, `crc`, `consecutivo`, `recorridoorig_idrecorridoorig`) VALUES
-(1, '2014-02-28', '0000-00-00', 2, 2, '2', 1, 1),
-(2, '2014-02-28', '2014-02-28', 3, 3, '3', 2, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -73,23 +65,25 @@ INSERT INTO `log` (`idlog`, `fecha`, `hora`, `numero_dato`, `valor_obbtenido`, `
 --
 
 CREATE TABLE IF NOT EXISTS `recorridoorig` (
-  `idrecorridoorig` int(11) NOT NULL,
+  `idrecorridoorig` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `vehiculo_idvehiculo` int(11) NOT NULL,
   `conductor_idConductor` int(11) NOT NULL,
-  `hora_salida` varchar(45) DEFAULT NULL,
-  `hora_llegada` varchar(45) DEFAULT NULL,
+  `hora_salida` datetime DEFAULT NULL,
+  `hora_llegada` datetime DEFAULT NULL,
   PRIMARY KEY (`idrecorridoorig`),
   KEY `fk_recorridoorig_vehiculo1` (`vehiculo_idvehiculo`),
   KEY `fk_recorridoorig_conductor1` (`conductor_idConductor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Volcado de datos para la tabla `recorridoorig`
 --
 
 INSERT INTO `recorridoorig` (`idrecorridoorig`, `nombre`, `vehiculo_idvehiculo`, `conductor_idConductor`, `hora_salida`, `hora_llegada`) VALUES
-(1, 'mañanero', 1, 1, '7', '9');
+(1, 'Mañanero', 1, 1, '2014-04-09 13:37:30', '2014-04-09 19:00:00'),
+(4, 'Toro', 1, 1, '2014-04-09 14:37:30', '2014-04-09 20:00:00'),
+(5, 'Medio dia', 1, 1, '1970-01-01 15:37:30', '1970-01-01 21:00:00');
 
 -- --------------------------------------------------------
 
@@ -133,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `vehiculo` (
 --
 
 INSERT INTO `vehiculo` (`idvehiculo`, `placa`) VALUES
-(1, '345');
+(1, 'UAP 345');
 
 --
 -- Restricciones para tablas volcadas
@@ -149,8 +143,8 @@ ALTER TABLE `log`
 -- Filtros para la tabla `recorridoorig`
 --
 ALTER TABLE `recorridoorig`
-  ADD CONSTRAINT `fk_recorridoorig_conductor1` FOREIGN KEY (`conductor_idConductor`) REFERENCES `conductor` (`idConductor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_recorridoorig_vehiculo1` FOREIGN KEY (`vehiculo_idvehiculo`) REFERENCES `vehiculo` (`idvehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_recorridoorig_vehiculo1` FOREIGN KEY (`vehiculo_idvehiculo`) REFERENCES `vehiculo` (`idvehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_recorridoorig_conductor1` FOREIGN KEY (`conductor_idConductor`) REFERENCES `conductor` (`idConductor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `sensor`

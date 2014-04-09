@@ -9,6 +9,7 @@ package com.udec.benlly;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -23,6 +24,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -52,9 +55,11 @@ public class Recorridoorig implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "hora_salida")
-    private String horaSalida;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date horaSalida;
     @Column(name = "hora_llegada")
-    private String horaLlegada;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date horaLlegada;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recorridoorigIdrecorridoorig")
     private List<Log> logList;
     @JoinColumn(name = "conductor_idConductor", referencedColumnName = "idConductor")
@@ -91,22 +96,22 @@ public class Recorridoorig implements Serializable {
         changeSupport.firePropertyChange("nombre", oldNombre, nombre);
     }
 
-    public String getHoraSalida() {
+    public Date getHoraSalida() {
         return horaSalida;
     }
 
-    public void setHoraSalida(String horaSalida) {
-        String oldHoraSalida = this.horaSalida;
+    public void setHoraSalida(Date horaSalida) {
+        Date oldHoraSalida = this.horaSalida;
         this.horaSalida = horaSalida;
         changeSupport.firePropertyChange("horaSalida", oldHoraSalida, horaSalida);
     }
 
-    public String getHoraLlegada() {
+    public Date getHoraLlegada() {
         return horaLlegada;
     }
 
-    public void setHoraLlegada(String horaLlegada) {
-        String oldHoraLlegada = this.horaLlegada;
+    public void setHoraLlegada(Date horaLlegada) {
+        Date oldHoraLlegada = this.horaLlegada;
         this.horaLlegada = horaLlegada;
         changeSupport.firePropertyChange("horaLlegada", oldHoraLlegada, horaLlegada);
     }
