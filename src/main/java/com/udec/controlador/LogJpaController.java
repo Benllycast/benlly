@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.udec.controlador;
 
 import com.udec.benlly.Log;
@@ -13,10 +12,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.udec.benlly.Recorridoorig;
+import com.udec.connection.jpaConnection;
 import com.udec.controlador.exceptions.NonexistentEntityException;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -24,13 +23,11 @@ import javax.persistence.EntityManagerFactory;
  */
 public class LogJpaController implements Serializable {
 
-    public LogJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public LogJpaController() {
     }
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        return jpaConnection.getEntityManager();
     }
 
     public void create(Log log) {
@@ -165,5 +162,5 @@ public class LogJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

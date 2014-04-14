@@ -6,10 +6,18 @@
 package com.udec.vista;
 
 import com.udec.benlly.Conductor;
+import com.udec.benlly.Log;
 import com.udec.benlly.Vehiculo;
+import com.udec.controlador.LogJpaController;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.beans.Beans;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,6 +26,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.RollbackException;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -33,11 +42,14 @@ import javax.swing.table.TableCellRenderer;
  */
 public class RecorridoForm extends JPanel {
 
+    JFileChooser fc;
+
     public RecorridoForm() {
         initComponents();
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
         }
+        fc = new JFileChooser();
     }
 
     TableCellRenderer tableCellRenderer = new DefaultTableCellRenderer() {
@@ -88,6 +100,9 @@ public class RecorridoForm extends JPanel {
         jComboBox2 = new javax.swing.JComboBox();
         jSpinner1 = new javax.swing.JSpinner(new SpinnerDateModel());
         jSpinner2 = new javax.swing.JSpinner(new SpinnerDateModel());
+        jButton1 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         FormListener formListener = new FormListener();
 
@@ -201,38 +216,51 @@ public class RecorridoForm extends JPanel {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jSpinner2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        jButton1.setText("Examinar");
+        jButton1.addActionListener(formListener);
+
+        jButton2.setText("Importar Log");
+        jButton2.addActionListener(formListener);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(newButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(refreshButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton))
+                    .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombreLabel)
-                                    .addComponent(vehiculoIdvehiculoLabel)
-                                    .addComponent(conductoridConductorLabel)
-                                    .addComponent(horaSalidaLabel)
-                                    .addComponent(horaLlegadaLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jSpinner1)
-                                    .addComponent(jSpinner2)))
-                            .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE))))
+                            .addComponent(nombreLabel)
+                            .addComponent(vehiculoIdvehiculoLabel)
+                            .addComponent(conductoridConductorLabel)
+                            .addComponent(horaSalidaLabel)
+                            .addComponent(horaLlegadaLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSpinner1)
+                            .addComponent(jSpinner2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(newButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(deleteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(refreshButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(saveButton))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
 
@@ -242,8 +270,8 @@ public class RecorridoForm extends JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreLabel)
                     .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -269,7 +297,13 @@ public class RecorridoForm extends JPanel {
                     .addComponent(refreshButton)
                     .addComponent(deleteButton)
                     .addComponent(newButton))
-                .addContainerGap())
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -291,6 +325,12 @@ public class RecorridoForm extends JPanel {
             }
             else if (evt.getSource() == deleteButton) {
                 RecorridoForm.this.deleteButtonActionPerformed(evt);
+            }
+            else if (evt.getSource() == jButton1) {
+                RecorridoForm.this.jButton1ActionPerformed(evt);
+            }
+            else if (evt.getSource() == jButton2) {
+                RecorridoForm.this.jButton2ActionPerformed(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -329,7 +369,7 @@ public class RecorridoForm extends JPanel {
             masterTable.setRowSelectionInterval(row, row);
             masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
         } catch (Exception rex) {
-            
+
         }
 
     }//GEN-LAST:event_newButtonActionPerformed
@@ -350,6 +390,93 @@ public class RecorridoForm extends JPanel {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String ruta = file.getAbsolutePath();
+            jTextField1.setText(ruta);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int selected = masterTable.getSelectedRow();
+        com.udec.benlly.Recorridoorig r = list.get(masterTable.convertRowIndexToModel(selected));
+        try {
+            // Abrimos el archivo
+            FileInputStream fstream = new FileInputStream(jTextField1.getText());
+            // Creamos el objeto de entrada
+            DataInputStream entrada = new DataInputStream(fstream);
+            // Creamos el Buffer de Lectura
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(entrada));
+            String strLinea;
+            // Leer el archivo linea por linea
+            Log l = new Log();
+            while ((strLinea = buffer.readLine()) != null) {
+
+                String aux[] = strLinea.split(":");
+
+                int dia = Integer.parseInt(aux[0].trim(), 16);
+                int mes = Integer.parseInt(aux[1].trim(), 16);
+                int anio = Integer.parseInt(aux[2].trim(), 16);
+                int horas = Integer.parseInt(aux[3].trim(), 16);
+                int minutos = Integer.parseInt(aux[4].trim(), 16);
+                int segundos = Integer.parseInt(aux[5].trim(), 16);
+                int consecutivo_sensor = Integer.parseInt(aux[6].trim(), 16);
+                int dato = Integer.parseInt(aux[7].trim(), 16);
+                int valor = Integer.parseInt(aux[8].trim(), 16);
+                int crc = Integer.parseInt(aux[9].trim(), 16);
+
+                String strDia = (dia > 9 ? ""+dia : "0"+dia);
+                String strMes = (mes > 9 ? ""+mes : "0"+mes);
+                String strAnio = (anio > 9 ? ""+anio : "0"+anio);
+                
+                String strHoras = (horas > 9 ? ""+horas : "0"+horas);
+                String strMinutos = (minutos > 9 ? ""+minutos : "0"+minutos);
+                String strSegundos = (segundos > 9 ? ""+segundos : "0"+segundos);
+                
+                l.setConsecutivo(consecutivo_sensor);
+                l.setNumeroDato(dato);
+                l.setValorObbtenido(valor);
+                l.setCrc("" + crc);
+                l.setHora(null);
+                l.setRecorridoorigIdrecorridoorig(r);
+
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yy");
+                String strFecha = "" + strDia + "/" + strMes + "/" + strAnio;
+                Date fecha = null;
+                try {
+
+                    fecha = formatoDelTexto.parse(strFecha);
+                    l.setFecha(fecha);
+
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                
+                SimpleDateFormat formatoDelTexto2 = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
+                String strHora = "" + strDia + "/" + strMes + "/" + strAnio+ " " + strHoras + ":" + strMinutos + ":" + strSegundos;
+                Date hora = null;
+                try {
+
+                    hora = formatoDelTexto.parse(strHora);
+                    l.setHora(hora);
+
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                
+
+                new LogJpaController().create(l);
+            }
+            // Cerramos el archivo
+            entrada.close();
+            System.out.println("ha terminado!!!!");
+        } catch (Exception e) {
+            System.err.println("Ocurrio un error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.util.List<com.udec.benlly.Conductor> conductorList;
@@ -359,10 +486,13 @@ public class RecorridoForm extends JPanel {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JLabel horaLlegadaLabel;
     private javax.swing.JLabel horaSalidaLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JTextField jTextField1;
     private java.util.List<com.udec.benlly.Recorridoorig> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
