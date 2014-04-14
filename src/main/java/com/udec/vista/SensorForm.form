@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
@@ -55,6 +55,9 @@
       </AuxValues>
     </Component>
   </NonVisualComponents>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="2"/>
+  </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -90,16 +93,20 @@
                                   <Component id="tipoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="vehiculoIdvehiculoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="consecutivoVehiculoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="foscLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="preescalerLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="valorField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tipoField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="consecutivoVehiculoField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="valorField" alignment="0" pref="572" max="32767" attributes="0"/>
+                                  <Component id="consecutivoVehiculoField" alignment="0" pref="572" max="32767" attributes="0"/>
+                                  <Component id="foscField" alignment="0" pref="572" max="32767" attributes="0"/>
+                                  <Component id="preescalerField" alignment="0" pref="572" max="32767" attributes="0"/>
                                   <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="masterScrollPane" pref="535" max="32767" attributes="0"/>
+                          <Component id="masterScrollPane" pref="673" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -111,7 +118,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="masterScrollPane" pref="154" max="32767" attributes="0"/>
+              <Component id="masterScrollPane" pref="269" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="valorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -120,17 +127,27 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tipoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="tipoField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="vehiculoIdvehiculoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="consecutivoVehiculoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="consecutivoVehiculoField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="foscLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="foscField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="preescalerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="preescalerField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="1"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -176,6 +193,16 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -185,7 +212,7 @@
           <BindingProperties>
             <BindingProperty name="elements" source="list" target="masterTable" targetPath="elements" updateStrategy="0" immediately="true">
               <Subbinding sourcePath="${valor}">
-                <BindingParameter name="NAME" value="Valor"/>
+                <BindingParameter name="NAME" value="Valor Maximo Salida"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${tipo}">
@@ -197,7 +224,15 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${consecutivoVehiculo}">
-                <BindingParameter name="NAME" value="Consecutivo"/>
+                <BindingParameter name="NAME" value="# Sensor"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${fosc}">
+                <BindingParameter name="NAME" value="Fosc"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${preescaler}">
+                <BindingParameter name="NAME" value="Preescaler"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
               </Subbinding>
             </BindingProperty>
@@ -211,7 +246,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="valorLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Valor:"/>
+        <Property name="text" type="java.lang.String" value="Valor maximo salida:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="tipoLabel">
@@ -226,7 +261,17 @@
     </Component>
     <Component class="javax.swing.JLabel" name="consecutivoVehiculoLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Consecutivo:"/>
+        <Property name="text" type="java.lang.String" value="# Sensor"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="foscLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fosc:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="preescalerLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Preescaler:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="valorField">
@@ -238,15 +283,6 @@
         <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="valorField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tipoField">
-      <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.tipo}" target="tipoField" targetPath="text" updateStrategy="0" immediately="false">
-          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-          <Property name="incompletePathValue" type="java.lang.String" value=""/>
-        </BindingProperty>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="tipoField" targetPath="enabled" updateStrategy="1" immediately="false"/>
-      </BindingProperties>
-    </Component>
     <Component class="javax.swing.JTextField" name="consecutivoVehiculoField">
       <BindingProperties>
         <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.consecutivoVehiculo}" target="consecutivoVehiculoField" targetPath="text" updateStrategy="0" immediately="false">
@@ -254,6 +290,24 @@
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
         <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="consecutivoVehiculoField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="foscField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.fosc}" target="foscField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="foscField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="preescalerField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.preescaler}" target="preescalerField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="preescalerField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">
@@ -308,12 +362,25 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Frecuencia de Voltaje"/>
+            <StringItem index="1" value="Pulso"/>
+          </StringArray>
+        </Property>
+      </Properties>
       <BindingProperties>
-        <BindingProperty name="elements" source="vehiculoList" target="jComboBox1" targetPath="elements" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.vehiculoIdvehiculo}" target="jComboBox1" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.tipo}" target="jComboBox1" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBox2">
+      <BindingProperties>
+        <BindingProperty name="elements" source="vehiculoList" target="jComboBox2" targetPath="elements" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.vehiculoIdvehiculo}" target="jComboBox2" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox1.setRenderer(new DefaultListCellRenderer() {&#xa;           @Override&#xa;           public Component getListCellRendererComponent(&#xa;                   JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;               super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;               if (value instanceof Vehiculo) {&#xa;                   Vehiculo mec = (Vehiculo)value;&#xa;                   setText(mec.getPlaca());&#xa;               }&#xa;               return this;&#xa;           }&#xa;       });"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox2.setRenderer(new DefaultListCellRenderer() {&#xa;            @Override&#xa;            public Component getListCellRendererComponent(&#xa;                JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;                if (value instanceof Vehiculo) {&#xa;                    Vehiculo mec = (Vehiculo)value;&#xa;                    setText(mec.getPlaca());&#xa;                }&#xa;                return this;&#xa;            }&#xa;        });"/>
       </AuxValues>
     </Component>
   </SubComponents>

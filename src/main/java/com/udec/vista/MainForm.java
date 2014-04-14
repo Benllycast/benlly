@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.udec.vista;
+
+import java.awt.Container;
+import java.awt.event.MouseListener;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -49,19 +52,29 @@ public class MainForm extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 833, Short.MAX_VALUE)
+            .addGap(0, 1194, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGap(0, 588, Short.MAX_VALUE)
         );
 
-        jMenu2.setText("Modulo de Configuración");
+        jMenu2.setText("Configuración");
 
         jMenuItem1.setText("Vehiculos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setText("Conductores");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuItem3.setText("Sensores");
@@ -74,21 +87,26 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Modulo de carga y Clasificacion de datos");
+        jMenu3.setText("Carga y Clasificacion de datos");
 
         jMenuItem5.setText("Recorrido");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Modulo de presentacion de datos");
+        jMenu4.setText("Presentacion de datos");
 
         jMenuItem6.setText("Mostrar Logs");
         jMenu4.add(jMenuItem6);
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Modulo de analisis de datos");
+        jMenu5.setText("Analisis de datos");
 
         jMenuItem7.setText("Promedio de valores");
         jMenu5.add(jMenuItem7);
@@ -118,8 +136,72 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+        this.jDesktopPane1.removeAll();
+        SensorForm cb = new SensorForm();
+        for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) cb.getUI()).getNorthPane().getMouseListeners()) {
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) cb.getUI()).getNorthPane().removeMouseListener(listener);
+        }
+        cb.setFrameIcon(null);
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) cb.getUI();
+        Container north = (Container) ui.getNorthPane();
+        north.remove(0);
+        north.validate();
+        north.repaint();
+        this.jDesktopPane1.add(cb);
+        cb.setBounds(0, 0, this.jDesktopPane1.getWidth(), this.jDesktopPane1.getHeight());
+        cb.show();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.jDesktopPane1.removeAll();
+        VehiculoForm cb = new VehiculoForm();
+        for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) cb.getUI()).getNorthPane().getMouseListeners()) {
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) cb.getUI()).getNorthPane().removeMouseListener(listener);
+        }
+        cb.setFrameIcon(null);
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) cb.getUI();
+        Container north = (Container) ui.getNorthPane();
+        north.remove(0);
+        north.validate();
+        north.repaint();
+        this.jDesktopPane1.add(cb);
+        cb.setBounds(0, 0, this.jDesktopPane1.getWidth(), this.jDesktopPane1.getHeight());
+        cb.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        this.jDesktopPane1.removeAll();
+        ConductorForm cb = new ConductorForm();
+        for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) cb.getUI()).getNorthPane().getMouseListeners()) {
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) cb.getUI()).getNorthPane().removeMouseListener(listener);
+        }
+        cb.setFrameIcon(null);
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) cb.getUI();
+        Container north = (Container) ui.getNorthPane();
+        north.remove(0);
+        north.validate();
+        north.repaint();
+        this.jDesktopPane1.add(cb);
+        cb.setBounds(0, 0, this.jDesktopPane1.getWidth(), this.jDesktopPane1.getHeight());
+        cb.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        this.jDesktopPane1.removeAll();
+        RecorridoForm cb = new RecorridoForm();
+        for (MouseListener listener : ((javax.swing.plaf.basic.BasicInternalFrameUI) cb.getUI()).getNorthPane().getMouseListeners()) {
+            ((javax.swing.plaf.basic.BasicInternalFrameUI) cb.getUI()).getNorthPane().removeMouseListener(listener);
+        }
+        cb.setFrameIcon(null);
+        BasicInternalFrameUI ui = (BasicInternalFrameUI) cb.getUI();
+        Container north = (Container) ui.getNorthPane();
+        north.remove(0);
+        north.validate();
+        north.repaint();
+        this.jDesktopPane1.add(cb);
+        cb.setBounds(0, 0, this.jDesktopPane1.getWidth(), this.jDesktopPane1.getHeight());
+        cb.show();
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

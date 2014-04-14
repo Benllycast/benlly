@@ -6,8 +6,6 @@
 
 package com.udec.benlly;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -26,13 +24,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ususario
+ * @author Oscar
  */
 @Entity
 @Table(name = "recorridoorig", catalog = "benlly", schema = "")
@@ -44,8 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Recorridoorig.findByHoraSalida", query = "SELECT r FROM Recorridoorig r WHERE r.horaSalida = :horaSalida"),
     @NamedQuery(name = "Recorridoorig.findByHoraLlegada", query = "SELECT r FROM Recorridoorig r WHERE r.horaLlegada = :horaLlegada")})
 public class Recorridoorig implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,9 +76,7 @@ public class Recorridoorig implements Serializable {
     }
 
     public void setIdrecorridoorig(Integer idrecorridoorig) {
-        Integer oldIdrecorridoorig = this.idrecorridoorig;
         this.idrecorridoorig = idrecorridoorig;
-        changeSupport.firePropertyChange("idrecorridoorig", oldIdrecorridoorig, idrecorridoorig);
     }
 
     public String getNombre() {
@@ -91,9 +84,7 @@ public class Recorridoorig implements Serializable {
     }
 
     public void setNombre(String nombre) {
-        String oldNombre = this.nombre;
         this.nombre = nombre;
-        changeSupport.firePropertyChange("nombre", oldNombre, nombre);
     }
 
     public Date getHoraSalida() {
@@ -101,9 +92,7 @@ public class Recorridoorig implements Serializable {
     }
 
     public void setHoraSalida(Date horaSalida) {
-        Date oldHoraSalida = this.horaSalida;
         this.horaSalida = horaSalida;
-        changeSupport.firePropertyChange("horaSalida", oldHoraSalida, horaSalida);
     }
 
     public Date getHoraLlegada() {
@@ -111,9 +100,7 @@ public class Recorridoorig implements Serializable {
     }
 
     public void setHoraLlegada(Date horaLlegada) {
-        Date oldHoraLlegada = this.horaLlegada;
         this.horaLlegada = horaLlegada;
-        changeSupport.firePropertyChange("horaLlegada", oldHoraLlegada, horaLlegada);
     }
 
     @XmlTransient
@@ -130,9 +117,7 @@ public class Recorridoorig implements Serializable {
     }
 
     public void setConductoridConductor(Conductor conductoridConductor) {
-        Conductor oldConductoridConductor = this.conductoridConductor;
         this.conductoridConductor = conductoridConductor;
-        changeSupport.firePropertyChange("conductoridConductor", oldConductoridConductor, conductoridConductor);
     }
 
     public Vehiculo getVehiculoIdvehiculo() {
@@ -140,9 +125,7 @@ public class Recorridoorig implements Serializable {
     }
 
     public void setVehiculoIdvehiculo(Vehiculo vehiculoIdvehiculo) {
-        Vehiculo oldVehiculoIdvehiculo = this.vehiculoIdvehiculo;
         this.vehiculoIdvehiculo = vehiculoIdvehiculo;
-        changeSupport.firePropertyChange("vehiculoIdvehiculo", oldVehiculoIdvehiculo, vehiculoIdvehiculo);
     }
 
     @Override
@@ -168,14 +151,6 @@ public class Recorridoorig implements Serializable {
     @Override
     public String toString() {
         return "com.udec.benlly.Recorridoorig[ idrecorridoorig=" + idrecorridoorig + " ]";
-    }
-
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

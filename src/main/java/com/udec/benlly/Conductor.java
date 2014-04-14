@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ususario
+ * @author Oscar
  */
 @Entity
 @Table(name = "conductor", catalog = "benlly", schema = "")
@@ -33,7 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Conductor.findAll", query = "SELECT c FROM Conductor c"),
     @NamedQuery(name = "Conductor.findByIdConductor", query = "SELECT c FROM Conductor c WHERE c.idConductor = :idConductor"),
-    @NamedQuery(name = "Conductor.findByNombre", query = "SELECT c FROM Conductor c WHERE c.nombre = :nombre")})
+    @NamedQuery(name = "Conductor.findByNombre", query = "SELECT c FROM Conductor c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Conductor.findByLicencia", query = "SELECT c FROM Conductor c WHERE c.licencia = :licencia")})
 public class Conductor implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -44,6 +45,8 @@ public class Conductor implements Serializable {
     private Integer idConductor;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "licencia")
+    private String licencia;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "conductoridConductor")
     private List<Recorridoorig> recorridoorigList;
 
@@ -72,6 +75,16 @@ public class Conductor implements Serializable {
         String oldNombre = this.nombre;
         this.nombre = nombre;
         changeSupport.firePropertyChange("nombre", oldNombre, nombre);
+    }
+
+    public String getLicencia() {
+        return licencia;
+    }
+
+    public void setLicencia(String licencia) {
+        String oldLicencia = this.licencia;
+        this.licencia = licencia;
+        changeSupport.firePropertyChange("licencia", oldLicencia, licencia);
     }
 
     @XmlTransient

@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Ususario
+ * @author Oscar
  */
 @Entity
 @Table(name = "vehiculo", catalog = "benlly", schema = "")
@@ -35,7 +35,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Vehiculo.findAll", query = "SELECT v FROM Vehiculo v"),
     @NamedQuery(name = "Vehiculo.findByIdvehiculo", query = "SELECT v FROM Vehiculo v WHERE v.idvehiculo = :idvehiculo"),
-    @NamedQuery(name = "Vehiculo.findByPlaca", query = "SELECT v FROM Vehiculo v WHERE v.placa = :placa")})
+    @NamedQuery(name = "Vehiculo.findByPlaca", query = "SELECT v FROM Vehiculo v WHERE v.placa = :placa"),
+    @NamedQuery(name = "Vehiculo.findByMarca", query = "SELECT v FROM Vehiculo v WHERE v.marca = :marca"),
+    @NamedQuery(name = "Vehiculo.findByModelo", query = "SELECT v FROM Vehiculo v WHERE v.modelo = :modelo"),
+    @NamedQuery(name = "Vehiculo.findByNp", query = "SELECT v FROM Vehiculo v WHERE v.np = :np"),
+    @NamedQuery(name = "Vehiculo.findByRc", query = "SELECT v FROM Vehiculo v WHERE v.rc = :rc"),
+    @NamedQuery(name = "Vehiculo.findByRd", query = "SELECT v FROM Vehiculo v WHERE v.rd = :rd"),
+    @NamedQuery(name = "Vehiculo.findByRr", query = "SELECT v FROM Vehiculo v WHERE v.rr = :rr")})
 public class Vehiculo implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -47,6 +53,18 @@ public class Vehiculo implements Serializable {
     private Integer idvehiculo;
     @Column(name = "placa")
     private String placa;
+    @Column(name = "marca")
+    private String marca;
+    @Column(name = "modelo")
+    private String modelo;
+    @Column(name = "np")
+    private Integer np;
+    @Column(name = "rc")
+    private Integer rc;
+    @Column(name = "rd")
+    private Integer rd;
+    @Column(name = "rr")
+    private Integer rr;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculoIdvehiculo")
     private List<Sensor> sensorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vehiculoIdvehiculo")
@@ -77,6 +95,66 @@ public class Vehiculo implements Serializable {
         String oldPlaca = this.placa;
         this.placa = placa;
         changeSupport.firePropertyChange("placa", oldPlaca, placa);
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        String oldMarca = this.marca;
+        this.marca = marca;
+        changeSupport.firePropertyChange("marca", oldMarca, marca);
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        String oldModelo = this.modelo;
+        this.modelo = modelo;
+        changeSupport.firePropertyChange("modelo", oldModelo, modelo);
+    }
+
+    public Integer getNp() {
+        return np;
+    }
+
+    public void setNp(Integer np) {
+        Integer oldNp = this.np;
+        this.np = np;
+        changeSupport.firePropertyChange("np", oldNp, np);
+    }
+
+    public Integer getRc() {
+        return rc;
+    }
+
+    public void setRc(Integer rc) {
+        Integer oldRc = this.rc;
+        this.rc = rc;
+        changeSupport.firePropertyChange("rc", oldRc, rc);
+    }
+
+    public Integer getRd() {
+        return rd;
+    }
+
+    public void setRd(Integer rd) {
+        Integer oldRd = this.rd;
+        this.rd = rd;
+        changeSupport.firePropertyChange("rd", oldRd, rd);
+    }
+
+    public Integer getRr() {
+        return rr;
+    }
+
+    public void setRr(Integer rr) {
+        Integer oldRr = this.rr;
+        this.rr = rr;
+        changeSupport.firePropertyChange("rr", oldRr, rr);
     }
 
     @XmlTransient

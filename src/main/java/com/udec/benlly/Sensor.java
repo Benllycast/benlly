@@ -35,7 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sensor.findByIdsensor", query = "SELECT s FROM Sensor s WHERE s.idsensor = :idsensor"),
     @NamedQuery(name = "Sensor.findByValor", query = "SELECT s FROM Sensor s WHERE s.valor = :valor"),
     @NamedQuery(name = "Sensor.findByTipo", query = "SELECT s FROM Sensor s WHERE s.tipo = :tipo"),
-    @NamedQuery(name = "Sensor.findByConsecutivoVehiculo", query = "SELECT s FROM Sensor s WHERE s.consecutivoVehiculo = :consecutivoVehiculo")})
+    @NamedQuery(name = "Sensor.findByConsecutivoVehiculo", query = "SELECT s FROM Sensor s WHERE s.consecutivoVehiculo = :consecutivoVehiculo"),
+    @NamedQuery(name = "Sensor.findByFosc", query = "SELECT s FROM Sensor s WHERE s.fosc = :fosc"),
+    @NamedQuery(name = "Sensor.findByPreescaler", query = "SELECT s FROM Sensor s WHERE s.preescaler = :preescaler")})
 public class Sensor implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -51,6 +53,10 @@ public class Sensor implements Serializable {
     private String tipo;
     @Column(name = "consecutivo_vehiculo")
     private Integer consecutivoVehiculo;
+    @Column(name = "FOSC")
+    private Integer fosc;
+    @Column(name = "preescaler")
+    private Integer preescaler;
     @JoinColumn(name = "vehiculo_idvehiculo", referencedColumnName = "idvehiculo")
     @ManyToOne(optional = false)
     private Vehiculo vehiculoIdvehiculo;
@@ -100,6 +106,26 @@ public class Sensor implements Serializable {
         Integer oldConsecutivoVehiculo = this.consecutivoVehiculo;
         this.consecutivoVehiculo = consecutivoVehiculo;
         changeSupport.firePropertyChange("consecutivoVehiculo", oldConsecutivoVehiculo, consecutivoVehiculo);
+    }
+
+    public Integer getFosc() {
+        return fosc;
+    }
+
+    public void setFosc(Integer fosc) {
+        Integer oldFosc = this.fosc;
+        this.fosc = fosc;
+        changeSupport.firePropertyChange("fosc", oldFosc, fosc);
+    }
+
+    public Integer getPreescaler() {
+        return preescaler;
+    }
+
+    public void setPreescaler(Integer preescaler) {
+        Integer oldPreescaler = this.preescaler;
+        this.preescaler = preescaler;
+        changeSupport.firePropertyChange("preescaler", oldPreescaler, preescaler);
     }
 
     public Vehiculo getVehiculoIdvehiculo() {
