@@ -6,6 +6,8 @@
 
 package com.udec.model.filtros;
 
+import com.udec.model.wraperModels.WraperSensorAnalogo;
+
 /**
  *
  * @author windows7
@@ -22,7 +24,8 @@ public class FiltroAnalogoVelocidad extends FiltroAnalogo implements InterfaceFi
     }
 
     private float getFrecuenciaDeGiro() {
-        return this.getFrecuenciaDeEntrada()/this.getVehiculo().getDivisorDeFrecuenciaVelocidad();
+        WraperSensorAnalogo sensor = (WraperSensorAnalogo) super.getSensor();
+        return this.getFrecuenciaDeEntrada()/sensor.getDivisorDeFrecuenciaVelocidad();
     }
 
     @Override

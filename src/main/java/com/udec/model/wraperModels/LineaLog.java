@@ -13,38 +13,19 @@ import com.udec.benlly.Log;
  */
 public class LineaLog extends Log {
 
-    private float numeroTic = 0.0f;
-    private int valorDigital = 0;
-    
-
-    public LineaLog(float numeroTic) {
-        this.numeroTic = numeroTic;
-    }
-
     public LineaLog(Integer idlog) {
         super(idlog);
-        this.numeroTic = super.getValorObbtenido().floatValue();
     }
     
     public LineaLog(Log log) {
-        super(log.getIdlog());
-        this.numeroTic = super.getValorObbtenido().floatValue();
+        super(log.getIdLog());
     }
 
     public float getNumeroTic() {
-        return numeroTic;
-    }
-
-    public void setNumeroTic(float numeroTic) {
-        this.numeroTic = numeroTic;
+        return super.getValor().floatValue();
     }
 
     public int getValorDigital() {
-        return valorDigital;
+        return super.getValor();
     }
-
-    public void setValorDigital(int valorDigital) {
-        this.valorDigital = valorDigital;
-    }
-
 }

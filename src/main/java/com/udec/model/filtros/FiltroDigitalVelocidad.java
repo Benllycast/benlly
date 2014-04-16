@@ -5,9 +5,9 @@
  */
 package com.udec.model.filtros;
 
-import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
+import com.udec.model.wraperModels.LineaLog;
 
 /**
  *
@@ -18,14 +18,14 @@ public class FiltroDigitalVelocidad extends FiltroDigitalRPM implements Interfac
     public FiltroDigitalVelocidad() {
     }
 
-    public FiltroDigitalVelocidad(Vehiculo vehiculo1, Log log, Sensor sensor) {
+    public FiltroDigitalVelocidad(Vehiculo vehiculo1, LineaLog log, Sensor sensor) {
         super(vehiculo1, log, sensor);
     }
 
     @Override
     public float getVelocidad() {
         float velocidad = super.getVehiculo().getRadioRueda() * 
-                (this.getVelocidadAngular()/(super.getVehiculo().getRelacionDeCaja()*super.getVehiculo().getRelacionDeDiferencial()));
+                (this.getVelocidadAngular()/(this.getVehiculo().getRelacionCaja()*this.getVehiculo().getRelacionDiferencial()));
         return velocidad;
     }
 

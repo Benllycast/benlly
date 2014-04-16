@@ -8,6 +8,8 @@ package com.udec.model.filtros;
 import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
+import com.udec.model.wraperModels.LineaLog;
+import com.udec.model.wraperModels.WraperSensorDigital;
 
 /**
  *
@@ -27,7 +29,7 @@ public abstract class FiltroDigital extends Filtro {
     public FiltroDigital() {
     }
 
-    public FiltroDigital(Vehiculo vehiculo1, Log log, Sensor sensor) {
+    public FiltroDigital(Vehiculo vehiculo1, LineaLog log, Sensor sensor) {
         super(vehiculo1, log, sensor);
         this.periodoPulso = this.getTotalTic() * this.tiempoTic;
         this.frecuenciaPulso = 1.0f / this.getPeriodoDePulso();
@@ -36,10 +38,6 @@ public abstract class FiltroDigital extends Filtro {
 
     float getPulsosPorMinuto() {
         return pulsosPorMinuto;
-    }
-
-    float getNumeroPulsosPorRevolucion() {
-        return this.getVehiculo().getNumeroPulsosPorRevolucion();
     }
 
     private float getFrecuenciaDePulso() {

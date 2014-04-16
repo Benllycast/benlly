@@ -8,10 +8,7 @@ package com.udec.model.filtros;
 import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
-import com.udec.model.Valor;
 import com.udec.model.wraperModels.LineaLog;
-import com.udec.model.wraperModels.WraperSensor;
-import com.udec.model.wraperModels.WraperVehiculo;
 
 /**
  *
@@ -21,32 +18,16 @@ public abstract class Filtro {
 
     public static final float MINUTO = 60.0f;
     private LineaLog lineaLog = null;
-    private WraperVehiculo vehiculo = null;
-    private WraperSensor sensor = null;
+    private Vehiculo vehiculo = null;
+    private Sensor sensor = null;
 
     public Filtro() {
     }
 
-    public Filtro(Vehiculo vehiculo1, Log log, Sensor sensor){
-        this.vehiculo = (WraperVehiculo) vehiculo1;
-        this.lineaLog = (LineaLog) log;
-        this.sensor = (WraperSensor) sensor;
-    }
-    
-    public WraperSensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(WraperSensor sensor) {
+    public Filtro(Vehiculo vehiculo1, LineaLog log, Sensor sensor){
+        this.vehiculo = vehiculo1;
+        this.lineaLog = log;
         this.sensor = sensor;
-    }
-
-    public WraperVehiculo getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(WraperVehiculo vehiculo) {
-        this.vehiculo = vehiculo;
     }
 
     public LineaLog getLineaLog() {
@@ -55,6 +36,22 @@ public abstract class Filtro {
 
     public void setLineaLog(LineaLog lineaLog) {
         this.lineaLog = lineaLog;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public Sensor getSensor() {
+        return sensor;
+    }
+
+    public void setSensor(Sensor sensor) {
+        this.sensor = sensor;
     }
     
     public abstract float getValor();

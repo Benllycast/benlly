@@ -7,31 +7,35 @@
 package com.udec.model.wraperModels;
 
 import com.udec.benlly.Sensor;
+import com.udec.benlly.Sensordigital;
 
 /**
  *
  * @author windows7
  */
-public class WraperSensorDigital extends WraperSensor{
+public class WraperSensorDigital extends Sensor {
     
-    private float pulsosPorMinuto = 0.0f;
+        private Sensordigital sensorDigital;
 
-    public WraperSensorDigital() {
+    public WraperSensorDigital(Sensordigital sensorDigital) {
+        this.sensorDigital = sensorDigital;
     }
 
-    public WraperSensorDigital(Integer idsensor) {
+    public WraperSensorDigital(Sensordigital sensorDigital, Integer idsensor) {
         super(idsensor);
+        this.sensorDigital = sensorDigital;
     }
 
-    public WraperSensorDigital(Sensor sensor) {
-        super(sensor);
+    public Sensordigital getSensorDigital() {
+        return sensorDigital;
     }
 
-    public float getPulsosPorMinuto() {
-        return pulsosPorMinuto;
+    public void setSensorDigital(Sensordigital sensorDigital) {
+        this.sensorDigital = sensorDigital;
     }
 
-    public void setPulsosPorMinuto(float pulsosPorMinuto) {
-        this.pulsosPorMinuto = pulsosPorMinuto;
-    }    
+    public float getNumeroPulsosPorRevolucion() {
+        return this.sensorDigital.getPulsosRevolucion();
+    }
+    
 }

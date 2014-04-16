@@ -6,66 +6,76 @@
 package com.udec.model.wraperModels;
 
 import com.udec.benlly.Sensor;
+import com.udec.benlly.Sensoranalogo;
 
 /**
  *
  * @author windows7
  */
-public class WraperSensorAnalogo extends WraperSensor {
+public class WraperSensorAnalogo extends Sensor {
 
-    private float magnitudMaxima = 0.0f;
-    private float magnitudMinima = 0.0f;    
-    private float voltajeMaximoDeSalida = 0.0f;
-    private float voltajeMinimoDeSalida = 0.0f;
+    private Sensoranalogo sensorAnalogo;
+
+    public WraperSensorAnalogo(Sensoranalogo sensorAnalogo) {
+        this.sensorAnalogo = sensorAnalogo;
+    }
+
+    public WraperSensorAnalogo(Sensoranalogo sensorAnalogo, Integer idsensor) {
+        super(idsensor);
+        this.sensorAnalogo = sensorAnalogo;
+    }
 
     public float getVoltajeMinimoDeSalida() {
-        return voltajeMinimoDeSalida;
+        return this.sensorAnalogo.getSalidaMinima();
     }
 
     public void setVoltajeMinimoDeSalida(float voltajeMinimoDeSalida) {
-        this.voltajeMinimoDeSalida = voltajeMinimoDeSalida;
+        this.sensorAnalogo.setSalidaMinima(voltajeMinimoDeSalida);
     }
 
-
     public float getVoltajeMaximoDeSalida() {
-        return voltajeMaximoDeSalida;
+        return this.sensorAnalogo.getSalidaMaxima();
     }
 
     public void setVoltajeMaximoDeSalida(float voltajeMaximoDeSalida) {
-        this.voltajeMaximoDeSalida = voltajeMaximoDeSalida;
+        this.sensorAnalogo.setSalidaMaxima(voltajeMaximoDeSalida);
     }
 
-
     public float getMagnitudMinima() {
-        return magnitudMinima;
+        return sensorAnalogo.getMagnitudMinima();
     }
 
     public void setMagnitudMinima(float magnitudMinima) {
-        this.magnitudMinima = magnitudMinima;
+        this.sensorAnalogo.setMagnitudMinima(magnitudMinima);
     }
 
     public float getMagnitudMaxima() {
-        return magnitudMaxima;
+        return sensorAnalogo.getMagnitudMaxima();
     }
 
     public void setMagnitudMaxima(float magnitudMaxima) {
-        this.magnitudMaxima = magnitudMaxima;
-    }
-
-    public WraperSensorAnalogo() {
-    }
-
-    public WraperSensorAnalogo(Integer idsensor) {
-        super(idsensor);
-    }
-
-    public WraperSensorAnalogo(Sensor sensor) {
-        super(sensor);
+        this.sensorAnalogo.setMagnitudMaxima(magnitudMaxima);
     }
 
     public float getResolucion() {
-        return (this.getVoltajeMaximoDeSalida()-this.getVoltajeMinimoDeSalida())/
-                (this.getMagnitudMaxima()-this.getMagnitudMinima());
+        return (this.getVoltajeMaximoDeSalida() - this.getVoltajeMinimoDeSalida())
+                / (this.getMagnitudMaxima() - this.getMagnitudMinima());
+    }
+
+    public Sensoranalogo getSensorAnalogo() {
+        return sensorAnalogo;
+    }
+
+    public void setSensorAnalogo(Sensoranalogo sensorAnalogo) {
+        this.sensorAnalogo = sensorAnalogo;
+    }
+
+    public float getDivisorDeFrecuenciaVelocidad() {
+        return sensorAnalogo.getDivisorFrecuencia();
+    }
+
+    public float getDivisorDeFrecuenciaRPM() {
+        return sensorAnalogo.getDivisorFrecuencia();
     }
 
 }

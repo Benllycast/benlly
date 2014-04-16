@@ -9,6 +9,7 @@ package com.udec.model.filtros;
 import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
+import com.udec.model.wraperModels.LineaLog;
 import com.udec.model.wraperModels.WraperSensorAnalogo;
 /**
  *
@@ -23,10 +24,10 @@ public abstract class FiltroAnalogo extends Filtro{
     public FiltroAnalogo() {
     }
 
-    public FiltroAnalogo(Vehiculo vehiculo1, Log log, Sensor sensor) {
+    public FiltroAnalogo(Vehiculo vehiculo1, LineaLog log, Sensor sensor) {
         super(vehiculo1, log, sensor);
     }
-
+    
     float getFrecuenciaDeEntrada() {
         WraperSensorAnalogo sensor = (WraperSensorAnalogo) this.getSensor();
         return this.getVoltajeDeSalida()/sensor.getResolucion();

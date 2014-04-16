@@ -21,5 +21,7 @@ public class FiltrosManager {
     private List<Sensor> sensores;
     private List<Log> lista;
     private List<Valor> valores;
+    private List<Filtro> filtros;
+    
     
 }

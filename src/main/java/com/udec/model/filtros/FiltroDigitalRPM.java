@@ -9,6 +9,7 @@ package com.udec.model.filtros;
 import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
+import com.udec.model.wraperModels.LineaLog;
 import com.udec.model.wraperModels.WraperSensorDigital;
 
 /**
@@ -20,14 +21,14 @@ public class FiltroDigitalRPM extends FiltroDigital implements InterfaceFiltroRP
     public FiltroDigitalRPM() {
     }
 
-    public FiltroDigitalRPM(Vehiculo vehiculo1, Log log, Sensor sensor) {
+    public FiltroDigitalRPM(Vehiculo vehiculo1, LineaLog log, Sensor sensor) {
         super(vehiculo1, log, sensor);
     }
 
     @Override
     public float getRPM() {
         WraperSensorDigital sensor = (WraperSensorDigital)this.getSensor();
-        return sensor.getPulsosPorMinuto() / super.getNumeroPulsosPorRevolucion();
+        return this.getPulsosPorMinuto() / sensor.getNumeroPulsosPorRevolucion();
     }
 
     @Override
