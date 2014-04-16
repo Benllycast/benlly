@@ -6,6 +6,8 @@
 
 package com.udec.benlly;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,6 +23,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -38,6 +41,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sensor.findByCanal", query = "SELECT s FROM Sensor s WHERE s.canal = :canal"),
     @NamedQuery(name = "Sensor.findByMagnitud", query = "SELECT s FROM Sensor s WHERE s.magnitud = :magnitud")})
 public class Sensor implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,7 +83,9 @@ public class Sensor implements Serializable {
     }
 
     public void setIdsensor(Integer idsensor) {
+        Integer oldIdsensor = this.idsensor;
         this.idsensor = idsensor;
+        changeSupport.firePropertyChange("idsensor", oldIdsensor, idsensor);
     }
 
     public Long getSerial() {
@@ -86,7 +93,9 @@ public class Sensor implements Serializable {
     }
 
     public void setSerial(Long serial) {
+        Long oldSerial = this.serial;
         this.serial = serial;
+        changeSupport.firePropertyChange("serial", oldSerial, serial);
     }
 
     public String getTipo() {
@@ -94,7 +103,9 @@ public class Sensor implements Serializable {
     }
 
     public void setTipo(String tipo) {
+        String oldTipo = this.tipo;
         this.tipo = tipo;
+        changeSupport.firePropertyChange("tipo", oldTipo, tipo);
     }
 
     public Short getCanal() {
@@ -102,7 +113,9 @@ public class Sensor implements Serializable {
     }
 
     public void setCanal(Short canal) {
+        Short oldCanal = this.canal;
         this.canal = canal;
+        changeSupport.firePropertyChange("canal", oldCanal, canal);
     }
 
     public String getMagnitud() {
@@ -110,7 +123,9 @@ public class Sensor implements Serializable {
     }
 
     public void setMagnitud(String magnitud) {
+        String oldMagnitud = this.magnitud;
         this.magnitud = magnitud;
+        changeSupport.firePropertyChange("magnitud", oldMagnitud, magnitud);
     }
 
     public String getUvicacion() {
@@ -118,7 +133,9 @@ public class Sensor implements Serializable {
     }
 
     public void setUvicacion(String uvicacion) {
+        String oldUvicacion = this.uvicacion;
         this.uvicacion = uvicacion;
+        changeSupport.firePropertyChange("uvicacion", oldUvicacion, uvicacion);
     }
 
     public String getOtrosDatos() {
@@ -126,7 +143,9 @@ public class Sensor implements Serializable {
     }
 
     public void setOtrosDatos(String otrosDatos) {
+        String oldOtrosDatos = this.otrosDatos;
         this.otrosDatos = otrosDatos;
+        changeSupport.firePropertyChange("otrosDatos", oldOtrosDatos, otrosDatos);
     }
 
     public Vehiculo getVehiculoidVehiculo() {
@@ -134,7 +153,9 @@ public class Sensor implements Serializable {
     }
 
     public void setVehiculoidVehiculo(Vehiculo vehiculoidVehiculo) {
+        Vehiculo oldVehiculoidVehiculo = this.vehiculoidVehiculo;
         this.vehiculoidVehiculo = vehiculoidVehiculo;
+        changeSupport.firePropertyChange("vehiculoidVehiculo", oldVehiculoidVehiculo, vehiculoidVehiculo);
     }
 
     public Sensoranalogo getSensoranalogo() {
@@ -176,6 +197,14 @@ public class Sensor implements Serializable {
     @Override
     public String toString() {
         return "com.udec.benlly.Sensor[ idsensor=" + idsensor + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

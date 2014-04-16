@@ -6,10 +6,17 @@
 package com.udec.vista;
 
 import com.udec.benlly.Conductor;
+import com.udec.benlly.Log;
 import com.udec.benlly.Vehiculo;
+import com.udec.controlador.LogJpaController;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.beans.Beans;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.RollbackException;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
@@ -33,11 +41,14 @@ import javax.swing.table.TableCellRenderer;
  */
 public class RecorridoForm extends JInternalFrame {
 
+    JFileChooser fc;
+
     public RecorridoForm() {
         initComponents();
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
         }
+        fc = new JFileChooser();
 
     }
 
@@ -97,6 +108,11 @@ public class RecorridoForm extends JInternalFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         FormListener formListener = new FormListener();
 
@@ -230,99 +246,174 @@ public class RecorridoForm extends JInternalFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.conductoridConductor}"), jComboBox2, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
+        jComboBox2.addActionListener(formListener);
+
+        jButton1.setText("Examinar");
+        jButton1.addActionListener(formListener);
+
+        jButton2.setText("Importar Log");
+        jButton2.addActionListener(formListener);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+
+        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.logList}");
+        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, eLProperty, jTable1);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${fecha}"));
+        columnBinding.setColumnName("Fecha");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tiempo}"));
+        columnBinding.setColumnName("Tiempo");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${numeroDato}"));
+        columnBinding.setColumnName("Numero Dato");
+        columnBinding.setColumnClass(Short.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${valor}"));
+        columnBinding.setColumnName("Valor");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${canal}"));
+        columnBinding.setColumnName("Canal");
+        columnBinding.setColumnClass(Short.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${crc}"));
+        columnBinding.setColumnName("Crc");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${otrosDatos}"));
+        columnBinding.setColumnName("Otros Datos");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(newButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(refreshButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(vehiculoidVehiculoLabel)
+                                .addGap(429, 429, 429)
+                                .addComponent(conductoridConductorLabel)
+                                .addGap(80, 80, 80)
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 988, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, 0))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombreLabel)
+                            .addComponent(horaSalidaProgramadaLabel)
+                            .addComponent(horaInicioLabel)
+                            .addComponent(otrosDatosLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSpinner3)
+                            .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                            .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                            .addComponent(otrosDatosField))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombreLabel)
-                                    .addComponent(fechaLabel)
-                                    .addComponent(horaSalidaProgramadaLabel)
-                                    .addComponent(horaLlegadaProgramadaLabel)
-                                    .addComponent(horaInicioLabel)
-                                    .addComponent(horaFinalizacionLabel)
-                                    .addComponent(otrosDatosLabel)
-                                    .addComponent(vehiculoidVehiculoLabel)
-                                    .addComponent(conductoridConductorLabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(27, 27, 27)
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton2))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(horaLlegadaProgramadaLabel)
+                                            .addComponent(fechaLabel)
+                                            .addComponent(horaFinalizacionLabel))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jSpinner2, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, 0))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(newButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
-                                    .addComponent(otrosDatosField, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
-                                    .addComponent(jSpinner1)
-                                    .addComponent(jSpinner2)
-                                    .addComponent(jSpinner3)
-                                    .addComponent(jSpinner4)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE))))
-                .addContainerGap())
+                                .addComponent(deleteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(refreshButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(saveButton)
+                                .addContainerGap(20, Short.MAX_VALUE))))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(272, 272, 272)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton});
 
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jSpinner1, jSpinner3, nombreField});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreLabel)
-                    .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fechaLabel)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(nombreLabel)
+                        .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(fechaLabel)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(horaSalidaProgramadaLabel)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(horaLlegadaProgramadaLabel)
                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(horaInicioLabel)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(horaFinalizacionLabel)
                     .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vehiculoidVehiculoLabel)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(conductoridConductorLabel)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(otrosDatosLabel)
-                    .addComponent(otrosDatosField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveButton)
-                    .addComponent(refreshButton)
-                    .addComponent(deleteButton)
-                    .addComponent(newButton))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(otrosDatosLabel)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(otrosDatosField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(saveButton)
+                                .addComponent(refreshButton)
+                                .addComponent(deleteButton)
+                                .addComponent(newButton)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.horaSalidaProgramada}"), jSpinner1, org.jdesktop.beansbinding.BeanProperty.create("value"));
@@ -362,6 +453,15 @@ public class RecorridoForm extends JInternalFrame {
             }
             else if (evt.getSource() == deleteButton) {
                 RecorridoForm.this.deleteButtonActionPerformed(evt);
+            }
+            else if (evt.getSource() == jComboBox2) {
+                RecorridoForm.this.jComboBox2ActionPerformed(evt);
+            }
+            else if (evt.getSource() == jButton1) {
+                RecorridoForm.this.jButton1ActionPerformed(evt);
+            }
+            else if (evt.getSource() == jButton2) {
+                RecorridoForm.this.jButton2ActionPerformed(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -418,6 +518,95 @@ public class RecorridoForm extends JInternalFrame {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String ruta = file.getAbsolutePath();
+            jTextField1.setText(ruta);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int selected = masterTable.getSelectedRow();
+        com.udec.benlly.Recorrido r = list.get(masterTable.convertRowIndexToModel(selected));
+        try {
+            // Abrimos el archivo
+            FileInputStream fstream = new FileInputStream(jTextField1.getText());
+            // Creamos el objeto de entrada
+            DataInputStream entrada = new DataInputStream(fstream);
+            // Creamos el Buffer de Lectura
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(entrada));
+            String strLinea;
+            // Leer el archivo linea por linea
+            Log l = new Log();
+            while ((strLinea = buffer.readLine()) != null) {
+
+                String aux[] = strLinea.split(":");
+
+                int dia = Integer.parseInt(aux[0].trim(), 16);
+                int mes = Integer.parseInt(aux[1].trim(), 16);
+                int anio = Integer.parseInt(aux[2].trim(), 16);
+                int horas = Integer.parseInt(aux[3].trim(), 16);
+                int minutos = Integer.parseInt(aux[4].trim(), 16);
+                int segundos = Integer.parseInt(aux[5].trim(), 16);
+                short consecutivo_sensor = Short.parseShort(aux[6].trim(), 16);
+                short dato = Short.parseShort(aux[7].trim(), 16);
+                int valor = Integer.parseInt(aux[8].trim(), 16);
+                int crc = Integer.parseInt(aux[9].trim(), 16);
+
+                String strDia = (dia > 9 ? "" + dia : "0" + dia);
+                String strMes = (mes > 9 ? "" + mes : "0" + mes);
+                String strAnio = (anio > 9 ? "" + anio : "0" + anio);
+
+                String strHoras = (horas > 9 ? "" + horas : "0" + horas);
+                String strMinutos = (minutos > 9 ? "" + minutos : "0" + minutos);
+                String strSegundos = (segundos > 9 ? "" + segundos : "0" + segundos);
+
+                l.setCanal(consecutivo_sensor);
+                l.setNumeroDato(dato);
+                l.setValor(valor);
+                l.setCrc(crc);
+                l.setRecorridoidRecorrido(r);
+
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yy");
+                String strFecha = "" + strDia + "/" + strMes + "/" + strAnio;
+                Date fecha = null;
+                try {
+
+                    fecha = formatoDelTexto.parse(strFecha);
+                    l.setFecha(fecha);
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                SimpleDateFormat formatoDelTexto2 = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
+                String strHora = "" + strDia + "/" + strMes + "/" + strAnio + " " + strHoras + ":" + strMinutos + ":" + strSegundos;
+                Date hora = null;
+                try {
+
+                    hora = formatoDelTexto.parse(strHora);
+                    l.setTiempo(hora);
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
+                new LogJpaController().create(l);
+            }
+            // Cerramos el archivo
+            entrada.close();
+            System.out.println("ha terminado!!!!");
+        } catch (Exception e) {
+            System.err.println("Ocurrio un error: " + e.getMessage());
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.util.List<com.udec.benlly.Conductor> conductorList;
@@ -430,13 +619,18 @@ public class RecorridoForm extends JInternalFrame {
     private javax.swing.JLabel horaInicioLabel;
     private javax.swing.JLabel horaLlegadaProgramadaLabel;
     private javax.swing.JLabel horaSalidaProgramadaLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
     private javax.swing.JSpinner jSpinner4;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private java.util.List<com.udec.benlly.Recorrido> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
@@ -453,6 +647,5 @@ public class RecorridoForm extends JInternalFrame {
     private javax.swing.JLabel vehiculoidVehiculoLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
- 
 
 }
