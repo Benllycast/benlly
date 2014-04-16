@@ -5,14 +5,18 @@
  */
 package com.udec.vista;
 
+import com.udec.benlly.Vehiculo;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.beans.Beans;
 import java.util.ArrayList;
 
 import java.util.List;
 import javax.persistence.RollbackException;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 /**
@@ -26,6 +30,18 @@ public class SensorForm extends JInternalFrame {
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
         }
+        magnitudMaximaField.setVisible(false);
+        magnitudMaximaLabel.setVisible(false);
+        magnitudMinimaField.setVisible(false);
+        magnitudMinimaLabel.setVisible(false);
+        salidaMaximaField.setVisible(false);
+        salidaMaximaLabel.setVisible(false);
+        salidaMinimaField.setVisible(false);
+        salidaMinimaLabel.setVisible(false);
+        divisorFrecuenciaField.setVisible(false);
+        divisorFrecuenciaLabel.setVisible(false);
+        pulsosRevolucionField.setVisible(false);
+        pulsosRevolucionLabel.setVisible(false);
     }
 
     /**
@@ -52,11 +68,23 @@ public class SensorForm extends JInternalFrame {
         uvicacionLabel = new javax.swing.JLabel();
         otrosDatosLabel = new javax.swing.JLabel();
         vehiculoidVehiculoLabel = new javax.swing.JLabel();
+        pulsosRevolucionLabel = new javax.swing.JLabel();
+        magnitudMaximaLabel = new javax.swing.JLabel();
+        magnitudMinimaLabel = new javax.swing.JLabel();
+        salidaMaximaLabel = new javax.swing.JLabel();
+        salidaMinimaLabel = new javax.swing.JLabel();
+        divisorFrecuenciaLabel = new javax.swing.JLabel();
         serialField = new javax.swing.JTextField();
         canalField = new javax.swing.JTextField();
         magnitudField = new javax.swing.JTextField();
         uvicacionField = new javax.swing.JTextField();
         otrosDatosField = new javax.swing.JTextField();
+        pulsosRevolucionField = new javax.swing.JTextField();
+        magnitudMaximaField = new javax.swing.JTextField();
+        magnitudMinimaField = new javax.swing.JTextField();
+        salidaMaximaField = new javax.swing.JTextField();
+        salidaMinimaField = new javax.swing.JTextField();
+        divisorFrecuenciaField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
@@ -80,7 +108,7 @@ public class SensorForm extends JInternalFrame {
         columnBinding.setColumnName("Magnitud");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${uvicacion}"));
-        columnBinding.setColumnName("Ubicación");
+        columnBinding.setColumnName("Ubicacion");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${vehiculoidVehiculo.placa}"));
         columnBinding.setColumnName("Vehiculo");
@@ -100,11 +128,23 @@ public class SensorForm extends JInternalFrame {
 
         magnitudLabel.setText("Magnitud:");
 
-        uvicacionLabel.setText("Ubicación:");
+        uvicacionLabel.setText("Ubicacion:");
 
         otrosDatosLabel.setText("Otros Datos:");
 
         vehiculoidVehiculoLabel.setText("Vehiculo:");
+
+        pulsosRevolucionLabel.setText("Pulsos Revolucion:");
+
+        magnitudMaximaLabel.setText("Magnitud Maxima:");
+
+        magnitudMinimaLabel.setText("Magnitud Minima:");
+
+        salidaMaximaLabel.setText("Salida Maxima:");
+
+        salidaMinimaLabel.setText("Salida Minima:");
+
+        divisorFrecuenciaLabel.setText("Divisor Frecuencia:");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.serial}"), serialField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
@@ -136,6 +176,42 @@ public class SensorForm extends JInternalFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), otrosDatosField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.pulsosRevolucion}"), pulsosRevolucionField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), pulsosRevolucionField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.magnitudMaxima}"), magnitudMaximaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), magnitudMaximaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.magnitudMinima}"), magnitudMinimaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), magnitudMinimaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.salidaMaxima}"), salidaMaximaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), salidaMaximaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.salidaMinima}"), salidaMinimaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), salidaMinimaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.divisorFrecuencia}"), divisorFrecuenciaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), divisorFrecuenciaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
         saveButton.setText("Guardar cambios");
         saveButton.addActionListener(formListener);
 
@@ -152,10 +228,25 @@ public class SensorForm extends JInternalFrame {
 
         deleteButton.addActionListener(formListener);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "analogo", "digital" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--", "analogo", "digital" }));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.tipo}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
+
+        jComboBox1.addActionListener(formListener);
+
+        jComboBox2.setRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(
+                JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if (value instanceof Vehiculo) {
+                    Vehiculo mec = (Vehiculo)value;
+                    setText(mec.getPlaca());
+                }
+                return this;
+            }
+        });
 
         org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vehiculoList, jComboBox2);
         bindingGroup.addBinding(jComboBoxBinding);
@@ -169,55 +260,79 @@ public class SensorForm extends JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(masterScrollPane)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(serialLabel)
+                            .addComponent(tipoLabel)
+                            .addComponent(canalLabel)
                             .addComponent(magnitudLabel)
                             .addComponent(uvicacionLabel)
                             .addComponent(otrosDatosLabel)
                             .addComponent(vehiculoidVehiculoLabel)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(tipoLabel)
-                                .addComponent(canalLabel)))
+                            .addComponent(pulsosRevolucionLabel)
+                            .addComponent(magnitudMaximaLabel)
+                            .addComponent(salidaMaximaLabel))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(salidaMaximaField, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(magnitudMaximaField, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(magnitudMinimaLabel)
+                            .addComponent(salidaMinimaLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(salidaMinimaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(magnitudMinimaField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(divisorFrecuenciaLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(otrosDatosField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(uvicacionField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(magnitudField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(canalField, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, 517, Short.MAX_VALUE))
-                            .addComponent(serialField, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(divisorFrecuenciaField, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pulsosRevolucionField)
+                            .addComponent(otrosDatosField)
+                            .addComponent(uvicacionField)
+                            .addComponent(magnitudField)
+                            .addComponent(canalField)
+                            .addComponent(serialField))))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(newButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refreshButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveButton)
-                .addContainerGap())
+                .addComponent(saveButton))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {divisorFrecuenciaField, magnitudMaximaField, salidaMaximaField});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {magnitudMinimaField, salidaMinimaField});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(serialField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(serialLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(serialLabel)
+                    .addComponent(serialField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tipoLabel)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(canalLabel)
                     .addComponent(canalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -237,13 +352,33 @@ public class SensorForm extends JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vehiculoidVehiculoLabel)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pulsosRevolucionLabel)
+                    .addComponent(pulsosRevolucionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(magnitudMaximaLabel)
+                    .addComponent(magnitudMaximaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(magnitudMinimaLabel)
+                    .addComponent(magnitudMinimaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(salidaMaximaLabel)
+                    .addComponent(salidaMaximaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salidaMinimaLabel)
+                    .addComponent(salidaMinimaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(divisorFrecuenciaLabel)
+                    .addComponent(divisorFrecuenciaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(refreshButton)
                     .addComponent(deleteButton)
                     .addComponent(newButton))
-                .addGap(10, 10, 10))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         bindingGroup.bind();
@@ -265,6 +400,9 @@ public class SensorForm extends JInternalFrame {
             }
             else if (evt.getSource() == deleteButton) {
                 SensorForm.this.deleteButtonActionPerformed(evt);
+            }
+            else if (evt.getSource() == jComboBox1) {
+                SensorForm.this.jComboBox1ActionPerformed(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -317,24 +455,81 @@ public class SensorForm extends JInternalFrame {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String aux = (String) jComboBox1.getSelectedItem();
+        if (aux != null && aux.equals("analogo")) {
+            magnitudMaximaField.setVisible(true);
+            magnitudMaximaLabel.setVisible(true);
+            magnitudMinimaField.setVisible(true);
+            magnitudMinimaLabel.setVisible(true);
+            salidaMaximaField.setVisible(true);
+            salidaMaximaLabel.setVisible(true);
+            salidaMinimaField.setVisible(true);
+            salidaMinimaLabel.setVisible(true);
+            divisorFrecuenciaField.setVisible(true);
+            divisorFrecuenciaLabel.setVisible(true);
+            pulsosRevolucionField.setVisible(false);
+            pulsosRevolucionLabel.setVisible(false);
+        } else if (aux != null && aux.equals("digital")) {
+            pulsosRevolucionField.setVisible(true);
+            pulsosRevolucionLabel.setVisible(true);
+            magnitudMaximaField.setVisible(false);
+            magnitudMaximaLabel.setVisible(false);
+            magnitudMinimaField.setVisible(false);
+            magnitudMinimaLabel.setVisible(false);
+            salidaMaximaField.setVisible(false);
+            salidaMaximaLabel.setVisible(false);
+            salidaMinimaField.setVisible(false);
+            salidaMinimaLabel.setVisible(false);
+            divisorFrecuenciaField.setVisible(false);
+            divisorFrecuenciaLabel.setVisible(false);
+        } else {
+            magnitudMaximaField.setVisible(false);
+            magnitudMaximaLabel.setVisible(false);
+            magnitudMinimaField.setVisible(false);
+            magnitudMinimaLabel.setVisible(false);
+            salidaMaximaField.setVisible(false);
+            salidaMaximaLabel.setVisible(false);
+            salidaMinimaField.setVisible(false);
+            salidaMinimaLabel.setVisible(false);
+            divisorFrecuenciaField.setVisible(false);
+            divisorFrecuenciaLabel.setVisible(false);
+            pulsosRevolucionField.setVisible(false);
+            pulsosRevolucionLabel.setVisible(false);
+        }
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField canalField;
     private javax.swing.JLabel canalLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JTextField divisorFrecuenciaField;
+    private javax.swing.JLabel divisorFrecuenciaLabel;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private java.util.List<com.udec.benlly.Sensor> list;
     private javax.swing.JTextField magnitudField;
     private javax.swing.JLabel magnitudLabel;
+    private javax.swing.JTextField magnitudMaximaField;
+    private javax.swing.JLabel magnitudMaximaLabel;
+    private javax.swing.JTextField magnitudMinimaField;
+    private javax.swing.JLabel magnitudMinimaLabel;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JButton newButton;
     private javax.swing.JTextField otrosDatosField;
     private javax.swing.JLabel otrosDatosLabel;
+    private javax.swing.JTextField pulsosRevolucionField;
+    private javax.swing.JLabel pulsosRevolucionLabel;
     private javax.persistence.Query query;
     private javax.swing.JButton refreshButton;
+    private javax.swing.JTextField salidaMaximaField;
+    private javax.swing.JLabel salidaMaximaLabel;
+    private javax.swing.JTextField salidaMinimaField;
+    private javax.swing.JLabel salidaMinimaLabel;
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField serialField;
     private javax.swing.JLabel serialLabel;
@@ -346,40 +541,6 @@ public class SensorForm extends JInternalFrame {
     private javax.swing.JLabel vehiculoidVehiculoLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-    public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SensorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SensorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SensorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SensorForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                JFrame frame = new JFrame();
-                frame.setContentPane(new SensorForm());
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
-                frame.setVisible(true);
-            }
-        });
-    }
+   
 
 }

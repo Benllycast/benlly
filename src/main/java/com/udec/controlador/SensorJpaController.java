@@ -13,11 +13,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.udec.benlly.Vehiculo;
-import com.udec.benlly.Sensoranalogo;
-import com.udec.benlly.Sensordigital;
-import com.udec.controlador.exceptions.IllegalOrphanException;
 import com.udec.controlador.exceptions.NonexistentEntityException;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -47,38 +43,10 @@ public class SensorJpaController implements Serializable {
                 vehiculoidVehiculo = em.getReference(vehiculoidVehiculo.getClass(), vehiculoidVehiculo.getIdVehiculo());
                 sensor.setVehiculoidVehiculo(vehiculoidVehiculo);
             }
-            Sensoranalogo sensoranalogo = sensor.getSensoranalogo();
-            if (sensoranalogo != null) {
-                sensoranalogo = em.getReference(sensoranalogo.getClass(), sensoranalogo.getSensoridsensor());
-                sensor.setSensoranalogo(sensoranalogo);
-            }
-            Sensordigital sensordigital = sensor.getSensordigital();
-            if (sensordigital != null) {
-                sensordigital = em.getReference(sensordigital.getClass(), sensordigital.getSensoridsensor());
-                sensor.setSensordigital(sensordigital);
-            }
             em.persist(sensor);
             if (vehiculoidVehiculo != null) {
                 vehiculoidVehiculo.getSensorList().add(sensor);
                 vehiculoidVehiculo = em.merge(vehiculoidVehiculo);
-            }
-            if (sensoranalogo != null) {
-                Sensor oldSensorOfSensoranalogo = sensoranalogo.getSensor();
-                if (oldSensorOfSensoranalogo != null) {
-                    oldSensorOfSensoranalogo.setSensoranalogo(null);
-                    oldSensorOfSensoranalogo = em.merge(oldSensorOfSensoranalogo);
-                }
-                sensoranalogo.setSensor(sensor);
-                sensoranalogo = em.merge(sensoranalogo);
-            }
-            if (sensordigital != null) {
-                Sensor oldSensorOfSensordigital = sensordigital.getSensor();
-                if (oldSensorOfSensordigital != null) {
-                    oldSensorOfSensordigital.setSensordigital(null);
-                    oldSensorOfSensordigital = em.merge(oldSensorOfSensordigital);
-                }
-                sensordigital.setSensor(sensor);
-                sensordigital = em.merge(sensordigital);
             }
             em.getTransaction().commit();
         } finally {
@@ -88,7 +56,7 @@ public class SensorJpaController implements Serializable {
         }
     }
 
-    public void edit(Sensor sensor) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Sensor sensor) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -96,37 +64,9 @@ public class SensorJpaController implements Serializable {
             Sensor persistentSensor = em.find(Sensor.class, sensor.getIdsensor());
             Vehiculo vehiculoidVehiculoOld = persistentSensor.getVehiculoidVehiculo();
             Vehiculo vehiculoidVehiculoNew = sensor.getVehiculoidVehiculo();
-            Sensoranalogo sensoranalogoOld = persistentSensor.getSensoranalogo();
-            Sensoranalogo sensoranalogoNew = sensor.getSensoranalogo();
-            Sensordigital sensordigitalOld = persistentSensor.getSensordigital();
-            Sensordigital sensordigitalNew = sensor.getSensordigital();
-            List<String> illegalOrphanMessages = null;
-            if (sensoranalogoOld != null && !sensoranalogoOld.equals(sensoranalogoNew)) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("You must retain Sensoranalogo " + sensoranalogoOld + " since its sensor field is not nullable.");
-            }
-            if (sensordigitalOld != null && !sensordigitalOld.equals(sensordigitalNew)) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("You must retain Sensordigital " + sensordigitalOld + " since its sensor field is not nullable.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (vehiculoidVehiculoNew != null) {
                 vehiculoidVehiculoNew = em.getReference(vehiculoidVehiculoNew.getClass(), vehiculoidVehiculoNew.getIdVehiculo());
                 sensor.setVehiculoidVehiculo(vehiculoidVehiculoNew);
-            }
-            if (sensoranalogoNew != null) {
-                sensoranalogoNew = em.getReference(sensoranalogoNew.getClass(), sensoranalogoNew.getSensoridsensor());
-                sensor.setSensoranalogo(sensoranalogoNew);
-            }
-            if (sensordigitalNew != null) {
-                sensordigitalNew = em.getReference(sensordigitalNew.getClass(), sensordigitalNew.getSensoridsensor());
-                sensor.setSensordigital(sensordigitalNew);
             }
             sensor = em.merge(sensor);
             if (vehiculoidVehiculoOld != null && !vehiculoidVehiculoOld.equals(vehiculoidVehiculoNew)) {
@@ -136,24 +76,6 @@ public class SensorJpaController implements Serializable {
             if (vehiculoidVehiculoNew != null && !vehiculoidVehiculoNew.equals(vehiculoidVehiculoOld)) {
                 vehiculoidVehiculoNew.getSensorList().add(sensor);
                 vehiculoidVehiculoNew = em.merge(vehiculoidVehiculoNew);
-            }
-            if (sensoranalogoNew != null && !sensoranalogoNew.equals(sensoranalogoOld)) {
-                Sensor oldSensorOfSensoranalogo = sensoranalogoNew.getSensor();
-                if (oldSensorOfSensoranalogo != null) {
-                    oldSensorOfSensoranalogo.setSensoranalogo(null);
-                    oldSensorOfSensoranalogo = em.merge(oldSensorOfSensoranalogo);
-                }
-                sensoranalogoNew.setSensor(sensor);
-                sensoranalogoNew = em.merge(sensoranalogoNew);
-            }
-            if (sensordigitalNew != null && !sensordigitalNew.equals(sensordigitalOld)) {
-                Sensor oldSensorOfSensordigital = sensordigitalNew.getSensor();
-                if (oldSensorOfSensordigital != null) {
-                    oldSensorOfSensordigital.setSensordigital(null);
-                    oldSensorOfSensordigital = em.merge(oldSensorOfSensordigital);
-                }
-                sensordigitalNew.setSensor(sensor);
-                sensordigitalNew = em.merge(sensordigitalNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -172,7 +94,7 @@ public class SensorJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -183,24 +105,6 @@ public class SensorJpaController implements Serializable {
                 sensor.getIdsensor();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The sensor with id " + id + " no longer exists.", enfe);
-            }
-            List<String> illegalOrphanMessages = null;
-            Sensoranalogo sensoranalogoOrphanCheck = sensor.getSensoranalogo();
-            if (sensoranalogoOrphanCheck != null) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Sensor (" + sensor + ") cannot be destroyed since the Sensoranalogo " + sensoranalogoOrphanCheck + " in its sensoranalogo field has a non-nullable sensor field.");
-            }
-            Sensordigital sensordigitalOrphanCheck = sensor.getSensordigital();
-            if (sensordigitalOrphanCheck != null) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Sensor (" + sensor + ") cannot be destroyed since the Sensordigital " + sensordigitalOrphanCheck + " in its sensordigital field has a non-nullable sensor field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Vehiculo vehiculoidVehiculo = sensor.getVehiculoidVehiculo();
             if (vehiculoidVehiculo != null) {
