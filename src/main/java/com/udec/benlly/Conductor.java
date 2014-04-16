@@ -14,7 +14,10 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -28,33 +31,55 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Oscar
  */
 @Entity
-@Table(name = "conductor", catalog = "benlly", schema = "")
+@Table(name = "conductor", catalog = "proyecto", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Conductor.findAll", query = "SELECT c FROM Conductor c"),
     @NamedQuery(name = "Conductor.findByIdConductor", query = "SELECT c FROM Conductor c WHERE c.idConductor = :idConductor"),
-    @NamedQuery(name = "Conductor.findByNombre", query = "SELECT c FROM Conductor c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Conductor.findByIdentificacion", query = "SELECT c FROM Conductor c WHERE c.identificacion = :identificacion"),
+    @NamedQuery(name = "Conductor.findByPrimerNombre", query = "SELECT c FROM Conductor c WHERE c.primerNombre = :primerNombre"),
+    @NamedQuery(name = "Conductor.findBySegundoNombre", query = "SELECT c FROM Conductor c WHERE c.segundoNombre = :segundoNombre"),
+    @NamedQuery(name = "Conductor.findByPrimerApellido", query = "SELECT c FROM Conductor c WHERE c.primerApellido = :primerApellido"),
+    @NamedQuery(name = "Conductor.findBySegundoApellido", query = "SELECT c FROM Conductor c WHERE c.segundoApellido = :segundoApellido"),
     @NamedQuery(name = "Conductor.findByLicencia", query = "SELECT c FROM Conductor c WHERE c.licencia = :licencia")})
 public class Conductor implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idConductor")
     private Integer idConductor;
-    @Column(name = "nombre")
-    private String nombre;
+    @Basic(optional = false)
+    @Column(name = "identificacion")
+    private int identificacion;
+    @Column(name = "primer_nombre")
+    private String primerNombre;
+    @Column(name = "segundo_nombre")
+    private String segundoNombre;
+    @Column(name = "primer_apellido")
+    private String primerApellido;
+    @Column(name = "segundo_apellido")
+    private String segundoApellido;
     @Column(name = "licencia")
-    private String licencia;
+    private Integer licencia;
+    @Lob
+    @Column(name = "otros_datos")
+    private String otrosDatos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "conductoridConductor")
-    private List<Recorridoorig> recorridoorigList;
+    private List<Recorrido> recorridoList;
 
     public Conductor() {
     }
 
     public Conductor(Integer idConductor) {
         this.idConductor = idConductor;
+    }
+
+    public Conductor(Integer idConductor, int identificacion) {
+        this.idConductor = idConductor;
+        this.identificacion = identificacion;
     }
 
     public Integer getIdConductor() {
@@ -67,33 +92,83 @@ public class Conductor implements Serializable {
         changeSupport.firePropertyChange("idConductor", oldIdConductor, idConductor);
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getIdentificacion() {
+        return identificacion;
     }
 
-    public void setNombre(String nombre) {
-        String oldNombre = this.nombre;
-        this.nombre = nombre;
-        changeSupport.firePropertyChange("nombre", oldNombre, nombre);
+    public void setIdentificacion(int identificacion) {
+        int oldIdentificacion = this.identificacion;
+        this.identificacion = identificacion;
+        changeSupport.firePropertyChange("identificacion", oldIdentificacion, identificacion);
     }
 
-    public String getLicencia() {
+    public String getPrimerNombre() {
+        return primerNombre;
+    }
+
+    public void setPrimerNombre(String primerNombre) {
+        String oldPrimerNombre = this.primerNombre;
+        this.primerNombre = primerNombre;
+        changeSupport.firePropertyChange("primerNombre", oldPrimerNombre, primerNombre);
+    }
+
+    public String getSegundoNombre() {
+        return segundoNombre;
+    }
+
+    public void setSegundoNombre(String segundoNombre) {
+        String oldSegundoNombre = this.segundoNombre;
+        this.segundoNombre = segundoNombre;
+        changeSupport.firePropertyChange("segundoNombre", oldSegundoNombre, segundoNombre);
+    }
+
+    public String getPrimerApellido() {
+        return primerApellido;
+    }
+
+    public void setPrimerApellido(String primerApellido) {
+        String oldPrimerApellido = this.primerApellido;
+        this.primerApellido = primerApellido;
+        changeSupport.firePropertyChange("primerApellido", oldPrimerApellido, primerApellido);
+    }
+
+    public String getSegundoApellido() {
+        return segundoApellido;
+    }
+
+    public void setSegundoApellido(String segundoApellido) {
+        String oldSegundoApellido = this.segundoApellido;
+        this.segundoApellido = segundoApellido;
+        changeSupport.firePropertyChange("segundoApellido", oldSegundoApellido, segundoApellido);
+    }
+
+    public Integer getLicencia() {
         return licencia;
     }
 
-    public void setLicencia(String licencia) {
-        String oldLicencia = this.licencia;
+    public void setLicencia(Integer licencia) {
+        Integer oldLicencia = this.licencia;
         this.licencia = licencia;
         changeSupport.firePropertyChange("licencia", oldLicencia, licencia);
     }
 
-    @XmlTransient
-    public List<Recorridoorig> getRecorridoorigList() {
-        return recorridoorigList;
+    public String getOtrosDatos() {
+        return otrosDatos;
     }
 
-    public void setRecorridoorigList(List<Recorridoorig> recorridoorigList) {
-        this.recorridoorigList = recorridoorigList;
+    public void setOtrosDatos(String otrosDatos) {
+        String oldOtrosDatos = this.otrosDatos;
+        this.otrosDatos = otrosDatos;
+        changeSupport.firePropertyChange("otrosDatos", oldOtrosDatos, otrosDatos);
+    }
+
+    @XmlTransient
+    public List<Recorrido> getRecorridoList() {
+        return recorridoList;
+    }
+
+    public void setRecorridoList(List<Recorrido> recorridoList) {
+        this.recorridoList = recorridoList;
     }
 
     @Override

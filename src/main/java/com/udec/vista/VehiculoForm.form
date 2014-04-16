@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
-        <Property name="persistenceUnit" type="java.lang.String" value="com.udec_benlly_jar_1.0-SNAPSHOTPU"/>
+        <Property name="persistenceUnit" type="java.lang.String" value="proyecto?zeroDateTimeBehavior=convertToNullPU"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
@@ -74,23 +74,23 @@
                                   <Component id="placaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="marcaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="modeloLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="npLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rcLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="rrLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="radioRuedaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="relacionCajaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="relacionDiferencialLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="otrosDatosLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="placaField" alignment="0" pref="698" max="32767" attributes="0"/>
-                                  <Component id="marcaField" alignment="0" pref="698" max="32767" attributes="0"/>
-                                  <Component id="modeloField" alignment="0" pref="698" max="32767" attributes="0"/>
-                                  <Component id="npField" alignment="0" pref="698" max="32767" attributes="0"/>
-                                  <Component id="rcField" alignment="0" pref="698" max="32767" attributes="0"/>
-                                  <Component id="rdField" alignment="0" pref="698" max="32767" attributes="0"/>
-                                  <Component id="rrField" alignment="0" pref="698" max="32767" attributes="0"/>
+                                  <Component id="placaField" alignment="0" pref="720" max="32767" attributes="0"/>
+                                  <Component id="marcaField" alignment="0" pref="720" max="32767" attributes="0"/>
+                                  <Component id="modeloField" alignment="0" pref="720" max="32767" attributes="0"/>
+                                  <Component id="radioRuedaField" alignment="0" pref="720" max="32767" attributes="0"/>
+                                  <Component id="relacionCajaField" alignment="0" pref="720" max="32767" attributes="0"/>
+                                  <Component id="relacionDiferencialField" alignment="0" pref="720" max="32767" attributes="0"/>
+                                  <Component id="otrosDatosField" alignment="0" pref="720" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="masterScrollPane" pref="740" max="32767" attributes="0"/>
+                          <Component id="masterScrollPane" pref="821" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -102,7 +102,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="masterScrollPane" pref="207" max="32767" attributes="0"/>
+              <Component id="masterScrollPane" pref="201" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="placaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -120,23 +120,23 @@
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="npLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="npField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="radioRuedaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="radioRuedaField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rcLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rcField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="relacionCajaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="relacionCajaField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rdField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="relacionDiferencialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="relacionDiferencialField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="rrLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="rrField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="otrosDatosLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="otrosDatosField" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="1"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -171,23 +171,23 @@
               </Subbinding>
               <Subbinding sourcePath="${modelo}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="2"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Short.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${np}">
+              <Subbinding sourcePath="${radioRueda}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="3"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Float.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${rc}">
+              <Subbinding sourcePath="${relacionCaja}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="4"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Float.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${rd}">
+              <Subbinding sourcePath="${relacionDiferencial}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="5"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Float.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${rr}">
+              <Subbinding sourcePath="${otrosDatos}">
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="6"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
@@ -213,24 +213,24 @@
         <Property name="text" type="java.lang.String" value="Modelo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="npLabel">
+    <Component class="javax.swing.JLabel" name="radioRuedaLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Np:"/>
+        <Property name="text" type="java.lang.String" value="Radio Rueda:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="rcLabel">
+    <Component class="javax.swing.JLabel" name="relacionCajaLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rc:"/>
+        <Property name="text" type="java.lang.String" value="Relacion Caja:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="rdLabel">
+    <Component class="javax.swing.JLabel" name="relacionDiferencialLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rd:"/>
+        <Property name="text" type="java.lang.String" value="Relacion Diferencial:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="rrLabel">
+    <Component class="javax.swing.JLabel" name="otrosDatosLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rr:"/>
+        <Property name="text" type="java.lang.String" value="Otros Datos:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="placaField">
@@ -260,40 +260,40 @@
         <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="modeloField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JTextField" name="npField">
+    <Component class="javax.swing.JTextField" name="radioRuedaField">
       <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.np}" target="npField" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.radioRueda}" target="radioRuedaField" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="npField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="radioRuedaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JTextField" name="rcField">
+    <Component class="javax.swing.JTextField" name="relacionCajaField">
       <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.rc}" target="rcField" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.relacionCaja}" target="relacionCajaField" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="rcField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="relacionCajaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JTextField" name="rdField">
+    <Component class="javax.swing.JTextField" name="relacionDiferencialField">
       <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.rd}" target="rdField" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.relacionDiferencial}" target="relacionDiferencialField" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="rdField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="relacionDiferencialField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JTextField" name="rrField">
+    <Component class="javax.swing.JTextField" name="otrosDatosField">
       <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.rr}" target="rrField" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.otrosDatos}" target="otrosDatosField" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="rrField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="otrosDatosField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">

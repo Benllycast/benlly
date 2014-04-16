@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
-        <Property name="persistenceUnit" type="java.lang.String" value="com.udec_benlly_jar_1.0-SNAPSHOTPU"/>
+        <Property name="persistenceUnit" type="java.lang.String" value="proyecto?zeroDateTimeBehavior=convertToNullPU"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
@@ -71,18 +71,26 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="idConductorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="identificacionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="primerNombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="segundoNombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="primerApellidoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="segundoApellidoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="licenciaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="otrosDatosLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="idConductorField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nombreField" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="licenciaField" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="identificacionField" alignment="0" pref="841" max="32767" attributes="0"/>
+                                  <Component id="primerNombreField" alignment="0" pref="841" max="32767" attributes="0"/>
+                                  <Component id="segundoNombreField" alignment="0" pref="841" max="32767" attributes="0"/>
+                                  <Component id="primerApellidoField" alignment="0" pref="841" max="32767" attributes="0"/>
+                                  <Component id="segundoApellidoField" alignment="0" pref="841" max="32767" attributes="0"/>
+                                  <Component id="licenciaField" alignment="0" pref="841" max="32767" attributes="0"/>
+                                  <Component id="otrosDatosField" alignment="0" pref="841" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="masterScrollPane" pref="636" max="32767" attributes="0"/>
+                          <Component id="masterScrollPane" pref="931" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -94,21 +102,41 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="masterScrollPane" pref="189" max="32767" attributes="0"/>
+              <Component id="masterScrollPane" pref="197" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="idConductorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="idConductorField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="identificacionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="identificacionField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="nombreField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="primerNombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="primerNombreField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="segundoNombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="segundoNombreField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="primerApellidoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="primerApellidoField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="segundoApellidoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="segundoApellidoField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="licenciaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="licenciaField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="otrosDatosLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="otrosDatosField" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="1"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -131,42 +159,34 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTable" name="masterTable">
-          <Properties>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
-              </TableColumnModel>
-            </Property>
-            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
-            </Property>
-          </Properties>
           <BindingProperties>
-            <BindingProperty name="elements" source="list" target="masterTable" targetPath="elements" updateStrategy="0" immediately="true">
-              <Subbinding sourcePath="${idConductor}">
-                <BindingParameter name="NAME" value="Identificaci&#xf3;n"/>
+            <BindingProperty name="elements" source="list" target="masterTable" targetPath="elements" updateStrategy="0" immediately="false">
+              <Subbinding sourcePath="${identificacion}">
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="0"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${nombre}">
-                <BindingParameter name="NAME" value="Nombre"/>
+              <Subbinding sourcePath="${primerNombre}">
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="1"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${segundoNombre}">
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="2"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${primerApellido}">
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="3"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${segundoApellido}">
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="4"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${licencia}">
-                <BindingParameter name="NAME" value="Licencia"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="5"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${otrosDatos}">
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="6"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
             </BindingProperty>
@@ -178,14 +198,29 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="idConductorLabel">
+    <Component class="javax.swing.JLabel" name="identificacionLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Identificaci&#xf3;n:"/>
+        <Property name="text" type="java.lang.String" value="Identificacion:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="nombreLabel">
+    <Component class="javax.swing.JLabel" name="primerNombreLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre:"/>
+        <Property name="text" type="java.lang.String" value="Primer Nombre:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="segundoNombreLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Segundo Nombre:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="primerApellidoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Primer Apellido:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="segundoApellidoLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Segundo Apellido:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="licenciaLabel">
@@ -193,22 +228,54 @@
         <Property name="text" type="java.lang.String" value="Licencia:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="idConductorField">
+    <Component class="javax.swing.JLabel" name="otrosDatosLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Otros Datos:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="identificacionField">
       <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.idConductor}" target="idConductorField" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.identificacion}" target="identificacionField" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="idConductorField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="identificacionField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
-    <Component class="javax.swing.JTextField" name="nombreField">
+    <Component class="javax.swing.JTextField" name="primerNombreField">
       <BindingProperties>
-        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.nombre}" target="nombreField" targetPath="text" updateStrategy="0" immediately="false">
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.primerNombre}" target="primerNombreField" targetPath="text" updateStrategy="0" immediately="false">
           <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
-        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="nombreField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="primerNombreField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="segundoNombreField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.segundoNombre}" target="segundoNombreField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="segundoNombreField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="primerApellidoField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.primerApellido}" target="primerApellidoField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="primerApellidoField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="segundoApellidoField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.segundoApellido}" target="segundoApellidoField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="segundoApellidoField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JTextField" name="licenciaField">
@@ -218,6 +285,15 @@
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
         <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="licenciaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="otrosDatosField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.otrosDatos}" target="otrosDatosField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="otrosDatosField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">

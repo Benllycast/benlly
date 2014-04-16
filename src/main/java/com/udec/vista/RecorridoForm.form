@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
-        <Property name="persistenceUnit" type="java.lang.String" value="com.udec_benlly_jar_1.0-SNAPSHOTPU"/>
+        <Property name="persistenceUnit" type="java.lang.String" value="proyecto?zeroDateTimeBehavior=convertToNullPU"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
@@ -13,7 +13,7 @@
     </Component>
     <Component class="javax.persistence.Query" name="query">
       <Properties>
-        <Property name="query" type="java.lang.String" value="SELECT r FROM Recorridoorig r"/>
+        <Property name="query" type="java.lang.String" value="SELECT r FROM Recorrido r"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
           <ComponentRef name="entityManager"/>
         </Property>
@@ -31,7 +31,7 @@
         <Property name="observable" type="boolean" value="true"/>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;com.udec.benlly.Recorridoorig&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;com.udec.benlly.Recorrido&gt;"/>
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="false"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
       </AuxValues>
@@ -73,9 +73,6 @@
       </AuxValues>
     </Component>
   </NonVisualComponents>
-  <SyntheticProperties>
-    <SyntheticProperty name="formSizePolicy" type="int" value="2"/>
-  </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -91,56 +88,50 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jTextField1" min="-2" pref="302" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="newButton" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="deleteButton" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="refreshButton" linkSize="1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="saveButton" linkSize="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jButton2" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="597" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="newButton" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="deleteButton" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="refreshButton" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="saveButton" linkSize="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="masterScrollPane" min="-2" pref="468" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="nombreLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="vehiculoIdvehiculoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fechaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="horaSalidaProgramadaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="horaLlegadaProgramadaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="horaInicioLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="horaFinalizacionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="otrosDatosLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="vehiculoidVehiculoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="conductoridConductorLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="horaSalidaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="horaLlegadaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jSpinner2" alignment="0" pref="399" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nombreField" alignment="0" pref="906" max="32767" attributes="0"/>
+                                  <Component id="otrosDatosField" alignment="0" pref="906" max="32767" attributes="0"/>
                                   <Component id="jSpinner1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSpinner2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSpinner3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jSpinner4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nombreField" max="32767" attributes="0"/>
+                                  <Component id="jDateChooser1" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <Component id="masterScrollPane" pref="1038" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="532" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,50 +139,60 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
-                  <Component id="masterScrollPane" pref="207" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="masterScrollPane" min="-2" pref="185" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="nombreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nombreField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="vehiculoIdvehiculoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="fechaLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="jDateChooser1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="conductoridConductorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="horaSalidaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="horaSalidaProgramadaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jSpinner1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="horaLlegadaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="horaLlegadaProgramadaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jSpinner2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="horaInicioLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSpinner3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="horaFinalizacionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jSpinner4" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="vehiculoidVehiculoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="conductoridConductorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="otrosDatosLabel" min="-2" max="-2" attributes="0"/>
+                  <Component id="otrosDatosField" min="-2" pref="34" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <EmptySpace pref="98" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -206,8 +207,28 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="masterTable">
           <Properties>
-            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="masterTable.getColumnModel ().getColumn(3).setCellRenderer(tableCellRenderer);&#xa;masterTable.getColumnModel ().getColumn(4).setCellRenderer(tableCellRenderer);">
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" preCode="masterTable.getColumnModel ().getColumn(2).setCellRenderer(tableCellRenderer);&#xa;masterTable.getColumnModel ().getColumn(3).setCellRenderer(tableCellRenderer);&#xa;masterTable.getColumnModel ().getColumn(4).setCellRenderer(tableCellRenderer);&#xa;masterTable.getColumnModel ().getColumn(5).setCellRenderer(tableCellRenderer);">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
@@ -245,21 +266,37 @@
                 <BindingParameter name="NAME" value="Nombre"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${conductoridConductor.nombre}">
-                <BindingParameter name="NAME" value="Conductor"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+              <Subbinding sourcePath="${fecha}">
+                <BindingParameter name="NAME" value="Fecha"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${vehiculoIdvehiculo.placa}">
+              <Subbinding sourcePath="${horaSalidaProgramada}">
+                <BindingParameter name="NAME" value="Hora Salida Programada"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${horaLlegadaProgramada}">
+                <BindingParameter name="NAME" value="Hora Llegada Programada"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${horaInicio}">
+                <BindingParameter name="NAME" value="Hora Inicio"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${horaFinalizacion}">
+                <BindingParameter name="NAME" value="Hora Finalizacion"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+              </Subbinding>
+              <Subbinding sourcePath="${vehiculoidVehiculo.placa}">
                 <BindingParameter name="NAME" value="Vehiculo"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${horaSalida}">
-                <BindingParameter name="NAME" value="Hora Salida"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+              <Subbinding sourcePath="${conductoridConductor.primerNombre}">
+                <BindingParameter name="NAME" value="Conductor"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
-              <Subbinding sourcePath="${horaLlegada}">
-                <BindingParameter name="NAME" value="Hora Llegada"/>
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
+              <Subbinding sourcePath="${otrosDatos}">
+                <BindingParameter name="NAME" value="Otros Datos"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
@@ -275,7 +312,37 @@
         <Property name="text" type="java.lang.String" value="Nombre:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="vehiculoIdvehiculoLabel">
+    <Component class="javax.swing.JLabel" name="fechaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fecha:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="horaSalidaProgramadaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora Salida Programada:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="horaLlegadaProgramadaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora Llegada Programada:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="horaInicioLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora Inicio:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="horaFinalizacionLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hora Finalizacion:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="otrosDatosLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Otros Datos:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="vehiculoidVehiculoLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vehiculo:"/>
       </Properties>
@@ -285,16 +352,6 @@
         <Property name="text" type="java.lang.String" value="Conductor:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="horaSalidaLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Hora Salida:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="horaLlegadaLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Hora Llegada:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="nombreField">
       <BindingProperties>
         <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.nombre}" target="nombreField" targetPath="text" updateStrategy="0" immediately="false">
@@ -302,6 +359,15 @@
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
         <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="nombreField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="otrosDatosField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.otrosDatos}" target="otrosDatosField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="otrosDatosField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">
@@ -355,13 +421,41 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="2"/>
       </AuxValues>
     </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinner1">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create(&quot;${selectedElement.horaSalidaProgramada}&quot;), jSpinner1, org.jdesktop.beansbinding.BeanProperty.create(&quot;value&quot;));&#xa;binding.setSourceNullValue(null);&#xa;bindingGroup.addBinding(binding);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(new SpinnerDateModel())"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(jSpinner1, &quot;HH:mm:ss&quot;);&#xa;jSpinner1.setEditor(timeEditor);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinner2">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create(&quot;${selectedElement.horaLlegadaProgramada}&quot;), jSpinner2, org.jdesktop.beansbinding.BeanProperty.create(&quot;value&quot;));&#xa;binding.setSourceNullValue(null);&#xa;bindingGroup.addBinding(binding);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(new SpinnerDateModel())"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JSpinner.DateEditor timeEditor2 = new JSpinner.DateEditor(jSpinner2, &quot;HH:mm:ss&quot;);&#xa;jSpinner2.setEditor(timeEditor2);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinner3">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create(&quot;${selectedElement.horaInicio}&quot;), jSpinner3, org.jdesktop.beansbinding.BeanProperty.create(&quot;value&quot;));&#xa;binding.setSourceNullValue(null);&#xa;bindingGroup.addBinding(binding);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(new SpinnerDateModel())"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JSpinner.DateEditor timeEditor3 = new JSpinner.DateEditor(jSpinner3, &quot;HH:mm:ss&quot;);&#xa;jSpinner3.setEditor(timeEditor3);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinner4">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create(&quot;${selectedElement.horaFinalizacion}&quot;), jSpinner4, org.jdesktop.beansbinding.BeanProperty.create(&quot;value&quot;));&#xa;binding.setSourceNullValue(null);&#xa;bindingGroup.addBinding(binding);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(new SpinnerDateModel())"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JSpinner.DateEditor timeEditor4 = new JSpinner.DateEditor(jSpinner4, &quot;HH:mm:ss&quot;);&#xa;jSpinner4.setEditor(timeEditor4);"/>
+      </AuxValues>
+    </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <BindingProperties>
         <BindingProperty name="elements" source="vehiculoList" target="jComboBox1" targetPath="elements" updateStrategy="0" immediately="false"/>
-        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.vehiculoIdvehiculo}" target="jComboBox1" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+        <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.vehiculoidVehiculo}" target="jComboBox1" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox1.setRenderer(new DefaultListCellRenderer() {&#xa;           @Override&#xa;           public Component getListCellRendererComponent(&#xa;                   JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;               super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;               if (value instanceof Vehiculo) {&#xa;                   Vehiculo mec = (Vehiculo)value;&#xa;                   setText(mec.getPlaca());&#xa;               }&#xa;               return this;&#xa;           }&#xa;       });"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox1.setRenderer(new DefaultListCellRenderer() {&#xa;            @Override&#xa;            public Component getListCellRendererComponent(&#xa;                JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;                if (value instanceof Vehiculo) {&#xa;                    Vehiculo mec = (Vehiculo)value;&#xa;                    setText(mec.getPlaca());&#xa;                }&#xa;                return this;&#xa;            }&#xa;        });"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox2">
@@ -370,93 +464,13 @@
         <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.conductoridConductor}" target="jComboBox2" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox2.setRenderer(new DefaultListCellRenderer() {&#xa;           @Override&#xa;           public Component getListCellRendererComponent(&#xa;                   JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;               super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;               if (value instanceof Conductor) {&#xa;                   Conductor mec = (Conductor)value;&#xa;                   setText(mec.getNombre());&#xa;               }&#xa;               return this;&#xa;           }&#xa;       });"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox2.setRenderer(new DefaultListCellRenderer() {&#xa;            @Override&#xa;            public Component getListCellRendererComponent(&#xa;                JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;                if (value instanceof Conductor) {&#xa;                    Conductor mec = (Conductor)value;&#xa;                    setText(mec.getPrimerNombre());&#xa;                }&#xa;                return this;&#xa;            }&#xa;        });"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner1">
-      <BindingProperties>
-        <BindingProperty name="value" source="masterTable" sourcePath="${selectedElement.horaSalida}" target="jSpinner1" targetPath="value" updateStrategy="0" immediately="false">
-          <Property name="nullValue" type="java.lang.Object" value="null"/>
-        </BindingProperty>
-      </BindingProperties>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(new SpinnerDateModel())"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(jSpinner1, &quot;HH:mm:ss&quot;);&#xa;jSpinner1.setEditor(timeEditor);"/>
-        <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create(&quot;${selectedElement != null}&quot;), jSpinner1, org.jdesktop.beansbinding.BeanProperty.create(&quot;enabled&quot;));&#xa;bindingGroup.addBinding(binding);"/>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create(&quot;${selectedElement.fecha}&quot;), jDateChooser1, org.jdesktop.beansbinding.BeanProperty.create(&quot;date&quot;));&#xa;binding.setSourceUnreadableValue(null);&#xa;bindingGroup.addBinding(binding);&#xa;binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create(&quot;${selectedElement != null}&quot;), jDateChooser1, org.jdesktop.beansbinding.BeanProperty.create(&quot;enabled&quot;));&#xa;bindingGroup.addBinding(binding);"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner2">
-      <BindingProperties>
-        <BindingProperty name="value" source="masterTable" sourcePath="${selectedElement.horaLlegada}" target="jSpinner2" targetPath="value" updateStrategy="0" immediately="false">
-          <Property name="nullValue" type="java.lang.Object" value="null"/>
-        </BindingProperty>
-      </BindingProperties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(new SpinnerDateModel())"/>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="JSpinner.DateEditor timeEditor2 = new JSpinner.DateEditor(jSpinner2, &quot;HH:mm:ss&quot;);&#xa;jSpinner2.setEditor(timeEditor2);"/>
-        <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create(&quot;${selectedElement != null}&quot;), jSpinner2, org.jdesktop.beansbinding.BeanProperty.create(&quot;enabled&quot;));&#xa;bindingGroup.addBinding(binding);"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Examinar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Importar Log"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-      </Events>
-    </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
-          <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
-              </Table>
-            </Property>
-          </Properties>
-          <BindingProperties>
-            <BindingProperty name="elements" source="masterTable" sourcePath="${selectedElement.logList}" target="jTable1" targetPath="elements" updateStrategy="0" immediately="true">
-              <Subbinding sourcePath="${numeroDato}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${consecutivo}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${crc}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${fecha}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${hora}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
-              </Subbinding>
-              <Subbinding sourcePath="${valorObbtenido}">
-                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
-              </Subbinding>
-            </BindingProperty>
-          </BindingProperties>
-        </Component>
-      </SubComponents>
-    </Container>
   </SubComponents>
 </Form>
