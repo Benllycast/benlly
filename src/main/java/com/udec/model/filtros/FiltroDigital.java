@@ -31,7 +31,7 @@ public abstract class FiltroDigital extends Filtro {
 
     public FiltroDigital(Vehiculo vehiculo1, LineaLog log, Sensor sensor) {
         super(vehiculo1, log, sensor);
-        this.periodoPulso = this.getTotalTic() * this.tiempoTic;
+        this.periodoPulso = this.getLineaLog().getNumeroTic() * this.tiempoTic;
         this.frecuenciaPulso = 1.0f / this.getPeriodoDePulso();
         this.pulsosPorMinuto = this.getFrecuenciaDePulso() * MINUTO;
     }
@@ -48,8 +48,5 @@ public abstract class FiltroDigital extends Filtro {
         return this.periodoPulso;
     }
 
-    private float getTotalTic() {
-        return super.getLineaLog().getNumeroTic();
-    }
 
 }

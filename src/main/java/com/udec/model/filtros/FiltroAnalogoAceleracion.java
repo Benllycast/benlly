@@ -6,7 +6,7 @@
 
 package com.udec.model.filtros;
 
-import com.udec.model.wraperModels.WraperSensorAnalogo;
+import com.udec.model.wraperModels.FakeSensor;
 
 /**
  *
@@ -16,12 +16,12 @@ public class FiltroAnalogoAceleracion extends FiltroAnalogo implements Interface
 
     @Override
     public float getAceleracion() {
-        WraperSensorAnalogo sensor = (WraperSensorAnalogo) this.getSensor();
+        FakeSensor sensor = (FakeSensor) this.getSensor();
         return (this.getVoltajeDeSalida()-this.getVoltaCentro())/sensor.getResolucion();
     }
 
     private float getVoltaCentro() {
-        WraperSensorAnalogo sensor = (WraperSensorAnalogo) this.getSensor();
+        FakeSensor sensor = (FakeSensor) this.getSensor();
         return (sensor.getVoltajeMaximoDeSalida()-sensor.getVoltajeMinimoDeSalida())/2.0f;
     }
 

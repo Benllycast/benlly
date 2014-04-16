@@ -6,11 +6,10 @@
 
 package com.udec.model.filtros;
 
-import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
+import com.udec.model.wraperModels.FakeSensor;
 import com.udec.model.wraperModels.LineaLog;
-import com.udec.model.wraperModels.WraperSensorDigital;
 
 /**
  *
@@ -27,7 +26,7 @@ public class FiltroDigitalRPM extends FiltroDigital implements InterfaceFiltroRP
 
     @Override
     public float getRPM() {
-        WraperSensorDigital sensor = (WraperSensorDigital)this.getSensor();
+        FakeSensor sensor = (FakeSensor)this.getSensor();
         return this.getPulsosPorMinuto() / sensor.getNumeroPulsosPorRevolucion();
     }
 

@@ -6,8 +6,7 @@
 
 package com.udec.model.filtros;
 
-import com.udec.model.Valor;
-import com.udec.model.wraperModels.WraperSensorAnalogo;
+import com.udec.model.wraperModels.FakeSensor;
 
 /**
  *
@@ -21,7 +20,7 @@ public class FiltroAnalogoRPM extends FiltroAnalogo implements InterfaceFiltroRP
     }
     
     float getFrecuenciaDeGiro() {
-        WraperSensorAnalogo sensor = (WraperSensorAnalogo) this.getSensor();
+        FakeSensor sensor = (FakeSensor) this.getSensor();
         return super.getFrecuenciaDeEntrada()/sensor.getDivisorDeFrecuenciaRPM();
     }
 
