@@ -13,6 +13,8 @@ import com.udec.benlly.Sensor;
  * @author windows7
  */
 public class WraperSensorDigital extends WraperSensor{
+    
+    private float pulsosPorMinuto = 0.0f;
 
     public WraperSensorDigital() {
     }
@@ -24,5 +26,12 @@ public class WraperSensorDigital extends WraperSensor{
     public WraperSensorDigital(Sensor sensor) {
         super(sensor);
     }
-    
+
+    public float getPulsosPorMinuto() {
+        return pulsosPorMinuto;
+    }
+
+    public void setPulsosPorMinuto(float pulsosPorMinuto) {
+        this.pulsosPorMinuto = pulsosPorMinuto;
+    }    
 }

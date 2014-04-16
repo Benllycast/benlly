@@ -15,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -25,58 +26,61 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Ususario
+ * @author Oscar
  */
 @Entity
-@Table(name = "log", catalog = "benlly", schema = "")
+@Table(name = "log", catalog = "proyecto", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Log.findAll", query = "SELECT l FROM Log l"),
-    @NamedQuery(name = "Log.findByIdlog", query = "SELECT l FROM Log l WHERE l.idlog = :idlog"),
+    @NamedQuery(name = "Log.findByIdLog", query = "SELECT l FROM Log l WHERE l.idLog = :idLog"),
     @NamedQuery(name = "Log.findByFecha", query = "SELECT l FROM Log l WHERE l.fecha = :fecha"),
-    @NamedQuery(name = "Log.findByHora", query = "SELECT l FROM Log l WHERE l.hora = :hora"),
+    @NamedQuery(name = "Log.findByTiempo", query = "SELECT l FROM Log l WHERE l.tiempo = :tiempo"),
     @NamedQuery(name = "Log.findByNumeroDato", query = "SELECT l FROM Log l WHERE l.numeroDato = :numeroDato"),
-    @NamedQuery(name = "Log.findByValorObbtenido", query = "SELECT l FROM Log l WHERE l.valorObbtenido = :valorObbtenido"),
-    @NamedQuery(name = "Log.findByCrc", query = "SELECT l FROM Log l WHERE l.crc = :crc"),
-    @NamedQuery(name = "Log.findByConsecutivo", query = "SELECT l FROM Log l WHERE l.consecutivo = :consecutivo")})
+    @NamedQuery(name = "Log.findByCanal", query = "SELECT l FROM Log l WHERE l.canal = :canal"),
+    @NamedQuery(name = "Log.findByValor", query = "SELECT l FROM Log l WHERE l.valor = :valor"),
+    @NamedQuery(name = "Log.findByCrc", query = "SELECT l FROM Log l WHERE l.crc = :crc")})
 public class Log implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idlog")
-    private Integer idlog;
+    @Column(name = "idLog")
+    private Integer idLog;
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Column(name = "hora")
-    @Temporal(TemporalType.DATE)
-    private Date hora;
+    @Column(name = "tiempo")
+    @Temporal(TemporalType.TIME)
+    private Date tiempo;
     @Column(name = "numero_dato")
-    private Integer numeroDato;
-    @Column(name = "valor_obbtenido")
-    private Integer valorObbtenido;
+    private Short numeroDato;
+    @Column(name = "canal")
+    private Short canal;
+    @Column(name = "valor")
+    private Integer valor;
     @Column(name = "crc")
-    private String crc;
-    @Column(name = "consecutivo")
-    private Integer consecutivo;
-    @JoinColumn(name = "recorridoorig_idrecorridoorig", referencedColumnName = "idrecorridoorig")
+    private Integer crc;
+    @Lob
+    @Column(name = "otros_datos")
+    private String otrosDatos;
+    @JoinColumn(name = "Recorrido_idRecorrido", referencedColumnName = "idRecorrido")
     @ManyToOne(optional = false)
-    private Recorridoorig recorridoorigIdrecorridoorig;
+    private Recorrido recorridoidRecorrido;
 
     public Log() {
     }
 
-    public Log(Integer idlog) {
-        this.idlog = idlog;
+    public Log(Integer idLog) {
+        this.idLog = idLog;
     }
 
-    public Integer getIdlog() {
-        return idlog;
+    public Integer getIdLog() {
+        return idLog;
     }
 
-    public void setIdlog(Integer idlog) {
-        this.idlog = idlog;
+    public void setIdLog(Integer idLog) {
+        this.idLog = idLog;
     }
 
     public Date getFecha() {
@@ -87,58 +91,66 @@ public class Log implements Serializable {
         this.fecha = fecha;
     }
 
-    public Date getHora() {
-        return hora;
+    public Date getTiempo() {
+        return tiempo;
     }
 
-    public void setHora(Date hora) {
-        this.hora = hora;
+    public void setTiempo(Date tiempo) {
+        this.tiempo = tiempo;
     }
 
-    public Integer getNumeroDato() {
+    public Short getNumeroDato() {
         return numeroDato;
     }
 
-    public void setNumeroDato(Integer numeroDato) {
+    public void setNumeroDato(Short numeroDato) {
         this.numeroDato = numeroDato;
     }
 
-    public Integer getValorObbtenido() {
-        return valorObbtenido;
+    public Short getCanal() {
+        return canal;
     }
 
-    public void setValorObbtenido(Integer valorObbtenido) {
-        this.valorObbtenido = valorObbtenido;
+    public void setCanal(Short canal) {
+        this.canal = canal;
     }
 
-    public String getCrc() {
+    public Integer getValor() {
+        return valor;
+    }
+
+    public void setValor(Integer valor) {
+        this.valor = valor;
+    }
+
+    public Integer getCrc() {
         return crc;
     }
 
-    public void setCrc(String crc) {
+    public void setCrc(Integer crc) {
         this.crc = crc;
     }
 
-    public Integer getConsecutivo() {
-        return consecutivo;
+    public String getOtrosDatos() {
+        return otrosDatos;
     }
 
-    public void setConsecutivo(Integer consecutivo) {
-        this.consecutivo = consecutivo;
+    public void setOtrosDatos(String otrosDatos) {
+        this.otrosDatos = otrosDatos;
     }
 
-    public Recorridoorig getRecorridoorigIdrecorridoorig() {
-        return recorridoorigIdrecorridoorig;
+    public Recorrido getRecorridoidRecorrido() {
+        return recorridoidRecorrido;
     }
 
-    public void setRecorridoorigIdrecorridoorig(Recorridoorig recorridoorigIdrecorridoorig) {
-        this.recorridoorigIdrecorridoorig = recorridoorigIdrecorridoorig;
+    public void setRecorridoidRecorrido(Recorrido recorridoidRecorrido) {
+        this.recorridoidRecorrido = recorridoidRecorrido;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idlog != null ? idlog.hashCode() : 0);
+        hash += (idLog != null ? idLog.hashCode() : 0);
         return hash;
     }
 
@@ -149,7 +161,7 @@ public class Log implements Serializable {
             return false;
         }
         Log other = (Log) object;
-        if ((this.idlog == null && other.idlog != null) || (this.idlog != null && !this.idlog.equals(other.idlog))) {
+        if ((this.idLog == null && other.idLog != null) || (this.idLog != null && !this.idLog.equals(other.idLog))) {
             return false;
         }
         return true;
@@ -157,7 +169,7 @@ public class Log implements Serializable {
 
     @Override
     public String toString() {
-        return "com.udec.benlly.Log[ idlog=" + idlog + " ]";
+        return "com.udec.benlly.Log[ idLog=" + idLog + " ]";
     }
     
 }

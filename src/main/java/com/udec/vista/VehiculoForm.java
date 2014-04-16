@@ -39,7 +39,7 @@ public class VehiculoForm extends JInternalFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("com.udec_benlly_jar_1.0-SNAPSHOTPU").createEntityManager();
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("proyecto?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
         query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vehiculo v");
         list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query.getResultList());
         masterScrollPane = new javax.swing.JScrollPane();
@@ -47,17 +47,17 @@ public class VehiculoForm extends JInternalFrame {
         placaLabel = new javax.swing.JLabel();
         marcaLabel = new javax.swing.JLabel();
         modeloLabel = new javax.swing.JLabel();
-        npLabel = new javax.swing.JLabel();
-        rcLabel = new javax.swing.JLabel();
-        rdLabel = new javax.swing.JLabel();
-        rrLabel = new javax.swing.JLabel();
+        radioRuedaLabel = new javax.swing.JLabel();
+        relacionCajaLabel = new javax.swing.JLabel();
+        relacionDiferencialLabel = new javax.swing.JLabel();
+        otrosDatosLabel = new javax.swing.JLabel();
         placaField = new javax.swing.JTextField();
         marcaField = new javax.swing.JTextField();
         modeloField = new javax.swing.JTextField();
-        npField = new javax.swing.JTextField();
-        rcField = new javax.swing.JTextField();
-        rdField = new javax.swing.JTextField();
-        rrField = new javax.swing.JTextField();
+        radioRuedaField = new javax.swing.JTextField();
+        relacionCajaField = new javax.swing.JTextField();
+        relacionDiferencialField = new javax.swing.JTextField();
+        otrosDatosField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
@@ -74,19 +74,19 @@ public class VehiculoForm extends JInternalFrame {
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modelo}"));
         columnBinding.setColumnName("Modelo");
+        columnBinding.setColumnClass(Short.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${radioRueda}"));
+        columnBinding.setColumnName("Radio Rueda");
+        columnBinding.setColumnClass(Float.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${relacionCaja}"));
+        columnBinding.setColumnName("Relacion Caja");
+        columnBinding.setColumnClass(Float.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${relacionDiferencial}"));
+        columnBinding.setColumnName("Relacion Diferencial");
+        columnBinding.setColumnClass(Float.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${otrosDatos}"));
+        columnBinding.setColumnName("Otros Datos");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${np}"));
-        columnBinding.setColumnName("Np");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rc}"));
-        columnBinding.setColumnName("Rc");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rd}"));
-        columnBinding.setColumnName("Rd");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rr}"));
-        columnBinding.setColumnName("Rr");
-        columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
 
         masterScrollPane.setViewportView(masterTable);
@@ -97,13 +97,13 @@ public class VehiculoForm extends JInternalFrame {
 
         modeloLabel.setText("Modelo:");
 
-        npLabel.setText("Np:");
+        radioRuedaLabel.setText("Radio Rueda:");
 
-        rcLabel.setText("Rc:");
+        relacionCajaLabel.setText("Relacion Caja:");
 
-        rdLabel.setText("Rd:");
+        relacionDiferencialLabel.setText("Relacion Diferencial:");
 
-        rrLabel.setText("Rr:");
+        otrosDatosLabel.setText("Otros Datos:");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.placa}"), placaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
@@ -123,28 +123,28 @@ public class VehiculoForm extends JInternalFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), modeloField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.np}"), npField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.radioRueda}"), radioRuedaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), npField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), radioRuedaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.rc}"), rcField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.relacionCaja}"), relacionCajaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), rcField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), relacionCajaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.rd}"), rdField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.relacionDiferencial}"), relacionDiferencialField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), rdField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), relacionDiferencialField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.rr}"), rrField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.otrosDatos}"), otrosDatosField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), rrField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), otrosDatosField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         saveButton.setText("Guardar cambios");
@@ -185,20 +185,20 @@ public class VehiculoForm extends JInternalFrame {
                                     .addComponent(placaLabel)
                                     .addComponent(marcaLabel)
                                     .addComponent(modeloLabel)
-                                    .addComponent(npLabel)
-                                    .addComponent(rcLabel)
-                                    .addComponent(rdLabel)
-                                    .addComponent(rrLabel))
+                                    .addComponent(radioRuedaLabel)
+                                    .addComponent(relacionCajaLabel)
+                                    .addComponent(relacionDiferencialLabel)
+                                    .addComponent(otrosDatosLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(placaField, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                                    .addComponent(marcaField, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                                    .addComponent(modeloField, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                                    .addComponent(npField, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                                    .addComponent(rcField, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                                    .addComponent(rdField, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
-                                    .addComponent(rrField, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)))
-                            .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE))))
+                                    .addComponent(placaField, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                                    .addComponent(marcaField, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                                    .addComponent(modeloField, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                                    .addComponent(radioRuedaField, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                                    .addComponent(relacionCajaField, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                                    .addComponent(relacionDiferencialField, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                                    .addComponent(otrosDatosField, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)))
+                            .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 821, Short.MAX_VALUE))))
                 .addContainerGap())
         );
 
@@ -208,7 +208,7 @@ public class VehiculoForm extends JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(placaLabel)
@@ -223,20 +223,20 @@ public class VehiculoForm extends JInternalFrame {
                     .addComponent(modeloField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(npLabel)
-                    .addComponent(npField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(radioRuedaLabel)
+                    .addComponent(radioRuedaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rcLabel)
-                    .addComponent(rcField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(relacionCajaLabel)
+                    .addComponent(relacionCajaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdLabel)
-                    .addComponent(rdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(relacionDiferencialLabel)
+                    .addComponent(relacionDiferencialField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rrLabel)
-                    .addComponent(rrField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(otrosDatosLabel)
+                    .addComponent(otrosDatosField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
@@ -331,21 +331,21 @@ public class VehiculoForm extends JInternalFrame {
     private javax.swing.JTextField modeloField;
     private javax.swing.JLabel modeloLabel;
     private javax.swing.JButton newButton;
-    private javax.swing.JTextField npField;
-    private javax.swing.JLabel npLabel;
+    private javax.swing.JTextField otrosDatosField;
+    private javax.swing.JLabel otrosDatosLabel;
     private javax.swing.JTextField placaField;
     private javax.swing.JLabel placaLabel;
     private javax.persistence.Query query;
-    private javax.swing.JTextField rcField;
-    private javax.swing.JLabel rcLabel;
-    private javax.swing.JTextField rdField;
-    private javax.swing.JLabel rdLabel;
+    private javax.swing.JTextField radioRuedaField;
+    private javax.swing.JLabel radioRuedaLabel;
     private javax.swing.JButton refreshButton;
-    private javax.swing.JTextField rrField;
-    private javax.swing.JLabel rrLabel;
+    private javax.swing.JTextField relacionCajaField;
+    private javax.swing.JLabel relacionCajaLabel;
+    private javax.swing.JTextField relacionDiferencialField;
+    private javax.swing.JLabel relacionDiferencialLabel;
     private javax.swing.JButton saveButton;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-   
+  
     
 }
