@@ -10,7 +10,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +20,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,7 +37,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sensor.findBySerial", query = "SELECT s FROM Sensor s WHERE s.serial = :serial"),
     @NamedQuery(name = "Sensor.findByTipo", query = "SELECT s FROM Sensor s WHERE s.tipo = :tipo"),
     @NamedQuery(name = "Sensor.findByCanal", query = "SELECT s FROM Sensor s WHERE s.canal = :canal"),
-    @NamedQuery(name = "Sensor.findByMagnitud", query = "SELECT s FROM Sensor s WHERE s.magnitud = :magnitud")})
+    @NamedQuery(name = "Sensor.findByMagnitud", query = "SELECT s FROM Sensor s WHERE s.magnitud = :magnitud"),
+    @NamedQuery(name = "Sensor.findByPulsosRevolucion", query = "SELECT s FROM Sensor s WHERE s.pulsosRevolucion = :pulsosRevolucion"),
+    @NamedQuery(name = "Sensor.findByMagnitudMaxima", query = "SELECT s FROM Sensor s WHERE s.magnitudMaxima = :magnitudMaxima"),
+    @NamedQuery(name = "Sensor.findByMagnitudMinima", query = "SELECT s FROM Sensor s WHERE s.magnitudMinima = :magnitudMinima"),
+    @NamedQuery(name = "Sensor.findBySalidaMaxima", query = "SELECT s FROM Sensor s WHERE s.salidaMaxima = :salidaMaxima"),
+    @NamedQuery(name = "Sensor.findBySalidaMinima", query = "SELECT s FROM Sensor s WHERE s.salidaMinima = :salidaMinima"),
+    @NamedQuery(name = "Sensor.findByDivisorFrecuencia", query = "SELECT s FROM Sensor s WHERE s.divisorFrecuencia = :divisorFrecuencia")})
 public class Sensor implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -63,13 +67,22 @@ public class Sensor implements Serializable {
     @Lob
     @Column(name = "otros_datos")
     private String otrosDatos;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "pulsos_revolucion")
+    private Float pulsosRevolucion;
+    @Column(name = "magnitud_maxima")
+    private Float magnitudMaxima;
+    @Column(name = "magnitud_minima")
+    private Float magnitudMinima;
+    @Column(name = "salida_maxima")
+    private Float salidaMaxima;
+    @Column(name = "salida_minima")
+    private Float salidaMinima;
+    @Column(name = "divisor_frecuencia")
+    private Float divisorFrecuencia;
     @JoinColumn(name = "Vehiculo_idVehiculo", referencedColumnName = "idVehiculo")
     @ManyToOne(optional = false)
     private Vehiculo vehiculoidVehiculo;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "sensor")
-    private Sensoranalogo sensoranalogo;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "sensor")
-    private Sensordigital sensordigital;
 
     public Sensor() {
     }
@@ -148,6 +161,66 @@ public class Sensor implements Serializable {
         changeSupport.firePropertyChange("otrosDatos", oldOtrosDatos, otrosDatos);
     }
 
+    public Float getPulsosRevolucion() {
+        return pulsosRevolucion;
+    }
+
+    public void setPulsosRevolucion(Float pulsosRevolucion) {
+        Float oldPulsosRevolucion = this.pulsosRevolucion;
+        this.pulsosRevolucion = pulsosRevolucion;
+        changeSupport.firePropertyChange("pulsosRevolucion", oldPulsosRevolucion, pulsosRevolucion);
+    }
+
+    public Float getMagnitudMaxima() {
+        return magnitudMaxima;
+    }
+
+    public void setMagnitudMaxima(Float magnitudMaxima) {
+        Float oldMagnitudMaxima = this.magnitudMaxima;
+        this.magnitudMaxima = magnitudMaxima;
+        changeSupport.firePropertyChange("magnitudMaxima", oldMagnitudMaxima, magnitudMaxima);
+    }
+
+    public Float getMagnitudMinima() {
+        return magnitudMinima;
+    }
+
+    public void setMagnitudMinima(Float magnitudMinima) {
+        Float oldMagnitudMinima = this.magnitudMinima;
+        this.magnitudMinima = magnitudMinima;
+        changeSupport.firePropertyChange("magnitudMinima", oldMagnitudMinima, magnitudMinima);
+    }
+
+    public Float getSalidaMaxima() {
+        return salidaMaxima;
+    }
+
+    public void setSalidaMaxima(Float salidaMaxima) {
+        Float oldSalidaMaxima = this.salidaMaxima;
+        this.salidaMaxima = salidaMaxima;
+        changeSupport.firePropertyChange("salidaMaxima", oldSalidaMaxima, salidaMaxima);
+    }
+
+    public Float getSalidaMinima() {
+        return salidaMinima;
+    }
+
+    public void setSalidaMinima(Float salidaMinima) {
+        Float oldSalidaMinima = this.salidaMinima;
+        this.salidaMinima = salidaMinima;
+        changeSupport.firePropertyChange("salidaMinima", oldSalidaMinima, salidaMinima);
+    }
+
+    public Float getDivisorFrecuencia() {
+        return divisorFrecuencia;
+    }
+
+    public void setDivisorFrecuencia(Float divisorFrecuencia) {
+        Float oldDivisorFrecuencia = this.divisorFrecuencia;
+        this.divisorFrecuencia = divisorFrecuencia;
+        changeSupport.firePropertyChange("divisorFrecuencia", oldDivisorFrecuencia, divisorFrecuencia);
+    }
+
     public Vehiculo getVehiculoidVehiculo() {
         return vehiculoidVehiculo;
     }
@@ -156,22 +229,6 @@ public class Sensor implements Serializable {
         Vehiculo oldVehiculoidVehiculo = this.vehiculoidVehiculo;
         this.vehiculoidVehiculo = vehiculoidVehiculo;
         changeSupport.firePropertyChange("vehiculoidVehiculo", oldVehiculoidVehiculo, vehiculoidVehiculo);
-    }
-
-    public Sensoranalogo getSensoranalogo() {
-        return sensoranalogo;
-    }
-
-    public void setSensoranalogo(Sensoranalogo sensoranalogo) {
-        this.sensoranalogo = sensoranalogo;
-    }
-
-    public Sensordigital getSensordigital() {
-        return sensordigital;
-    }
-
-    public void setSensordigital(Sensordigital sensordigital) {
-        this.sensordigital = sensordigital;
     }
 
     @Override
