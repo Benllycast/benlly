@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.persistence.EntityManager" name="entityManager">
       <Properties>
@@ -55,6 +55,9 @@
       </AuxValues>
     </Component>
   </NonVisualComponents>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="2"/>
+  </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -73,37 +76,60 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="masterScrollPane" alignment="0" min="-2" pref="581" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Component id="masterScrollPane" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="serialLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="tipoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="canalLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="magnitudLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="uvicacionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="otrosDatosLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="vehiculoidVehiculoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="tipoLabel" min="-2" max="-2" attributes="0"/>
-                              <Component id="canalLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="pulsosRevolucionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="magnitudMaximaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="salidaMaximaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="salidaMaximaField" linkSize="2" alignment="0" min="-2" pref="370" max="-2" attributes="0"/>
+                          <Component id="magnitudMaximaField" linkSize="2" min="-2" pref="370" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="29" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="magnitudMinimaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="salidaMinimaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="salidaMinimaField" linkSize="3" alignment="1" min="-2" pref="383" max="-2" attributes="0"/>
+                          <Component id="magnitudMinimaField" linkSize="3" alignment="1" min="-2" pref="383" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="divisorFrecuenciaLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="otrosDatosField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="uvicacionField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="magnitudField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="canalField" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" alignment="0" pref="517" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="serialField" min="-2" pref="517" max="-2" attributes="0"/>
+                      <Component id="divisorFrecuenciaField" linkSize="2" min="-2" pref="370" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="pulsosRevolucionField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="otrosDatosField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="uvicacionField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="magnitudField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="canalField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="serialField" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="newButton" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="deleteButton" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -111,7 +137,6 @@
               <Component id="refreshButton" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="saveButton" linkSize="1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -119,22 +144,23 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="masterScrollPane" min="-2" pref="115" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <Component id="masterScrollPane" min="-2" pref="88" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="serialField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="serialLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="serialField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="tipoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="canalLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="canalField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="magnitudLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="magnitudField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -154,14 +180,38 @@
                   <Component id="vehiculoidVehiculoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="pulsosRevolucionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pulsosRevolucionField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="magnitudMaximaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="magnitudMaximaField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="magnitudMinimaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="magnitudMinimaField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="salidaMaximaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="salidaMaximaField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="salidaMinimaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="salidaMinimaField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="divisorFrecuenciaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="divisorFrecuenciaField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="saveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="newButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -238,7 +288,7 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${uvicacion}">
-                <BindingParameter name="NAME" value="Ubicaci&#xf3;n"/>
+                <BindingParameter name="NAME" value="Ubicacion"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
               </Subbinding>
               <Subbinding sourcePath="${vehiculoidVehiculo.placa}">
@@ -280,7 +330,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="uvicacionLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ubicaci&#xf3;n:"/>
+        <Property name="text" type="java.lang.String" value="Ubicacion:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="otrosDatosLabel">
@@ -291,6 +341,36 @@
     <Component class="javax.swing.JLabel" name="vehiculoidVehiculoLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vehiculo:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="pulsosRevolucionLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pulsos Revolucion:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="magnitudMaximaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Magnitud Maxima:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="magnitudMinimaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Magnitud Minima:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="salidaMaximaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salida Maxima:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="salidaMinimaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salida Minima:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="divisorFrecuenciaLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Divisor Frecuencia:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="serialField">
@@ -336,6 +416,60 @@
           <Property name="incompletePathValue" type="java.lang.String" value=""/>
         </BindingProperty>
         <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="otrosDatosField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="pulsosRevolucionField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.pulsosRevolucion}" target="pulsosRevolucionField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="pulsosRevolucionField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="magnitudMaximaField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.magnitudMaxima}" target="magnitudMaximaField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="magnitudMaximaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="magnitudMinimaField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.magnitudMinima}" target="magnitudMinimaField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="magnitudMinimaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="salidaMaximaField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.salidaMaxima}" target="salidaMaximaField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="salidaMaximaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="salidaMinimaField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.salidaMinima}" target="salidaMinimaField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="salidaMinimaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
+      </BindingProperties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="divisorFrecuenciaField">
+      <BindingProperties>
+        <BindingProperty name="text" source="masterTable" sourcePath="${selectedElement.divisorFrecuencia}" target="divisorFrecuenciaField" targetPath="text" updateStrategy="0" immediately="false">
+          <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+          <Property name="incompletePathValue" type="java.lang.String" value=""/>
+        </BindingProperty>
+        <BindingProperty name="enabled" source="masterTable" sourcePath="${selectedElement != null}" target="divisorFrecuenciaField" targetPath="enabled" updateStrategy="1" immediately="false"/>
       </BindingProperties>
     </Component>
     <Component class="javax.swing.JButton" name="saveButton">
@@ -392,21 +526,28 @@
     <Component class="javax.swing.JComboBox" name="jComboBox1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="2">
-            <StringItem index="0" value="analogo"/>
-            <StringItem index="1" value="digital"/>
+          <StringArray count="3">
+            <StringItem index="0" value="--"/>
+            <StringItem index="1" value="analogo"/>
+            <StringItem index="2" value="digital"/>
           </StringArray>
         </Property>
       </Properties>
       <BindingProperties>
         <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.tipo}" target="jComboBox1" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox2">
       <BindingProperties>
         <BindingProperty name="elements" source="vehiculoList" target="jComboBox2" targetPath="elements" updateStrategy="0" immediately="false"/>
         <BindingProperty name="selectedItem" source="masterTable" sourcePath="${selectedElement.vehiculoidVehiculo}" target="jComboBox2" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
       </BindingProperties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jComboBox2.setRenderer(new DefaultListCellRenderer() {&#xa;            @Override&#xa;            public Component getListCellRendererComponent(&#xa;                JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {&#xa;                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);&#xa;                if (value instanceof Vehiculo) {&#xa;                    Vehiculo mec = (Vehiculo)value;&#xa;                    setText(mec.getPlaca());&#xa;                }&#xa;                return this;&#xa;            }&#xa;        });"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>
