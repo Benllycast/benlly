@@ -6,6 +6,8 @@
 
 package com.udec.benlly;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,6 +38,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sensoranalogo.findBySalidaMinima", query = "SELECT s FROM Sensoranalogo s WHERE s.salidaMinima = :salidaMinima"),
     @NamedQuery(name = "Sensoranalogo.findByDivisorFrecuencia", query = "SELECT s FROM Sensoranalogo s WHERE s.divisorFrecuencia = :divisorFrecuencia")})
 public class Sensoranalogo implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -70,7 +75,9 @@ public class Sensoranalogo implements Serializable {
     }
 
     public void setSensoridsensor(Integer sensoridsensor) {
+        Integer oldSensoridsensor = this.sensoridsensor;
         this.sensoridsensor = sensoridsensor;
+        changeSupport.firePropertyChange("sensoridsensor", oldSensoridsensor, sensoridsensor);
     }
 
     public Float getMagnitudMaxima() {
@@ -78,7 +85,9 @@ public class Sensoranalogo implements Serializable {
     }
 
     public void setMagnitudMaxima(Float magnitudMaxima) {
+        Float oldMagnitudMaxima = this.magnitudMaxima;
         this.magnitudMaxima = magnitudMaxima;
+        changeSupport.firePropertyChange("magnitudMaxima", oldMagnitudMaxima, magnitudMaxima);
     }
 
     public Float getMagnitudMinima() {
@@ -86,7 +95,9 @@ public class Sensoranalogo implements Serializable {
     }
 
     public void setMagnitudMinima(Float magnitudMinima) {
+        Float oldMagnitudMinima = this.magnitudMinima;
         this.magnitudMinima = magnitudMinima;
+        changeSupport.firePropertyChange("magnitudMinima", oldMagnitudMinima, magnitudMinima);
     }
 
     public Float getSalidaMaxima() {
@@ -94,7 +105,9 @@ public class Sensoranalogo implements Serializable {
     }
 
     public void setSalidaMaxima(Float salidaMaxima) {
+        Float oldSalidaMaxima = this.salidaMaxima;
         this.salidaMaxima = salidaMaxima;
+        changeSupport.firePropertyChange("salidaMaxima", oldSalidaMaxima, salidaMaxima);
     }
 
     public Float getSalidaMinima() {
@@ -102,7 +115,9 @@ public class Sensoranalogo implements Serializable {
     }
 
     public void setSalidaMinima(Float salidaMinima) {
+        Float oldSalidaMinima = this.salidaMinima;
         this.salidaMinima = salidaMinima;
+        changeSupport.firePropertyChange("salidaMinima", oldSalidaMinima, salidaMinima);
     }
 
     public Float getDivisorFrecuencia() {
@@ -110,7 +125,9 @@ public class Sensoranalogo implements Serializable {
     }
 
     public void setDivisorFrecuencia(Float divisorFrecuencia) {
+        Float oldDivisorFrecuencia = this.divisorFrecuencia;
         this.divisorFrecuencia = divisorFrecuencia;
+        changeSupport.firePropertyChange("divisorFrecuencia", oldDivisorFrecuencia, divisorFrecuencia);
     }
 
     public String getOtrosDatos() {
@@ -118,7 +135,9 @@ public class Sensoranalogo implements Serializable {
     }
 
     public void setOtrosDatos(String otrosDatos) {
+        String oldOtrosDatos = this.otrosDatos;
         this.otrosDatos = otrosDatos;
+        changeSupport.firePropertyChange("otrosDatos", oldOtrosDatos, otrosDatos);
     }
 
     public Sensor getSensor() {
@@ -152,6 +171,14 @@ public class Sensoranalogo implements Serializable {
     @Override
     public String toString() {
         return "com.udec.benlly.Sensoranalogo[ sensoridsensor=" + sensoridsensor + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
