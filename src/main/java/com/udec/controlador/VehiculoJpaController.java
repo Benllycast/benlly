@@ -14,7 +14,7 @@ import javax.persistence.criteria.Root;
 import com.udec.benlly.Sensor;
 import java.util.ArrayList;
 import java.util.List;
-import com.udec.benlly.Recorridoorig;
+import com.udec.benlly.Recorrido;
 import com.udec.benlly.Vehiculo;
 import com.udec.controlador.exceptions.IllegalOrphanException;
 import com.udec.controlador.exceptions.NonexistentEntityException;
@@ -23,7 +23,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Ususario
+ * @author Oscar
  */
 public class VehiculoJpaController implements Serializable {
 
@@ -40,8 +40,8 @@ public class VehiculoJpaController implements Serializable {
         if (vehiculo.getSensorList() == null) {
             vehiculo.setSensorList(new ArrayList<Sensor>());
         }
-        if (vehiculo.getRecorridoorigList() == null) {
-            vehiculo.setRecorridoorigList(new ArrayList<Recorridoorig>());
+        if (vehiculo.getRecorridoList() == null) {
+            vehiculo.setRecorridoList(new ArrayList<Recorrido>());
         }
         EntityManager em = null;
         try {
@@ -53,29 +53,29 @@ public class VehiculoJpaController implements Serializable {
                 attachedSensorList.add(sensorListSensorToAttach);
             }
             vehiculo.setSensorList(attachedSensorList);
-            List<Recorridoorig> attachedRecorridoorigList = new ArrayList<Recorridoorig>();
-            for (Recorridoorig recorridoorigListRecorridoorigToAttach : vehiculo.getRecorridoorigList()) {
-                recorridoorigListRecorridoorigToAttach = em.getReference(recorridoorigListRecorridoorigToAttach.getClass(), recorridoorigListRecorridoorigToAttach.getIdrecorridoorig());
-                attachedRecorridoorigList.add(recorridoorigListRecorridoorigToAttach);
+            List<Recorrido> attachedRecorridoList = new ArrayList<Recorrido>();
+            for (Recorrido recorridoListRecorridoToAttach : vehiculo.getRecorridoList()) {
+                recorridoListRecorridoToAttach = em.getReference(recorridoListRecorridoToAttach.getClass(), recorridoListRecorridoToAttach.getIdRecorrido());
+                attachedRecorridoList.add(recorridoListRecorridoToAttach);
             }
-            vehiculo.setRecorridoorigList(attachedRecorridoorigList);
+            vehiculo.setRecorridoList(attachedRecorridoList);
             em.persist(vehiculo);
             for (Sensor sensorListSensor : vehiculo.getSensorList()) {
-                Vehiculo oldVehiculoIdvehiculoOfSensorListSensor = sensorListSensor.getVehiculoIdvehiculo();
-                sensorListSensor.setVehiculoIdvehiculo(vehiculo);
+                Vehiculo oldVehiculoidVehiculoOfSensorListSensor = sensorListSensor.getVehiculoidVehiculo();
+                sensorListSensor.setVehiculoidVehiculo(vehiculo);
                 sensorListSensor = em.merge(sensorListSensor);
-                if (oldVehiculoIdvehiculoOfSensorListSensor != null) {
-                    oldVehiculoIdvehiculoOfSensorListSensor.getSensorList().remove(sensorListSensor);
-                    oldVehiculoIdvehiculoOfSensorListSensor = em.merge(oldVehiculoIdvehiculoOfSensorListSensor);
+                if (oldVehiculoidVehiculoOfSensorListSensor != null) {
+                    oldVehiculoidVehiculoOfSensorListSensor.getSensorList().remove(sensorListSensor);
+                    oldVehiculoidVehiculoOfSensorListSensor = em.merge(oldVehiculoidVehiculoOfSensorListSensor);
                 }
             }
-            for (Recorridoorig recorridoorigListRecorridoorig : vehiculo.getRecorridoorigList()) {
-                Vehiculo oldVehiculoIdvehiculoOfRecorridoorigListRecorridoorig = recorridoorigListRecorridoorig.getVehiculoIdvehiculo();
-                recorridoorigListRecorridoorig.setVehiculoIdvehiculo(vehiculo);
-                recorridoorigListRecorridoorig = em.merge(recorridoorigListRecorridoorig);
-                if (oldVehiculoIdvehiculoOfRecorridoorigListRecorridoorig != null) {
-                    oldVehiculoIdvehiculoOfRecorridoorigListRecorridoorig.getRecorridoorigList().remove(recorridoorigListRecorridoorig);
-                    oldVehiculoIdvehiculoOfRecorridoorigListRecorridoorig = em.merge(oldVehiculoIdvehiculoOfRecorridoorigListRecorridoorig);
+            for (Recorrido recorridoListRecorrido : vehiculo.getRecorridoList()) {
+                Vehiculo oldVehiculoidVehiculoOfRecorridoListRecorrido = recorridoListRecorrido.getVehiculoidVehiculo();
+                recorridoListRecorrido.setVehiculoidVehiculo(vehiculo);
+                recorridoListRecorrido = em.merge(recorridoListRecorrido);
+                if (oldVehiculoidVehiculoOfRecorridoListRecorrido != null) {
+                    oldVehiculoidVehiculoOfRecorridoListRecorrido.getRecorridoList().remove(recorridoListRecorrido);
+                    oldVehiculoidVehiculoOfRecorridoListRecorrido = em.merge(oldVehiculoidVehiculoOfRecorridoListRecorrido);
                 }
             }
             em.getTransaction().commit();
@@ -91,26 +91,26 @@ public class VehiculoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Vehiculo persistentVehiculo = em.find(Vehiculo.class, vehiculo.getIdvehiculo());
+            Vehiculo persistentVehiculo = em.find(Vehiculo.class, vehiculo.getIdVehiculo());
             List<Sensor> sensorListOld = persistentVehiculo.getSensorList();
             List<Sensor> sensorListNew = vehiculo.getSensorList();
-            List<Recorridoorig> recorridoorigListOld = persistentVehiculo.getRecorridoorigList();
-            List<Recorridoorig> recorridoorigListNew = vehiculo.getRecorridoorigList();
+            List<Recorrido> recorridoListOld = persistentVehiculo.getRecorridoList();
+            List<Recorrido> recorridoListNew = vehiculo.getRecorridoList();
             List<String> illegalOrphanMessages = null;
             for (Sensor sensorListOldSensor : sensorListOld) {
                 if (!sensorListNew.contains(sensorListOldSensor)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Sensor " + sensorListOldSensor + " since its vehiculoIdvehiculo field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Sensor " + sensorListOldSensor + " since its vehiculoidVehiculo field is not nullable.");
                 }
             }
-            for (Recorridoorig recorridoorigListOldRecorridoorig : recorridoorigListOld) {
-                if (!recorridoorigListNew.contains(recorridoorigListOldRecorridoorig)) {
+            for (Recorrido recorridoListOldRecorrido : recorridoListOld) {
+                if (!recorridoListNew.contains(recorridoListOldRecorrido)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Recorridoorig " + recorridoorigListOldRecorridoorig + " since its vehiculoIdvehiculo field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Recorrido " + recorridoListOldRecorrido + " since its vehiculoidVehiculo field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -123,33 +123,33 @@ public class VehiculoJpaController implements Serializable {
             }
             sensorListNew = attachedSensorListNew;
             vehiculo.setSensorList(sensorListNew);
-            List<Recorridoorig> attachedRecorridoorigListNew = new ArrayList<Recorridoorig>();
-            for (Recorridoorig recorridoorigListNewRecorridoorigToAttach : recorridoorigListNew) {
-                recorridoorigListNewRecorridoorigToAttach = em.getReference(recorridoorigListNewRecorridoorigToAttach.getClass(), recorridoorigListNewRecorridoorigToAttach.getIdrecorridoorig());
-                attachedRecorridoorigListNew.add(recorridoorigListNewRecorridoorigToAttach);
+            List<Recorrido> attachedRecorridoListNew = new ArrayList<Recorrido>();
+            for (Recorrido recorridoListNewRecorridoToAttach : recorridoListNew) {
+                recorridoListNewRecorridoToAttach = em.getReference(recorridoListNewRecorridoToAttach.getClass(), recorridoListNewRecorridoToAttach.getIdRecorrido());
+                attachedRecorridoListNew.add(recorridoListNewRecorridoToAttach);
             }
-            recorridoorigListNew = attachedRecorridoorigListNew;
-            vehiculo.setRecorridoorigList(recorridoorigListNew);
+            recorridoListNew = attachedRecorridoListNew;
+            vehiculo.setRecorridoList(recorridoListNew);
             vehiculo = em.merge(vehiculo);
             for (Sensor sensorListNewSensor : sensorListNew) {
                 if (!sensorListOld.contains(sensorListNewSensor)) {
-                    Vehiculo oldVehiculoIdvehiculoOfSensorListNewSensor = sensorListNewSensor.getVehiculoIdvehiculo();
-                    sensorListNewSensor.setVehiculoIdvehiculo(vehiculo);
+                    Vehiculo oldVehiculoidVehiculoOfSensorListNewSensor = sensorListNewSensor.getVehiculoidVehiculo();
+                    sensorListNewSensor.setVehiculoidVehiculo(vehiculo);
                     sensorListNewSensor = em.merge(sensorListNewSensor);
-                    if (oldVehiculoIdvehiculoOfSensorListNewSensor != null && !oldVehiculoIdvehiculoOfSensorListNewSensor.equals(vehiculo)) {
-                        oldVehiculoIdvehiculoOfSensorListNewSensor.getSensorList().remove(sensorListNewSensor);
-                        oldVehiculoIdvehiculoOfSensorListNewSensor = em.merge(oldVehiculoIdvehiculoOfSensorListNewSensor);
+                    if (oldVehiculoidVehiculoOfSensorListNewSensor != null && !oldVehiculoidVehiculoOfSensorListNewSensor.equals(vehiculo)) {
+                        oldVehiculoidVehiculoOfSensorListNewSensor.getSensorList().remove(sensorListNewSensor);
+                        oldVehiculoidVehiculoOfSensorListNewSensor = em.merge(oldVehiculoidVehiculoOfSensorListNewSensor);
                     }
                 }
             }
-            for (Recorridoorig recorridoorigListNewRecorridoorig : recorridoorigListNew) {
-                if (!recorridoorigListOld.contains(recorridoorigListNewRecorridoorig)) {
-                    Vehiculo oldVehiculoIdvehiculoOfRecorridoorigListNewRecorridoorig = recorridoorigListNewRecorridoorig.getVehiculoIdvehiculo();
-                    recorridoorigListNewRecorridoorig.setVehiculoIdvehiculo(vehiculo);
-                    recorridoorigListNewRecorridoorig = em.merge(recorridoorigListNewRecorridoorig);
-                    if (oldVehiculoIdvehiculoOfRecorridoorigListNewRecorridoorig != null && !oldVehiculoIdvehiculoOfRecorridoorigListNewRecorridoorig.equals(vehiculo)) {
-                        oldVehiculoIdvehiculoOfRecorridoorigListNewRecorridoorig.getRecorridoorigList().remove(recorridoorigListNewRecorridoorig);
-                        oldVehiculoIdvehiculoOfRecorridoorigListNewRecorridoorig = em.merge(oldVehiculoIdvehiculoOfRecorridoorigListNewRecorridoorig);
+            for (Recorrido recorridoListNewRecorrido : recorridoListNew) {
+                if (!recorridoListOld.contains(recorridoListNewRecorrido)) {
+                    Vehiculo oldVehiculoidVehiculoOfRecorridoListNewRecorrido = recorridoListNewRecorrido.getVehiculoidVehiculo();
+                    recorridoListNewRecorrido.setVehiculoidVehiculo(vehiculo);
+                    recorridoListNewRecorrido = em.merge(recorridoListNewRecorrido);
+                    if (oldVehiculoidVehiculoOfRecorridoListNewRecorrido != null && !oldVehiculoidVehiculoOfRecorridoListNewRecorrido.equals(vehiculo)) {
+                        oldVehiculoidVehiculoOfRecorridoListNewRecorrido.getRecorridoList().remove(recorridoListNewRecorrido);
+                        oldVehiculoidVehiculoOfRecorridoListNewRecorrido = em.merge(oldVehiculoidVehiculoOfRecorridoListNewRecorrido);
                     }
                 }
             }
@@ -157,7 +157,7 @@ public class VehiculoJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = vehiculo.getIdvehiculo();
+                Integer id = vehiculo.getIdVehiculo();
                 if (findVehiculo(id) == null) {
                     throw new NonexistentEntityException("The vehiculo with id " + id + " no longer exists.");
                 }
@@ -178,7 +178,7 @@ public class VehiculoJpaController implements Serializable {
             Vehiculo vehiculo;
             try {
                 vehiculo = em.getReference(Vehiculo.class, id);
-                vehiculo.getIdvehiculo();
+                vehiculo.getIdVehiculo();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The vehiculo with id " + id + " no longer exists.", enfe);
             }
@@ -188,14 +188,14 @@ public class VehiculoJpaController implements Serializable {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Vehiculo (" + vehiculo + ") cannot be destroyed since the Sensor " + sensorListOrphanCheckSensor + " in its sensorList field has a non-nullable vehiculoIdvehiculo field.");
+                illegalOrphanMessages.add("This Vehiculo (" + vehiculo + ") cannot be destroyed since the Sensor " + sensorListOrphanCheckSensor + " in its sensorList field has a non-nullable vehiculoidVehiculo field.");
             }
-            List<Recorridoorig> recorridoorigListOrphanCheck = vehiculo.getRecorridoorigList();
-            for (Recorridoorig recorridoorigListOrphanCheckRecorridoorig : recorridoorigListOrphanCheck) {
+            List<Recorrido> recorridoListOrphanCheck = vehiculo.getRecorridoList();
+            for (Recorrido recorridoListOrphanCheckRecorrido : recorridoListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Vehiculo (" + vehiculo + ") cannot be destroyed since the Recorridoorig " + recorridoorigListOrphanCheckRecorridoorig + " in its recorridoorigList field has a non-nullable vehiculoIdvehiculo field.");
+                illegalOrphanMessages.add("This Vehiculo (" + vehiculo + ") cannot be destroyed since the Recorrido " + recorridoListOrphanCheckRecorrido + " in its recorridoList field has a non-nullable vehiculoidVehiculo field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

@@ -6,27 +6,17 @@
 package com.udec.vista;
 
 import com.udec.benlly.Conductor;
-import com.udec.benlly.Log;
 import com.udec.benlly.Vehiculo;
-import com.udec.controlador.LogJpaController;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.beans.Beans;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import java.util.List;
 import javax.persistence.RollbackException;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
@@ -39,18 +29,16 @@ import javax.swing.table.TableCellRenderer;
 
 /**
  *
- * @author Ususario
+ * @author Oscar
  */
 public class RecorridoForm extends JInternalFrame {
-
-    JFileChooser fc;
 
     public RecorridoForm() {
         initComponents();
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
         }
-        fc = new JFileChooser();
+
     }
 
     TableCellRenderer tableCellRenderer = new DefaultTableCellRenderer() {
@@ -78,8 +66,8 @@ public class RecorridoForm extends JInternalFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("com.udec_benlly_jar_1.0-SNAPSHOTPU").createEntityManager();
-        query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT r FROM Recorridoorig r");
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("proyecto?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT r FROM Recorrido r");
         list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query.getResultList());
         vehiculoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT v FROM Vehiculo v");
         vehiculoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : vehiculoQuery.getResultList();
@@ -88,24 +76,27 @@ public class RecorridoForm extends JInternalFrame {
         masterScrollPane = new javax.swing.JScrollPane();
         masterTable = new javax.swing.JTable();
         nombreLabel = new javax.swing.JLabel();
-        vehiculoIdvehiculoLabel = new javax.swing.JLabel();
+        fechaLabel = new javax.swing.JLabel();
+        horaSalidaProgramadaLabel = new javax.swing.JLabel();
+        horaLlegadaProgramadaLabel = new javax.swing.JLabel();
+        horaInicioLabel = new javax.swing.JLabel();
+        horaFinalizacionLabel = new javax.swing.JLabel();
+        otrosDatosLabel = new javax.swing.JLabel();
+        vehiculoidVehiculoLabel = new javax.swing.JLabel();
         conductoridConductorLabel = new javax.swing.JLabel();
-        horaSalidaLabel = new javax.swing.JLabel();
-        horaLlegadaLabel = new javax.swing.JLabel();
         nombreField = new javax.swing.JTextField();
+        otrosDatosField = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
         jSpinner1 = new javax.swing.JSpinner(new SpinnerDateModel());
         jSpinner2 = new javax.swing.JSpinner(new SpinnerDateModel());
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jSpinner3 = new javax.swing.JSpinner(new SpinnerDateModel());
+        jSpinner4 = new javax.swing.JSpinner(new SpinnerDateModel());
+        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
 
         FormListener formListener = new FormListener();
 
@@ -113,38 +104,66 @@ public class RecorridoForm extends JInternalFrame {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nombre}"));
         columnBinding.setColumnName("Nombre");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${conductoridConductor.nombre}"));
-        columnBinding.setColumnName("Conductor");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${vehiculoIdvehiculo.placa}"));
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${fecha}"));
+        columnBinding.setColumnName("Fecha");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${horaSalidaProgramada}"));
+        columnBinding.setColumnName("Hora Salida Programada");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${horaLlegadaProgramada}"));
+        columnBinding.setColumnName("Hora Llegada Programada");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${horaInicio}"));
+        columnBinding.setColumnName("Hora Inicio");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${horaFinalizacion}"));
+        columnBinding.setColumnName("Hora Finalizacion");
+        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${vehiculoidVehiculo.placa}"));
         columnBinding.setColumnName("Vehiculo");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${horaSalida}"));
-        columnBinding.setColumnName("Hora Salida");
-        columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${horaLlegada}"));
-        columnBinding.setColumnName("Hora Llegada");
-        columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${conductoridConductor.primerNombre}"));
+        columnBinding.setColumnName("Conductor");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${otrosDatos}"));
+        columnBinding.setColumnName("Otros Datos");
+        columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         masterScrollPane.setViewportView(masterTable);
+        masterTable.getColumnModel ().getColumn(2).setCellRenderer(tableCellRenderer);
         masterTable.getColumnModel ().getColumn(3).setCellRenderer(tableCellRenderer);
         masterTable.getColumnModel ().getColumn(4).setCellRenderer(tableCellRenderer);
+        masterTable.getColumnModel ().getColumn(5).setCellRenderer(tableCellRenderer);
 
         nombreLabel.setText("Nombre:");
 
-        vehiculoIdvehiculoLabel.setText("Vehiculo:");
+        fechaLabel.setText("Fecha:");
+
+        horaSalidaProgramadaLabel.setText("Hora Salida Programada:");
+
+        horaLlegadaProgramadaLabel.setText("Hora Llegada Programada:");
+
+        horaInicioLabel.setText("Hora Inicio:");
+
+        horaFinalizacionLabel.setText("Hora Finalizacion:");
+
+        otrosDatosLabel.setText("Otros Datos:");
+
+        vehiculoidVehiculoLabel.setText("Vehiculo:");
 
         conductoridConductorLabel.setText("Conductor:");
-
-        horaSalidaLabel.setText("Hora Salida:");
-
-        horaLlegadaLabel.setText("Hora Llegada:");
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nombre}"), nombreField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("");
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), nombreField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.otrosDatos}"), otrosDatosField, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding.setSourceUnreadableValue("");
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), otrosDatosField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         saveButton.setText("Guardar cambios");
@@ -163,6 +182,18 @@ public class RecorridoForm extends JInternalFrame {
 
         deleteButton.addActionListener(formListener);
 
+        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(jSpinner1, "HH:mm:ss");
+        jSpinner1.setEditor(timeEditor);
+
+        JSpinner.DateEditor timeEditor2 = new JSpinner.DateEditor(jSpinner2, "HH:mm:ss");
+        jSpinner2.setEditor(timeEditor2);
+
+        JSpinner.DateEditor timeEditor3 = new JSpinner.DateEditor(jSpinner3, "HH:mm:ss");
+        jSpinner3.setEditor(timeEditor3);
+
+        JSpinner.DateEditor timeEditor4 = new JSpinner.DateEditor(jSpinner4, "HH:mm:ss");
+        jSpinner4.setEditor(timeEditor4);
+
         jComboBox1.setRenderer(new DefaultListCellRenderer() {
             @Override
             public Component getListCellRendererComponent(
@@ -178,7 +209,7 @@ public class RecorridoForm extends JInternalFrame {
 
         org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, vehiculoList, jComboBox1);
         bindingGroup.addBinding(jComboBoxBinding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.vehiculoIdvehiculo}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.vehiculoidVehiculo}"), jComboBox1, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
         jComboBox2.setRenderer(new DefaultListCellRenderer() {
@@ -188,7 +219,7 @@ public class RecorridoForm extends JInternalFrame {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (value instanceof Conductor) {
                     Conductor mec = (Conductor)value;
-                    setText(mec.getNombre());
+                    setText(mec.getPrimerNombre());
                 }
                 return this;
             }
@@ -199,112 +230,47 @@ public class RecorridoForm extends JInternalFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.conductoridConductor}"), jComboBox2, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
-        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(jSpinner1, "HH:mm:ss");
-        jSpinner1.setEditor(timeEditor);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.horaSalida}"), jSpinner1, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        binding.setSourceNullValue(null);
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jSpinner1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        JSpinner.DateEditor timeEditor2 = new JSpinner.DateEditor(jSpinner2, "HH:mm:ss");
-        jSpinner2.setEditor(timeEditor2);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.horaLlegada}"), jSpinner2, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        binding.setSourceNullValue(null);
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jSpinner2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
-        jButton1.setText("Examinar");
-        jButton1.addActionListener(formListener);
-
-        jButton2.setText("Importar Log");
-        jButton2.addActionListener(formListener);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-
-        org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.logList}");
-        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, eLProperty, jTable1);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${numeroDato}"));
-        columnBinding.setColumnName("Numero Dato");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${consecutivo}"));
-        columnBinding.setColumnName("Consecutivo");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${crc}"));
-        columnBinding.setColumnName("Crc");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${fecha}"));
-        columnBinding.setColumnName("Fecha");
-        columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${hora}"));
-        columnBinding.setColumnName("Hora");
-        columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${valorObbtenido}"));
-        columnBinding.setColumnName("Valor Obbtenido");
-        columnBinding.setColumnClass(Integer.class);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane1.setViewportView(jTable1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(newButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(refreshButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saveButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, 0)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(newButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(refreshButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(saveButton))
-                            .addComponent(jButton2))
-                        .addGap(0, 597, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nombreLabel)
-                                    .addComponent(vehiculoIdvehiculoLabel)
-                                    .addComponent(conductoridConductorLabel)
-                                    .addComponent(horaSalidaLabel)
-                                    .addComponent(horaLlegadaLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jSpinner2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nombreField))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                    .addComponent(fechaLabel)
+                                    .addComponent(horaSalidaProgramadaLabel)
+                                    .addComponent(horaLlegadaProgramadaLabel)
+                                    .addComponent(horaInicioLabel)
+                                    .addComponent(horaFinalizacionLabel)
+                                    .addComponent(otrosDatosLabel)
+                                    .addComponent(vehiculoidVehiculoLabel)
+                                    .addComponent(conductoridConductorLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
+                                    .addComponent(otrosDatosField, javax.swing.GroupLayout.DEFAULT_SIZE, 906, Short.MAX_VALUE)
+                                    .addComponent(jSpinner1)
+                                    .addComponent(jSpinner2)
+                                    .addComponent(jSpinner3)
+                                    .addComponent(jSpinner4)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1038, Short.MAX_VALUE))))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton});
@@ -313,43 +279,69 @@ public class RecorridoForm extends JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreLabel)
                     .addComponent(nombreField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fechaLabel)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(vehiculoIdvehiculoLabel)
+                    .addComponent(horaSalidaProgramadaLabel)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(horaLlegadaProgramadaLabel)
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(horaInicioLabel)
+                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(horaFinalizacionLabel)
+                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(vehiculoidVehiculoLabel)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(conductoridConductorLabel)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(horaSalidaLabel)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(horaLlegadaLabel)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(otrosDatosLabel)
+                    .addComponent(otrosDatosField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(refreshButton)
                     .addComponent(deleteButton)
                     .addComponent(newButton))
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.horaSalidaProgramada}"), jSpinner1, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding.setSourceNullValue(null);
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.horaLlegadaProgramada}"), jSpinner2, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding.setSourceNullValue(null);
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.horaInicio}"), jSpinner3, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding.setSourceNullValue(null);
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.horaFinalizacion}"), jSpinner4, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding.setSourceNullValue(null);
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.fecha}"), jDateChooser1, org.jdesktop.beansbinding.BeanProperty.create("date"));
+        binding.setSourceUnreadableValue(null);
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jDateChooser1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
 
         bindingGroup.bind();
     }
@@ -371,12 +363,6 @@ public class RecorridoForm extends JInternalFrame {
             else if (evt.getSource() == deleteButton) {
                 RecorridoForm.this.deleteButtonActionPerformed(evt);
             }
-            else if (evt.getSource() == jButton1) {
-                RecorridoForm.this.jButton1ActionPerformed(evt);
-            }
-            else if (evt.getSource() == jButton2) {
-                RecorridoForm.this.jButton2ActionPerformed(evt);
-            }
         }
     }// </editor-fold>//GEN-END:initComponents
 
@@ -394,9 +380,9 @@ public class RecorridoForm extends JInternalFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int[] selected = masterTable.getSelectedRows();
-        List<com.udec.benlly.Recorridoorig> toRemove = new ArrayList<com.udec.benlly.Recorridoorig>(selected.length);
+        List<com.udec.benlly.Recorrido> toRemove = new ArrayList<com.udec.benlly.Recorrido>(selected.length);
         for (int idx = 0; idx < selected.length; idx++) {
-            com.udec.benlly.Recorridoorig r = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            com.udec.benlly.Recorrido r = list.get(masterTable.convertRowIndexToModel(selected[idx]));
             toRemove.add(r);
             entityManager.remove(r);
         }
@@ -404,19 +390,16 @@ public class RecorridoForm extends JInternalFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        try {
-            com.udec.benlly.Recorridoorig r = new com.udec.benlly.Recorridoorig();
-            r.setHoraLlegada(new Date());
-            r.setHoraSalida(new Date());
-            entityManager.persist(r);
-            list.add(r);
-            int row = list.size() - 1;
-            masterTable.setRowSelectionInterval(row, row);
-            masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
-        } catch (Exception rex) {
-
-        }
-
+        com.udec.benlly.Recorrido r = new com.udec.benlly.Recorrido();
+        r.setHoraFinalizacion(new Date());
+        r.setHoraInicio(new Date());
+        r.setHoraLlegadaProgramada(new Date());
+        r.setHoraSalidaProgramada(new Date());
+        entityManager.persist(r);
+        list.add(r);
+        int row = list.size() - 1;
+        masterTable.setRowSelectionInterval(row, row);
+        masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
     }//GEN-LAST:event_newButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
@@ -426,101 +409,14 @@ public class RecorridoForm extends JInternalFrame {
         } catch (RollbackException rex) {
             rex.printStackTrace();
             entityManager.getTransaction().begin();
-            List<com.udec.benlly.Recorridoorig> merged = new ArrayList<com.udec.benlly.Recorridoorig>(list.size());
-            for (com.udec.benlly.Recorridoorig r : list) {
+            List<com.udec.benlly.Recorrido> merged = new ArrayList<com.udec.benlly.Recorrido>(list.size());
+            for (com.udec.benlly.Recorrido r : list) {
                 merged.add(entityManager.merge(r));
             }
             list.clear();
             list.addAll(merged);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int returnVal = fc.showSaveDialog(this);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            String ruta = file.getAbsolutePath();
-            jTextField1.setText(ruta);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int selected = masterTable.getSelectedRow();
-        com.udec.benlly.Recorridoorig r = list.get(masterTable.convertRowIndexToModel(selected));
-        try {
-            // Abrimos el archivo
-            FileInputStream fstream = new FileInputStream(jTextField1.getText());
-            // Creamos el objeto de entrada
-            DataInputStream entrada = new DataInputStream(fstream);
-            // Creamos el Buffer de Lectura
-            BufferedReader buffer = new BufferedReader(new InputStreamReader(entrada));
-            String strLinea;
-            // Leer el archivo linea por linea
-            Log l = new Log();
-            while ((strLinea = buffer.readLine()) != null) {
-
-                String aux[] = strLinea.split(":");
-
-                int dia = Integer.parseInt(aux[0].trim(), 16);
-                int mes = Integer.parseInt(aux[1].trim(), 16);
-                int anio = Integer.parseInt(aux[2].trim(), 16);
-                int horas = Integer.parseInt(aux[3].trim(), 16);
-                int minutos = Integer.parseInt(aux[4].trim(), 16);
-                int segundos = Integer.parseInt(aux[5].trim(), 16);
-                int consecutivo_sensor = Integer.parseInt(aux[6].trim(), 16);
-                int dato = Integer.parseInt(aux[7].trim(), 16);
-                int valor = Integer.parseInt(aux[8].trim(), 16);
-                int crc = Integer.parseInt(aux[9].trim(), 16);
-
-                String strDia = (dia > 9 ? ""+dia : "0"+dia);
-                String strMes = (mes > 9 ? ""+mes : "0"+mes);
-                String strAnio = (anio > 9 ? ""+anio : "0"+anio);
-                
-                String strHoras = (horas > 9 ? ""+horas : "0"+horas);
-                String strMinutos = (minutos > 9 ? ""+minutos : "0"+minutos);
-                String strSegundos = (segundos > 9 ? ""+segundos : "0"+segundos);
-                
-                l.setConsecutivo(consecutivo_sensor);
-                l.setNumeroDato(dato);
-                l.setValorObbtenido(valor);
-                l.setCrc("" + crc);
-                l.setHora(null);
-                l.setRecorridoorigIdrecorridoorig(r);
-
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yy");
-                String strFecha = "" + strDia + "/" + strMes + "/" + strAnio;
-                Date fecha = null;
-                try {
-
-                    fecha = formatoDelTexto.parse(strFecha);
-                    l.setFecha(fecha);
-
-                } catch (ParseException ex) {
-                    ex.printStackTrace();
-                }
-                
-                SimpleDateFormat formatoDelTexto2 = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
-                String strHora = "" + strDia + "/" + strMes + "/" + strAnio+ " " + strHoras + ":" + strMinutos + ":" + strSegundos;
-                Date hora = null;
-                try {
-
-                    hora = formatoDelTexto.parse(strHora);
-                    l.setHora(hora);
-
-                } catch (ParseException ex) {
-                    ex.printStackTrace();
-                }
-                
-
-                new LogJpaController().create(l);
-            }
-            // Cerramos el archivo
-            entrada.close();
-            System.out.println("ha terminado!!!!");
-        } catch (Exception e) {
-            System.err.println("Ocurrio un error: " + e.getMessage());
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -529,30 +425,34 @@ public class RecorridoForm extends JInternalFrame {
     private javax.swing.JLabel conductoridConductorLabel;
     private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JLabel horaLlegadaLabel;
-    private javax.swing.JLabel horaSalidaLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel fechaLabel;
+    private javax.swing.JLabel horaFinalizacionLabel;
+    private javax.swing.JLabel horaInicioLabel;
+    private javax.swing.JLabel horaLlegadaProgramadaLabel;
+    private javax.swing.JLabel horaSalidaProgramadaLabel;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private java.util.List<com.udec.benlly.Recorridoorig> list;
+    private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JSpinner jSpinner4;
+    private java.util.List<com.udec.benlly.Recorrido> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JButton newButton;
     private javax.swing.JTextField nombreField;
     private javax.swing.JLabel nombreLabel;
+    private javax.swing.JTextField otrosDatosField;
+    private javax.swing.JLabel otrosDatosLabel;
     private javax.persistence.Query query;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton saveButton;
-    private javax.swing.JLabel vehiculoIdvehiculoLabel;
     private java.util.List<com.udec.benlly.Vehiculo> vehiculoList;
     private javax.persistence.Query vehiculoQuery;
+    private javax.swing.JLabel vehiculoidVehiculoLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-   
+ 
+
 }

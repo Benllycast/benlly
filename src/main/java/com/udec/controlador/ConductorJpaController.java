@@ -12,10 +12,9 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import com.udec.benlly.Recorridoorig;
+import com.udec.benlly.Recorrido;
 import com.udec.controlador.exceptions.IllegalOrphanException;
 import com.udec.controlador.exceptions.NonexistentEntityException;
-import com.udec.controlador.exceptions.PreexistingEntityException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -23,7 +22,7 @@ import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author Ususario
+ * @author Oscar
  */
 public class ConductorJpaController implements Serializable {
 
@@ -36,36 +35,31 @@ public class ConductorJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Conductor conductor) throws PreexistingEntityException, Exception {
-        if (conductor.getRecorridoorigList() == null) {
-            conductor.setRecorridoorigList(new ArrayList<Recorridoorig>());
+    public void create(Conductor conductor) {
+        if (conductor.getRecorridoList() == null) {
+            conductor.setRecorridoList(new ArrayList<Recorrido>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<Recorridoorig> attachedRecorridoorigList = new ArrayList<Recorridoorig>();
-            for (Recorridoorig recorridoorigListRecorridoorigToAttach : conductor.getRecorridoorigList()) {
-                recorridoorigListRecorridoorigToAttach = em.getReference(recorridoorigListRecorridoorigToAttach.getClass(), recorridoorigListRecorridoorigToAttach.getIdrecorridoorig());
-                attachedRecorridoorigList.add(recorridoorigListRecorridoorigToAttach);
+            List<Recorrido> attachedRecorridoList = new ArrayList<Recorrido>();
+            for (Recorrido recorridoListRecorridoToAttach : conductor.getRecorridoList()) {
+                recorridoListRecorridoToAttach = em.getReference(recorridoListRecorridoToAttach.getClass(), recorridoListRecorridoToAttach.getIdRecorrido());
+                attachedRecorridoList.add(recorridoListRecorridoToAttach);
             }
-            conductor.setRecorridoorigList(attachedRecorridoorigList);
+            conductor.setRecorridoList(attachedRecorridoList);
             em.persist(conductor);
-            for (Recorridoorig recorridoorigListRecorridoorig : conductor.getRecorridoorigList()) {
-                Conductor oldConductoridConductorOfRecorridoorigListRecorridoorig = recorridoorigListRecorridoorig.getConductoridConductor();
-                recorridoorigListRecorridoorig.setConductoridConductor(conductor);
-                recorridoorigListRecorridoorig = em.merge(recorridoorigListRecorridoorig);
-                if (oldConductoridConductorOfRecorridoorigListRecorridoorig != null) {
-                    oldConductoridConductorOfRecorridoorigListRecorridoorig.getRecorridoorigList().remove(recorridoorigListRecorridoorig);
-                    oldConductoridConductorOfRecorridoorigListRecorridoorig = em.merge(oldConductoridConductorOfRecorridoorigListRecorridoorig);
+            for (Recorrido recorridoListRecorrido : conductor.getRecorridoList()) {
+                Conductor oldConductoridConductorOfRecorridoListRecorrido = recorridoListRecorrido.getConductoridConductor();
+                recorridoListRecorrido.setConductoridConductor(conductor);
+                recorridoListRecorrido = em.merge(recorridoListRecorrido);
+                if (oldConductoridConductorOfRecorridoListRecorrido != null) {
+                    oldConductoridConductorOfRecorridoListRecorrido.getRecorridoList().remove(recorridoListRecorrido);
+                    oldConductoridConductorOfRecorridoListRecorrido = em.merge(oldConductoridConductorOfRecorridoListRecorrido);
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findConductor(conductor.getIdConductor()) != null) {
-                throw new PreexistingEntityException("Conductor " + conductor + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -79,36 +73,36 @@ public class ConductorJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Conductor persistentConductor = em.find(Conductor.class, conductor.getIdConductor());
-            List<Recorridoorig> recorridoorigListOld = persistentConductor.getRecorridoorigList();
-            List<Recorridoorig> recorridoorigListNew = conductor.getRecorridoorigList();
+            List<Recorrido> recorridoListOld = persistentConductor.getRecorridoList();
+            List<Recorrido> recorridoListNew = conductor.getRecorridoList();
             List<String> illegalOrphanMessages = null;
-            for (Recorridoorig recorridoorigListOldRecorridoorig : recorridoorigListOld) {
-                if (!recorridoorigListNew.contains(recorridoorigListOldRecorridoorig)) {
+            for (Recorrido recorridoListOldRecorrido : recorridoListOld) {
+                if (!recorridoListNew.contains(recorridoListOldRecorrido)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Recorridoorig " + recorridoorigListOldRecorridoorig + " since its conductoridConductor field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Recorrido " + recorridoListOldRecorrido + " since its conductoridConductor field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            List<Recorridoorig> attachedRecorridoorigListNew = new ArrayList<Recorridoorig>();
-            for (Recorridoorig recorridoorigListNewRecorridoorigToAttach : recorridoorigListNew) {
-                recorridoorigListNewRecorridoorigToAttach = em.getReference(recorridoorigListNewRecorridoorigToAttach.getClass(), recorridoorigListNewRecorridoorigToAttach.getIdrecorridoorig());
-                attachedRecorridoorigListNew.add(recorridoorigListNewRecorridoorigToAttach);
+            List<Recorrido> attachedRecorridoListNew = new ArrayList<Recorrido>();
+            for (Recorrido recorridoListNewRecorridoToAttach : recorridoListNew) {
+                recorridoListNewRecorridoToAttach = em.getReference(recorridoListNewRecorridoToAttach.getClass(), recorridoListNewRecorridoToAttach.getIdRecorrido());
+                attachedRecorridoListNew.add(recorridoListNewRecorridoToAttach);
             }
-            recorridoorigListNew = attachedRecorridoorigListNew;
-            conductor.setRecorridoorigList(recorridoorigListNew);
+            recorridoListNew = attachedRecorridoListNew;
+            conductor.setRecorridoList(recorridoListNew);
             conductor = em.merge(conductor);
-            for (Recorridoorig recorridoorigListNewRecorridoorig : recorridoorigListNew) {
-                if (!recorridoorigListOld.contains(recorridoorigListNewRecorridoorig)) {
-                    Conductor oldConductoridConductorOfRecorridoorigListNewRecorridoorig = recorridoorigListNewRecorridoorig.getConductoridConductor();
-                    recorridoorigListNewRecorridoorig.setConductoridConductor(conductor);
-                    recorridoorigListNewRecorridoorig = em.merge(recorridoorigListNewRecorridoorig);
-                    if (oldConductoridConductorOfRecorridoorigListNewRecorridoorig != null && !oldConductoridConductorOfRecorridoorigListNewRecorridoorig.equals(conductor)) {
-                        oldConductoridConductorOfRecorridoorigListNewRecorridoorig.getRecorridoorigList().remove(recorridoorigListNewRecorridoorig);
-                        oldConductoridConductorOfRecorridoorigListNewRecorridoorig = em.merge(oldConductoridConductorOfRecorridoorigListNewRecorridoorig);
+            for (Recorrido recorridoListNewRecorrido : recorridoListNew) {
+                if (!recorridoListOld.contains(recorridoListNewRecorrido)) {
+                    Conductor oldConductoridConductorOfRecorridoListNewRecorrido = recorridoListNewRecorrido.getConductoridConductor();
+                    recorridoListNewRecorrido.setConductoridConductor(conductor);
+                    recorridoListNewRecorrido = em.merge(recorridoListNewRecorrido);
+                    if (oldConductoridConductorOfRecorridoListNewRecorrido != null && !oldConductoridConductorOfRecorridoListNewRecorrido.equals(conductor)) {
+                        oldConductoridConductorOfRecorridoListNewRecorrido.getRecorridoList().remove(recorridoListNewRecorrido);
+                        oldConductoridConductorOfRecorridoListNewRecorrido = em.merge(oldConductoridConductorOfRecorridoListNewRecorrido);
                     }
                 }
             }
@@ -142,12 +136,12 @@ public class ConductorJpaController implements Serializable {
                 throw new NonexistentEntityException("The conductor with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<Recorridoorig> recorridoorigListOrphanCheck = conductor.getRecorridoorigList();
-            for (Recorridoorig recorridoorigListOrphanCheckRecorridoorig : recorridoorigListOrphanCheck) {
+            List<Recorrido> recorridoListOrphanCheck = conductor.getRecorridoList();
+            for (Recorrido recorridoListOrphanCheckRecorrido : recorridoListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Conductor (" + conductor + ") cannot be destroyed since the Recorridoorig " + recorridoorigListOrphanCheckRecorridoorig + " in its recorridoorigList field has a non-nullable conductoridConductor field.");
+                illegalOrphanMessages.add("This Conductor (" + conductor + ") cannot be destroyed since the Recorrido " + recorridoListOrphanCheckRecorrido + " in its recorridoList field has a non-nullable conductoridConductor field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
