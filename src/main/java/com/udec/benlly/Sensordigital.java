@@ -6,6 +6,8 @@
 
 package com.udec.benlly;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -31,6 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sensordigital.findBySensoridsensor", query = "SELECT s FROM Sensordigital s WHERE s.sensoridsensor = :sensoridsensor"),
     @NamedQuery(name = "Sensordigital.findByPulsosRevolucion", query = "SELECT s FROM Sensordigital s WHERE s.pulsosRevolucion = :pulsosRevolucion")})
 public class Sensordigital implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -63,7 +68,9 @@ public class Sensordigital implements Serializable {
     }
 
     public void setSensoridsensor(Integer sensoridsensor) {
+        Integer oldSensoridsensor = this.sensoridsensor;
         this.sensoridsensor = sensoridsensor;
+        changeSupport.firePropertyChange("sensoridsensor", oldSensoridsensor, sensoridsensor);
     }
 
     public float getPulsosRevolucion() {
@@ -71,7 +78,9 @@ public class Sensordigital implements Serializable {
     }
 
     public void setPulsosRevolucion(float pulsosRevolucion) {
+        float oldPulsosRevolucion = this.pulsosRevolucion;
         this.pulsosRevolucion = pulsosRevolucion;
+        changeSupport.firePropertyChange("pulsosRevolucion", oldPulsosRevolucion, pulsosRevolucion);
     }
 
     public String getOtrosDatos() {
@@ -79,7 +88,9 @@ public class Sensordigital implements Serializable {
     }
 
     public void setOtrosDatos(String otrosDatos) {
+        String oldOtrosDatos = this.otrosDatos;
         this.otrosDatos = otrosDatos;
+        changeSupport.firePropertyChange("otrosDatos", oldOtrosDatos, otrosDatos);
     }
 
     public Sensor getSensor() {
@@ -113,6 +124,14 @@ public class Sensordigital implements Serializable {
     @Override
     public String toString() {
         return "com.udec.benlly.Sensordigital[ sensoridsensor=" + sensoridsensor + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
