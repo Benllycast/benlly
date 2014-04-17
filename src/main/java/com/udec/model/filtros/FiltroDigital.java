@@ -5,11 +5,9 @@
  */
 package com.udec.model.filtros;
 
-import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
 import com.udec.model.wraperModels.LineaLog;
-import com.udec.model.wraperModels.WraperSensorDigital;
 
 /**
  *

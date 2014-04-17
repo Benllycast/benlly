@@ -34,7 +34,7 @@ public class FiltroDigitalVelocidad extends FiltroDigitalRPM implements Interfac
     }
 
     private float getRevolucionesPorSegundo() {
-        return getRPM()/60.0f;
+        return getRPM()/MINUTO;
     }
 
 }
