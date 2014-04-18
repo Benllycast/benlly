@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.062" errors="0" skipped="0" tests="3" name="com.udec.model.filtros.FiltroAnalogoTest">
+<testsuite failures="0" time="0.045" errors="1" skipped="0" tests="1" name="com.udec.model.filtros.LineasLogTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_51\jre\bin"/>
@@ -14,7 +14,7 @@
     <property name="user.country" value="CO"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="test" value="com.udec.model.filtros.FiltroAnalogoTest"/>
+    <property name="test" value="com.udec.model.filtros.LineasLogTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="C:\Users\windows7\Desktop\Benlly\benlly"/>
     <property name="java.runtime.version" value="1.7.0_51-b13"/>
@@ -46,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.7.0_51\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=com.udec.model.filtros.FiltroAnalogoTest -DnetbeansProjectMappings= -Dmaven.ext.class.path=C:\Program Files\NetBeans 7.4\java\maven-nblib\netbeans-eventspy.jar surefire:test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=com.udec.model.filtros.LineasLogTest -DnetbeansProjectMappings= -Dmaven.ext.class.path=C:\Program Files\NetBeans 7.4\java\maven-nblib\netbeans-eventspy.jar surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="es"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -63,7 +63,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase time="0.013" classname="com.udec.model.filtros.FiltroAnalogoTest" name="testGetFrecuenciaDeEntrada"/>
-  <testcase time="0" classname="com.udec.model.filtros.FiltroAnalogoTest" name="testGetVoltajeDeSalida"/>
-  <testcase time="0.003" classname="com.udec.model.filtros.FiltroAnalogoTest" name="testGetResolucion"/>
+  <testcase time="0.026" classname="com.udec.model.filtros.LineasLogTest" name="testLineaLog">
+    <error message="com.udec.benlly.Log cannot be cast to com.udec.model.wraperModels.LineaLog" type="java.lang.ClassCastException">java.lang.ClassCastException: com.udec.benlly.Log cannot be cast to com.udec.model.wraperModels.LineaLog
+	at com.udec.model.filtros.LineasLogTest.testLineaLog(LineasLogTest.java:37)
+</error>
+  </testcase>
 </testsuite>

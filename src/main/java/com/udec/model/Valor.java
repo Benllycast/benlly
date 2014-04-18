@@ -29,7 +29,7 @@ public class Valor {
         this.valorReal = filtro.getValor();
         this.vehiculo = filtro.getVehiculo();
         this.sensor = filtro.getSensor();
-        this.log = filtro.getLineaLog();
+        this.log = filtro.getLog();
     }
     
     

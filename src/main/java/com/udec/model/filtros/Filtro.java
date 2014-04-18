@@ -5,9 +5,9 @@
  */
 package com.udec.model.filtros;
 
+import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
-import com.udec.model.wraperModels.LineaLog;
 
 /**
  *
@@ -16,25 +16,25 @@ import com.udec.model.wraperModels.LineaLog;
 public abstract class Filtro {
 
     public static final float MINUTO = 60.0f;
-    private LineaLog lineaLog = null;
+    private Log lineaLog = null;
     private Vehiculo vehiculo = null;
     private Sensor sensor = null;
 
     public Filtro() {
     }
 
-    public Filtro(Vehiculo vehiculo1, LineaLog log, Sensor sensor){
+    public Filtro(Vehiculo vehiculo1, Log log, Sensor sensor){
         this.vehiculo = vehiculo1;
         this.lineaLog = log;
         this.sensor = sensor;
     }
 
-    public LineaLog getLineaLog() {
+    public Log getLog() {
         return lineaLog;
     }
 
-    public void setLineaLog(LineaLog lineaLog) {
-        this.lineaLog = lineaLog;
+    public void setLog(com.udec.benlly.Log log) {
+        this.lineaLog = log;
     }
 
     public Vehiculo getVehiculo() {

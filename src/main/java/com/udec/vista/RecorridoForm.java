@@ -16,9 +16,11 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import java.util.List;
@@ -115,6 +117,12 @@ public class RecorridoForm extends JInternalFrame {
         jTable1 = new javax.swing.JTable();
 
         FormListener formListener = new FormListener();
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Recorridos");
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nombre}"));
@@ -248,23 +256,13 @@ public class RecorridoForm extends JInternalFrame {
 
         jComboBox2.addActionListener(formListener);
 
+        jTextField1.setEditable(false);
+
         jButton1.setText("Examinar");
         jButton1.addActionListener(formListener);
 
         jButton2.setText("Importar Log");
         jButton2.addActionListener(formListener);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
 
         org.jdesktop.beansbinding.ELProperty eLProperty = org.jdesktop.beansbinding.ELProperty.create("${selectedElement.logList}");
         jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, eLProperty, jTable1);
@@ -286,11 +284,10 @@ public class RecorridoForm extends JInternalFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${crc}"));
         columnBinding.setColumnName("Crc");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${otrosDatos}"));
-        columnBinding.setColumnName("Otros Datos");
-        columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
+        jTableBinding.bind();binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.logList}"), jTable1, org.jdesktop.beansbinding.BeanProperty.create("model"));
+        bindingGroup.addBinding(binding);
+
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -309,23 +306,24 @@ public class RecorridoForm extends JInternalFrame {
                                 .addGap(80, 80, 80)
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 988, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, 0))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nombreLabel)
-                            .addComponent(horaSalidaProgramadaLabel)
-                            .addComponent(horaInicioLabel)
-                            .addComponent(otrosDatosLabel))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSpinner3)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                            .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
-                            .addComponent(otrosDatosField))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nombreLabel)
+                                    .addComponent(horaSalidaProgramadaLabel)
+                                    .addComponent(horaInicioLabel)
+                                    .addComponent(otrosDatosLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField1)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jSpinner3)
+                                    .addComponent(jSpinner1, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                                    .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                                    .addComponent(otrosDatosField))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(27, 27, 27)
@@ -342,22 +340,18 @@ public class RecorridoForm extends JInternalFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jSpinner2, javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 0, 0))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(newButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(deleteButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(refreshButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(saveButton)
-                                .addContainerGap(20, Short.MAX_VALUE))))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(272, 272, 272)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(52, 52, 52)
+                                        .addComponent(newButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(deleteButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(refreshButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(saveButton)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton});
@@ -412,8 +406,8 @@ public class RecorridoForm extends JInternalFrame {
                         .addComponent(jButton1)
                         .addComponent(jButton2)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.horaSalidaProgramada}"), jSpinner1, org.jdesktop.beansbinding.BeanProperty.create("value"));
@@ -534,13 +528,22 @@ public class RecorridoForm extends JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int selected = masterTable.getSelectedRow();
         com.udec.benlly.Recorrido r = list.get(masterTable.convertRowIndexToModel(selected));
+        File file;
+        FileReader reader;
+        BufferedReader buffer;
+        LogJpaController ljc;
         try {
+            ljc = new LogJpaController();
+            /*
+             FileInputStream fstream = new FileInputStream(jTextField1.getText());
+             // Creamos el objeto de entrada
+             DataInputStream entrada = new DataInputStream(fstream);
+             */
             // Abrimos el archivo
-            FileInputStream fstream = new FileInputStream(jTextField1.getText());
-            // Creamos el objeto de entrada
-            DataInputStream entrada = new DataInputStream(fstream);
+            file = new File(jTextField1.getText());
+            reader = new FileReader(file);
             // Creamos el Buffer de Lectura
-            BufferedReader buffer = new BufferedReader(new InputStreamReader(entrada));
+            buffer = new BufferedReader(reader);
             String strLinea;
             // Leer el archivo linea por linea
             Log l = new Log();
@@ -573,34 +576,32 @@ public class RecorridoForm extends JInternalFrame {
                 l.setCrc(crc);
                 l.setRecorridoidRecorrido(r);
 
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yy");
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yy/MM/dd");
                 String strFecha = "" + strDia + "/" + strMes + "/" + strAnio;
                 Date fecha = null;
-                try {
 
-                    fecha = formatoDelTexto.parse(strFecha);
-                    l.setFecha(fecha);
+                fecha = formatoDelTexto.parse(strFecha);
 
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
+                l.setFecha(fecha);
 
-                SimpleDateFormat formatoDelTexto2 = new SimpleDateFormat("dd/MM/yy hh:mm:ss");
-                String strHora = "" + strDia + "/" + strMes + "/" + strAnio + " " + strHoras + ":" + strMinutos + ":" + strSegundos;
+                /*SimpleDateFormat formatoDelTexto2 = new SimpleDateFormat("yy/MM/dd hh:mm:ss");
+                 String strHora = "" + strDia + "/" + strMes + "/" + strAnio + " " + strHoras + ":" + strMinutos + ":" + strSegundos;*/
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(fecha);
+                calendar.add(Calendar.HOUR_OF_DAY, horas);
+                calendar.add(Calendar.MINUTE, minutos);
+                calendar.add(Calendar.SECOND, segundos);
+
                 Date hora = null;
-                try {
+                //hora = formatoDelTexto.parse(strHora);
+                hora = calendar.getTime();
+                l.setTiempo(hora);
 
-                    hora = formatoDelTexto.parse(strHora);
-                    l.setTiempo(hora);
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-
-                new LogJpaController().create(l);
+                ljc.create(l);
             }
             // Cerramos el archivo
-            entrada.close();
+            //entrada.close();
+            reader.close();
             System.out.println("ha terminado!!!!");
         } catch (Exception e) {
             System.err.println("Ocurrio un error: " + e.getMessage());

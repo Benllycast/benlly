@@ -6,9 +6,9 @@
 
 package com.udec.model.filtros;
 
+import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
-import com.udec.model.wraperModels.LineaLog;
 
 /**
  *
@@ -19,7 +19,7 @@ public class FiltroDigitalRPM extends FiltroDigital implements InterfaceFiltroRP
     public FiltroDigitalRPM() {
     }
 
-    public FiltroDigitalRPM(Vehiculo vehiculo1, LineaLog log, Sensor sensor) {
+    public FiltroDigitalRPM(Vehiculo vehiculo1, Log log, Sensor sensor) {
         super(vehiculo1, log, sensor);
     }
 

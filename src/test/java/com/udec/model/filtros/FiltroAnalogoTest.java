@@ -9,7 +9,6 @@ package com.udec.model.filtros;
 import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
-import com.udec.model.wraperModels.LineaLog;
 import junit.framework.TestCase;
 
 /**
@@ -44,7 +43,7 @@ public class FiltroAnalogoTest extends TestCase {
 
     public void testGetVoltajeDeSalida() {
         System.out.println("getVoltajeDeSalida");
-        LineaLog linea = new LineaLog(0);
+        Log linea = new Log(0);
         linea.setValor(1024);
         FiltroAnalogo instance = new FiltroAnalogoImpl(null, linea, null);
         float expResult = 5.0F;
@@ -73,7 +72,7 @@ public class FiltroAnalogoTest extends TestCase {
         public FiltroAnalogoImpl() {
         }
 
-        public FiltroAnalogoImpl(Vehiculo vehiculo1, LineaLog log, Sensor sensor) {
+        public FiltroAnalogoImpl(Vehiculo vehiculo1, Log log, Sensor sensor) {
             super(vehiculo1, log, sensor);
         }
         

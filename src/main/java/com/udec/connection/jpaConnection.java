@@ -15,7 +15,7 @@ public final class jpaConnection {
     public static void createEntityManagerFactory() {
 
         try {
-            emf = Persistence.createEntityManagerFactory("com.udec_benlly_jar_1.0-SNAPSHOTPU");
+            emf = Persistence.createEntityManagerFactory("proyecto?zeroDateTimeBehavior=convertToNullPU");
             // System.out.println("N O T A: EMF CREADO");
         } catch (Exception e) {
             System.err.println("E R R O R: ERROR AL CREAR EMF");

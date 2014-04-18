@@ -6,9 +6,9 @@
 
 package com.udec.model.filtros;
 
+import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
-import com.udec.model.wraperModels.LineaLog;
 /**
  *
  * @author windows7
@@ -22,7 +22,7 @@ public abstract class FiltroAnalogo extends Filtro{
     public FiltroAnalogo() {
     }
 
-    public FiltroAnalogo(Vehiculo vehiculo1, LineaLog log, Sensor sensor) {
+    public FiltroAnalogo(Vehiculo vehiculo1, Log log, Sensor sensor) {
         super(vehiculo1, log, sensor);
     }
     
@@ -31,7 +31,7 @@ public abstract class FiltroAnalogo extends Filtro{
     }
 
     public float getVoltajeDeSalida() {
-        return RES_ADC*super.getLineaLog().getValorDigital();
+        return RES_ADC*super.getLog().getValor();
     }
     
     public float getResolucion() {

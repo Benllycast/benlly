@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: com.udec.model.filtros.LineasLogTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.056 sec <<< FAILURE!
+testLineaLog(com.udec.model.filtros.LineasLogTest)  Time elapsed: 0.025 sec  <<< ERROR!
+java.lang.ClassCastException: com.udec.benlly.Log cannot be cast to com.udec.model.wraperModels.LineaLog
+	at com.udec.model.filtros.LineasLogTest.testLineaLog(LineasLogTest.java:37)
