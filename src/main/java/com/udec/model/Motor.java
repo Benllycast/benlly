@@ -10,6 +10,7 @@ import com.udec.benlly.Log;
 import com.udec.benlly.Recorrido;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
+import static com.udec.connection.jpaConnection.getEntityManager;
 import com.udec.model.exceptions.MotorException;
 import com.udec.model.filtros.FiltrosManager;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  * analiza un recorrido de la base de datos
@@ -34,7 +36,8 @@ public class Motor {
     static {
         em = Persistence.createEntityManagerFactory("proyecto?zeroDateTimeBehavior=convertToNullPU");
     }
-    
+
+
     /**
      * retorna el recorrido de analisis
      * @return
@@ -100,12 +103,13 @@ public class Motor {
      * - obtiene la lista de logs de un recorrido
      * @throws com.udec.model.exceptions.MotorException
      */
-    public static void init() throws MotorException{
+    public static boolean init() throws MotorException{
         if (Motor.recorrido != null) {
             Motor.manager = new FiltrosManager();
             Motor.vehiculo = recorrido.getVehiculoidVehiculo();
             Motor.sensorList = Motor.vehiculo.getSensorList();
             Motor.manager.configurarFiltros(Motor.vehiculo);
+            return true;
         } else {
             throw  new MotorException("E R R O R: no hay recorrido cofigurado");
         }
@@ -114,10 +118,11 @@ public class Motor {
     /**
      * Tareas:
      * - convierte todos los Log en sus valores reales
+     * @param logList
+     * @return List<Valor>
      * @throws com.udec.model.exceptions.MotorException
      */
-    public static void convertirLogs() throws MotorException{
-        List<Log> logList = recorrido.getLogList();
+    public static List<Valor> convertirLogs(List<Log> logList) throws MotorException{
         for(Log linea : logList){
             try {
                 Motor.manager.aplicarFiltro(linea);
@@ -126,13 +131,32 @@ public class Motor {
                 throw  new MotorException("E R R O R: No se puede convertir Log: "+linea.toString());
             }
         }
-        Motor.listValor = Motor.manager.getListaValores();
+        return Motor.manager.getListaValores();
     }
     
     public static void clasificarValores(){
-        Clasificador clasificador = new Clasificador();
-        clasificador.setListValor(Motor.listValor);
-        clasificador.clasificar();
-        Motor.listas = clasificador.getListas();
+        List<Log> listLog;
+        List<Valor> listValor;
+        for(Sensor sensor: Motor.sensorList){
+            listLog = Motor.findByRecorridoAndSensorOrderFecha(Motor.recorrido, sensor.getCanal());
+            if(!listLog.isEmpty()){
+                try {
+                    listValor = Motor.convertirLogs(listLog);
+                    Motor.listas.put(sensor, listValor);
+                } catch (MotorException ex) {
+                    Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+    }
+    
+    public static List<Log> findByRecorridoAndSensorOrderFecha(Object recorrido, Object sensor) {
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Log.class));
+        Query q = getEntityManager().createQuery("SELECT c FROM " + Log.class.getSimpleName() + " c WHERE c.recorridoidRecorrido = :parametro1 and c.canal = :parametro2 ORDER BY c.fecha, c.tiempo, c.numeroDato ASC" , Log.class);
+        q.setParameter("parametro1", recorrido);
+        q.setParameter("parametro2", sensor);
+        return q.getResultList();
     }
 }

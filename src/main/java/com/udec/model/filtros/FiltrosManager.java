@@ -73,7 +73,7 @@ public class FiltrosManager {
      * @param sensor
      * @return
      */
-    public Filtro crearFiltro(Sensor sensor){
+    Filtro crearFiltro(Sensor sensor){
         switch(sensor.getCanal()){
             case ConfiguracionManager.CANAL_ACC_1:
             case ConfiguracionManager.CANAL_ACC_2:

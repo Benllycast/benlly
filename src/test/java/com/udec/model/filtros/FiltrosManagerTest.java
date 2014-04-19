@@ -6,10 +6,8 @@
 
 package com.udec.model.filtros;
 
-import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import junit.framework.TestCase;
-
 /**
  *
  * @author windows7
@@ -74,9 +72,10 @@ public class FiltrosManagerTest extends TestCase {
         System.out.println("getFiltro Digital RPM");
         Sensor linea = new Sensor();
         linea.setCanal((short)6);
-        FiltrosManager instance = new FiltrosManager();
-        Filtro result = instance.crearFiltro(linea);
+        FiltrosManager fm = new FiltrosManager();
+        Filtro result = fm.crearFiltro(linea);
         assertTrue(result instanceof FiltroDigitalRPM);
     }
+    
     
 }

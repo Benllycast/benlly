@@ -10,6 +10,7 @@ import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
 import com.udec.model.filtros.Filtro;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -66,5 +67,20 @@ public class Valor {
         this.log = log;
     }
 
+    @Override
+    public String toString() {
+        SimpleDateFormat hora = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat fecha = new SimpleDateFormat("yy/MM/dd");
+        return "["+
+                this.log.getIdLog()+
+                "-"+fecha.format(this.log.getFecha())
+                +"-"+hora.format(this.log.getTiempo())
+                +"-"+this.getLog().getCanal()
+                +"-"+this.getValorReal()
+                +" ("+log.getValor()+")"
+                +"]";
+    }
+    
+    
     
 }

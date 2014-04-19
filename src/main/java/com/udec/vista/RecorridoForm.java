@@ -272,15 +272,15 @@ public class RecorridoForm extends JInternalFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tiempo}"));
         columnBinding.setColumnName("Tiempo");
         columnBinding.setColumnClass(java.util.Date.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${canal}"));
+        columnBinding.setColumnName("Canal");
+        columnBinding.setColumnClass(Short.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${numeroDato}"));
         columnBinding.setColumnName("Numero Dato");
         columnBinding.setColumnClass(Short.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${valor}"));
         columnBinding.setColumnName("Valor");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${canal}"));
-        columnBinding.setColumnName("Canal");
-        columnBinding.setColumnClass(Short.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${crc}"));
         columnBinding.setColumnName("Crc");
         columnBinding.setColumnClass(Integer.class);
