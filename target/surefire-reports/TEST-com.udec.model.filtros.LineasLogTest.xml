@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.045" errors="1" skipped="0" tests="1" name="com.udec.model.filtros.LineasLogTest">
+<testsuite failures="1" time="0.007" errors="0" skipped="0" tests="1" name="com.udec.model.filtros.LineasLogTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0_51\jre\bin"/>
@@ -14,7 +14,6 @@
     <property name="user.country" value="CO"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="test" value="com.udec.model.filtros.LineasLogTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="C:\Users\windows7\Desktop\Benlly\benlly"/>
     <property name="java.runtime.version" value="1.7.0_51-b13"/>
@@ -29,7 +28,6 @@
     <property name="os.name" value="Windows 7"/>
     <property name="maven.ext.class.path" value="C:\Program Files\NetBeans 7.4\java\maven-nblib\netbeans-eventspy.jar"/>
     <property name="classworlds.conf" value="C:\Program Files\NetBeans 7.4\java\maven\bin\m2.conf"/>
-    <property name="netbeansProjectMappings" value=""/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.7.0_51\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Windows Live\Shared;C:\Python27;C:\PROGRA~1\PICC;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -46,7 +44,7 @@
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.7.0_51\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=com.udec.model.filtros.LineasLogTest -DnetbeansProjectMappings= -Dmaven.ext.class.path=C:\Program Files\NetBeans 7.4\java\maven-nblib\netbeans-eventspy.jar surefire:test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 7.4\java\maven-nblib\netbeans-eventspy.jar clean install"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="es"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -63,9 +61,33 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase time="0.026" classname="com.udec.model.filtros.LineasLogTest" name="testLineaLog">
-    <error message="com.udec.benlly.Log cannot be cast to com.udec.model.wraperModels.LineaLog" type="java.lang.ClassCastException">java.lang.ClassCastException: com.udec.benlly.Log cannot be cast to com.udec.model.wraperModels.LineaLog
-	at com.udec.model.filtros.LineasLogTest.testLineaLog(LineasLogTest.java:37)
-</error>
+  <testcase time="0.005" classname="junit.framework.TestSuite$1" name="warning">
+    <failure message="No tests found in com.udec.model.filtros.LineasLogTest" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: No tests found in com.udec.model.filtros.LineasLogTest
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.TestSuite$1.runTest(TestSuite.java:263)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.maven.surefire.junit.JUnitTestSet.execute(JUnitTestSet.java:96)
+	at org.apache.maven.surefire.junit.JUnit3Provider.executeTestSet(JUnit3Provider.java:117)
+	at org.apache.maven.surefire.junit.JUnit3Provider.invoke(JUnit3Provider.java:94)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
   </testcase>
 </testsuite>

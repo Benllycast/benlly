@@ -11,7 +11,6 @@ import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
 import com.udec.model.ConfiguracionManager;
 import com.udec.model.Valor;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class FiltrosManager {
 
     public FiltrosManager() {
         this.filtros = new HashMap<>();
-        this.listaValores = new ArrayList<>();
     }
 
     public HashMap<Short, Filtro> getFiltros() {
@@ -36,16 +34,6 @@ public class FiltrosManager {
         this.filtros = filtros;
     }
 
-    public List<Valor> getListaValores() {
-        return listaValores;
-    }
-
-    public void setListaValores(List<Valor> listaValores) {
-        this.listaValores = listaValores;
-    }
-
-    
-    
     /**
      * coloca un filtro en la lista de filtros cclasificados por canal
      * @param canal
@@ -60,11 +48,12 @@ public class FiltrosManager {
      * @param canal
      * @return
      */
-    public Filtro pullFiltro(Short canal){
+    public Filtro pullFiltro(Short canal) throws Exception{
         Filtro filtro = null;
         if(this.filtros.containsKey(canal)){
             filtro = this.filtros.get(canal);
-        }
+        }else
+            throw new Exception("ERROR: no hay filtro para el canal"+canal);
         return filtro;
     }
 
@@ -73,7 +62,7 @@ public class FiltrosManager {
      * @param sensor
      * @return
      */
-    public Filtro crearFiltro(Sensor sensor){
+    Filtro crearFiltro(Sensor sensor){
         switch(sensor.getCanal()){
             case ConfiguracionManager.CANAL_ACC_1:
             case ConfiguracionManager.CANAL_ACC_2:
@@ -114,7 +103,7 @@ public class FiltrosManager {
      * @param linea
      * @throws Exception
      */
-    public void aplicarFiltro(Log linea) throws Exception{
+    public Valor aplicarFiltro(Log linea) throws Exception{
         Filtro filtro;
         if (this.filtros.size()>0) {
             filtro = this.pullFiltro(linea.getCanal());
@@ -123,7 +112,7 @@ public class FiltrosManager {
             }
             filtro.setLog(linea);
             Valor valor = new Valor(filtro);
-            this.listaValores.add(valor);
+            return valor;
         }else
             throw new Exception("no ahy filtros configurados");
     }

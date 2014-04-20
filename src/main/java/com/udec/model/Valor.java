@@ -10,6 +10,9 @@ import com.udec.benlly.Log;
 import com.udec.benlly.Sensor;
 import com.udec.benlly.Vehiculo;
 import com.udec.model.filtros.Filtro;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -66,5 +69,35 @@ public class Valor {
         this.log = log;
     }
 
+    @Override
+    public String toString() {
+        SimpleDateFormat hora = new SimpleDateFormat("HH:mm:ss");
+        SimpleDateFormat fecha = new SimpleDateFormat("yy/MM/dd");
+        return "["+
+                this.log.getIdLog()+
+                "-"+fecha.format(this.log.getFecha())
+                +"-"+hora.format(this.log.getTiempo())
+                +"-"+this.getLog().getCanal()
+                +"-"+this.getValorReal()
+                +" ("+log.getValor()+")"
+                +"]";
+    }
+    
+    public Object[] getPoint(){
+        Object [] point = new Object[2];
+        Date fecha = this.log.getFecha();
+        Date tiempo = this.log.getTiempo();
+        Calendar calFecha = Calendar.getInstance();
+        Calendar calHora = Calendar.getInstance();
+        calFecha.setTime(fecha);
+        calHora.setTime(tiempo);
+        calFecha.set(Calendar.HOUR_OF_DAY, calHora.get(Calendar.HOUR_OF_DAY));
+        calFecha.set(Calendar.MINUTE, calHora.get(Calendar.MINUTE));
+        calFecha.set(Calendar.SECOND, calHora.get(Calendar.SECOND));
+        calFecha.set(Calendar.MILLISECOND, log.getNumeroDato());
+        point[0] = calFecha.getTime();
+        point[1] = this.getValorReal();
+        return point;
+    }
     
 }

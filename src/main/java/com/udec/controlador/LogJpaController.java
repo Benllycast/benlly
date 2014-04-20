@@ -166,4 +166,12 @@ public class LogJpaController implements Serializable {
         }
     }
     
+    public List<Log> findByRecorridoAndSensorOrderFecha(Object recorrido, Object sensor) {
+        javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Log.class));
+        Query q = getEntityManager().createQuery("SELECT c FROM " + Log.class.getSimpleName() + " c WHERE c.recorridoidRecorrido = :parametro1 and c.canal = :parametro2 ORDER BY c.fecha" , Log.class);
+        q.setParameter("parametro1", recorrido);
+        q.setParameter("parametro2", sensor);
+        return q.getResultList();
+    }
 }
