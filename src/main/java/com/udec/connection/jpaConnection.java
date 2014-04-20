@@ -1,5 +1,6 @@
 package com.udec.connection;
 
+import com.udec.model.ConfiguracionManager;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -15,7 +16,7 @@ public final class jpaConnection {
     public static void createEntityManagerFactory() {
 
         try {
-            emf = Persistence.createEntityManagerFactory("proyecto?zeroDateTimeBehavior=convertToNullPU");
+            emf = Persistence.createEntityManagerFactory(ConfiguracionManager.CONEXION);
             // System.out.println("N O T A: EMF CREADO");
         } catch (Exception e) {
             System.err.println("E R R O R: ERROR AL CREAR EMF");

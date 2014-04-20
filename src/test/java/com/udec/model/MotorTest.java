@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.udec.model;
 
 import com.udec.benlly.Log;
@@ -20,6 +19,8 @@ import com.udec.model.filtros.FiltrosManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import junit.framework.TestCase;
@@ -29,39 +30,40 @@ import junit.framework.TestCase;
  * @author windows7
  */
 public class MotorTest extends TestCase {
-    
+
+    EntityManagerFactory emf;
     RecorridoJpaController r;
     SensorJpaController s;
     VehiculoJpaController v;
     private Recorrido recorrido;
     private Sensor sensor;
     private Vehiculo vehiculo;
-    
-    
-    
+
     public MotorTest(String testName) {
         super(testName);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("proyecto?zeroDateTimeBehavior=convertToNullPU");
-        r = new RecorridoJpaController(emf);
-        s = new SensorJpaController(emf);
-        v = new VehiculoJpaController(emf);
     }
-    
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        emf = Persistence.createEntityManagerFactory("proyecto?zeroDateTimeBehavior=convertToNullPU");
+        r = new RecorridoJpaController(emf);
+        s = new SensorJpaController(emf);
+        v = new VehiculoJpaController(emf);
         this.recorrido = r.findRecorrido(1);
         this.sensor = s.findSensor(1);
         this.vehiculo = v.findVehiculo(1);
-        
+        Motor.reset();
     }
-    
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
+        emf.close();
     }
-    
-    public void testInit(){
+
+    public void testInit() {
+        System.out.println("\n///////// testInit ////////");
         try {
             int cantidad = v.findVehiculo(1).getSensorList().size();
             Motor.setRecorrido(this.recorrido);
@@ -74,8 +76,9 @@ public class MotorTest extends TestCase {
             fail("Algo salio mal en el init");
         }
     }
-    
-    public void testFilstroCreados(){
+
+    public void testFilstroCreados() {
+        System.out.println("\n///////// testFiltrosCreados ////////");
         try {
             Motor.setRecorrido(recorrido);
             int cantidad = v.findVehiculo(1).getSensorList().size();
@@ -90,52 +93,61 @@ public class MotorTest extends TestCase {
             fail("escepcion en filtros creados");
         }
     }
-    
-    public void testClasificarValores(){
-        List<Sensor> sensores = new ArrayList<>();
-        sensores.add(sensor);
-        Motor.setRecorrido(recorrido);
-        Motor.setSensorList(sensores);
-        Motor.setListas(new HashMap<Sensor, List<Valor>>());
-        Motor.clasificarValores();
-        HashMap<Sensor, List<Valor>> listas = Motor.getListas();
-        List<Valor> get = listas.get(sensor);
-        for(Valor val: get){
-            System.out.println(val.toString());
+
+    public void testClasificarValores() {
+        System.out.println("\n///////// testClasificarValores ////////");
+        try {
+            Motor.setRecorrido(recorrido);
+            Motor.init();
+            Motor.clasificarValores();
+            HashMap<Sensor, List<Valor>> listas = Motor.getListas();
+            for (Sensor sen : listas.keySet()) {
+                System.out.println("\n Sensor:" + sen.toString());
+                for (Valor val : listas.get(sen)) {
+                    System.out.println(val);
+                }
+            }
+        } catch (MotorException ex) {
+            Logger.getLogger(MotorTest.class.getName()).log(Level.SEVERE, null, ex);
+            fail("E R R O R:excepcion en testClasificarValores:\n" + ex.getMessage());
+            ex.printStackTrace();
         }
-        assertEquals(1, 1);
-    }
-    
-    public void testClasificarValores2(){
-        List<Sensor> sensores = new ArrayList<>();
-        Sensor s2 = s.findSensor(2);
-        sensores.add(s2);
-        Motor.setRecorrido(recorrido);
-        Motor.setSensorList(sensores);
-        Motor.setListas(new HashMap<Sensor, List<Valor>>());
-        Motor.clasificarValores();
-        HashMap<Sensor, List<Valor>> listas = Motor.getListas();
-        List<Valor> get = listas.get(s2);
-        for(Valor val: get){
-            System.out.println(val.toString());
-        }
-        assertEquals(1, 1);
     }
 
     public void testFindByRecorridoAndSensorOrderFecha() {
-        System.out.println("findByRecorridoAndSensorOrderFecha");
+        System.out.println("\n///////// findByRecorridoAndSensorOrderFecha ////////");
         Recorrido salida = r.findRecorrido(1);
         short canal = 1;
         Motor instance = new Motor();
         List<Log> expResult = null;
         List<Log> result = Motor.findByRecorridoAndSensorOrderFecha(salida, canal);
-        
-        for(Log l : result){
-            System.out.println(""+l.getIdLog()+" "+l.getFecha().toString()+" "+l.getTiempo().toString()+" "+l.getNumeroDato());
+
+        for (Log l : result) {
+            System.out.println("" + l.getIdLog() + " " + l.getCanal() + " " + l.getNumeroDato());
         }
         // TODO review the generated test code and remove the default call to fail.
         assertEquals(1, 1);
     }
-    
-    
+
+    public void testGetListValorBySensor() {
+        System.out.println("\n///////// testGetListBySensor////////");
+        try {
+            Sensor sen = this.s.findSensor(2);
+            Motor.setRecorrido(this.recorrido);
+            boolean init = Motor.init();
+            if (init) {
+                Motor.clasificarValores();
+                List<Valor> listValorBySensor = Motor.getListValorBySensor(sen);
+                for (Valor val : listValorBySensor) {
+                    Object[] point = val.getPoint();
+                    System.out.println("valor: " + val + "\t\tTiempo: " + point[0] + "\tvalor:" + point[1]);
+                }
+            } else {
+                fail("No INIt MOTOR");
+            }
+        } catch (MotorException ex) {
+            Logger.getLogger(MotorTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

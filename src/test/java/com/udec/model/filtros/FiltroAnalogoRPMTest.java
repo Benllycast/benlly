@@ -53,33 +53,12 @@ public class FiltroAnalogoRPMTest extends TestCase {
     }
 
     public void testGetRPM() {
-        System.out.println("getRPM");
-        FiltroAnalogoRPM instance = new FiltroAnalogoRPM();
-        float expResult = 0.0F;
-        float result = instance.getRPM();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     public void testGetFrecuenciaDeGiro() {
-        System.out.println("getFrecuenciaDeGiro");
-        FiltroAnalogoRPM instance = new FiltroAnalogoRPM();
-        float expResult = 0.0F;
-        float result = instance.getFrecuenciaDeGiro();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     public void testGetValor() {
-        System.out.println("getValor");
-        FiltroAnalogoRPM instance = new FiltroAnalogoRPM();
-        float expResult = 0.0F;
-        float result = instance.getValor();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
