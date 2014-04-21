@@ -86,7 +86,6 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         });
 
         btnTestConexion.setText("TEST CONEXION");
-        btnTestConexion.setEnabled(false);
         btnTestConexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTestConexionActionPerformed(evt);
@@ -96,6 +95,11 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         lblID.setText("ID ");
 
         btnSetID.setText("Configurar ID");
+        btnSetID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetIDActionPerformed(evt);
+            }
+        });
 
         txtID.setColumns(6);
         txtID.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
@@ -149,6 +153,11 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         btnSetCanal.setMaximumSize(new java.awt.Dimension(153, 23));
         btnSetCanal.setMinimumSize(new java.awt.Dimension(153, 23));
         btnSetCanal.setPreferredSize(new java.awt.Dimension(153, 23));
+        btnSetCanal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetCanalActionPerformed(evt);
+            }
+        });
 
         lblStateConexion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblStateConexion.setText("NO HAY DISPOSITIVO CONECTADO");
@@ -310,21 +319,42 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         try {
             // TODO add your handling code here:
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-            String fechaHora = txtFecha.getText()+" "+txtHora.getText();
+            String fechaHora = txtFecha.getText() + " " + txtHora.getText();
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(dateFormat.parse(fechaHora));
             int hora = calendar.get(Calendar.HOUR_OF_DAY);
             int min = calendar.get(Calendar.MINUTE);
             int seg = calendar.get(Calendar.SECOND);
             int dia = calendar.get(Calendar.DAY_OF_MONTH);
-            int mes = calendar.get(Calendar.MONTH)+1;
+            int mes = calendar.get(Calendar.MONTH) + 1;
             int anio = (calendar.get(Calendar.YEAR) % 1000) % 100;
-            
+
             this.setHoraFecha(dia, mes, anio, hora, min, seg);
+            Thread.sleep(1000);
+            this.getHoraFecha();
         } catch (ParseException ex) {
             Logger.getLogger(SerialDeviceConfigForm.class.getName()).log(Level.SEVERE, "Error a parsear la fecha", ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SerialDeviceConfigForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSetFechaHoraActionPerformed
+
+    private void btnSetCanalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetCanalActionPerformed
+        // TODO add your handling code here:
+        HashMap<String, Boolean> map = new HashMap<>();
+        map.put("CCP_VEL", chkCCP_VEL.isSelected());
+        map.put("CCP_REV", chkCCP_REV.isSelected());
+        map.put("CCP_BIT", true);
+        map.put("AD_REV", chkAD_REV.isSelected());
+        map.put("AD_VEL", chkAD_VEL.isSelected());
+        this.setCanal(map);
+    }//GEN-LAST:event_btnSetCanalActionPerformed
+
+    private void btnSetIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetIDActionPerformed
+        // TODO add your handling code here:
+        int ID = Integer.parseInt(txtID.getText());
+        this.setID(ID);
+    }//GEN-LAST:event_btnSetIDActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -388,9 +418,9 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         chkCCP_VEL.setEnabled(false);
     }
 
-    private void getDeviceData(){
+    private void getDeviceData() {
         try {
-            if(this.manager.test()){
+            if (this.manager.test()) {
                 this.getHoraFecha();
                 Thread.sleep(1000);
                 this.getDeviceID();
@@ -401,6 +431,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
             error("Error al adquirir datos", ex);
         }
     }
+
     private void testConexionDialog() {
         try {
             // TODO add your handling code here:
@@ -410,7 +441,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
                 this.setStateConexion(1);
             } else {
                 JOptionPane.showMessageDialog(this, "Conexion Fallida", "Conexion con el dispositivo", JOptionPane.ERROR_MESSAGE);
-                this.desactivarCampos();                
+                this.desactivarCampos();
                 this.setStateConexion(0);
             }
         } catch (SerialPortTimeoutException ex) {
@@ -443,27 +474,27 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
 
             } else {
                 this.txtHoraFecha.setText("**/**/** **:**:**");
-                
+
             }
         } catch (SerialPortException | SerialPortTimeoutException ex) {
             error("transmicion de fecha", ex);
         }
     }
-    
-    private void getDeviceID(){
+
+    private void getDeviceID() {
         try {
             long ID = manager.getID();
             this.txtIdActual.setText(Long.toString(ID));
-            
+
         } catch (SerialPortException | SerialPortTimeoutException ex) {
             error("Transferencia de ID", ex);
         }
     }
-    
-    private void getDeviceChanelActive(){
+
+    private void getDeviceChanelActive() {
         try {
             HashMap<String, Boolean> canales = this.manager.getCanal();
-            if(canales != null){
+            if (canales != null) {
                 this.chkAD_REV.setSelected(canales.get("AD_REV"));
                 this.chkAD_VEL.setSelected(canales.get("AD_VEL"));
                 this.chkCCP_REV.setSelected(canales.get("CCP_REV"));
@@ -473,9 +504,9 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
             error("transmicion de datos", ex);
         }
     }
-    
-    private void setStateConexion(final int state){
-        switch(state){
+
+    private void setStateConexion(final int state) {
+        switch (state) {
             case 1:
                 this.lblStateConexion.setForeground(Color.GREEN);
                 this.lblStateConexion.setText(ConfiguracionManager.getString("serial.deviceConfig.stateConexion.ok"));
@@ -496,20 +527,38 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         try {
             if (manager.setFecha(dia, mes, anio, vic, hora, min, seg)) {
                 JOptionPane.showMessageDialog(this, "fecha configurada", null, JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "fecha configurada", null, JOptionPane.ERROR_MESSAGE);
             }
         } catch (SerialPortException | SerialPortTimeoutException ex) {
             error("transmicion de fecha", ex);
         }
     }
-    
-    private void error(String mensaje, Exception ex){
-        mensaje = (mensaje == null)? "Error Desconocido": mensaje;
+
+    private void setCanal(HashMap<String, Boolean> map) {
+        try {
+            if (manager.setCanal(map)) {
+                JOptionPane.showMessageDialog(this, "Caneles configurados", null, JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SerialPortException | SerialPortTimeoutException ex) {
+            error("Error de transmision de canales", ex);
+        }
+    }
+
+    private void error(String mensaje, Exception ex) {
+        mensaje = (mensaje == null) ? "Error Desconocido" : mensaje;
         Logger.getLogger(SerialConfigDialog.class.getName()).log(Level.SEVERE, mensaje, ex);
         this.desactivarCampos();
         setStateConexion(0);
-        JOptionPane.showMessageDialog(this,"ERROR: "+mensaje, null, JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, "ERROR: " + mensaje, null, JOptionPane.ERROR_MESSAGE);
     }
-    
+
+    private void setID(int ID) {
+        try {
+            if(this.manager.setID(ID)){
+                JOptionPane.showMessageDialog(null, "ID configurado", title, JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (SerialPortException | SerialPortTimeoutException ex) {
+            error("Transmicion de ID", ex);
+        }
+    }
+
 }

@@ -192,7 +192,6 @@
     <Component class="javax.swing.JButton" name="btnTestConexion">
       <Properties>
         <Property name="text" type="java.lang.String" value="TEST CONEXION"/>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTestConexionActionPerformed"/>
@@ -207,6 +206,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Configurar ID"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSetIDActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="txtID">
       <Properties>
@@ -341,6 +343,9 @@
           <Dimension value="[153, 23]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSetCanalActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblStateConexion">
       <Properties>
