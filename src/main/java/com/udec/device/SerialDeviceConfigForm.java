@@ -7,6 +7,11 @@ package com.udec.device;
 
 import com.udec.device.serial.CommManager;
 import com.udec.device.serial.SerialConfigDialog;
+import com.udec.model.ConfiguracionManager;
+import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,14 +25,14 @@ import jssc.SerialPortTimeoutException;
  */
 public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
 
-    ConfigurationManager manager = null;
+    ConfigurationDeviceManager manager = null;
 
     /**
      * Creates new form SerialDeviceConfigForm
      */
     public SerialDeviceConfigForm() {
         initComponents();
-        this.desactivarCampos();
+        //this.desactivarCampos();
     }
 
     /**
@@ -68,6 +73,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnSetCanal = new javax.swing.JButton();
+        lblStateConexion = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Configuracion de dispositivo");
@@ -105,13 +111,18 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         jLabel5.setText("Hora (hh:mm:ss):");
 
         btnSetFechaHora.setText("Configurar Hora y Fecha");
+        btnSetFechaHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetFechaHoraActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Fecha y hora de Dispositivo:");
 
         txtHoraFecha.setEditable(false);
         txtHoraFecha.setColumns(20);
 
-        txtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        txtFecha.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM/yy"))));
 
         txtHora.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("HH:mm:ss"))));
 
@@ -139,6 +150,9 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         btnSetCanal.setMinimumSize(new java.awt.Dimension(153, 23));
         btnSetCanal.setPreferredSize(new java.awt.Dimension(153, 23));
 
+        lblStateConexion.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblStateConexion.setText("NO HAY DISPOSITIVO CONECTADO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,7 +164,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtIdActual, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,9 +197,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chkCCP_VEL)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(chkAD_VEL)
-                                .addGap(6, 6, 6)))
+                            .addComponent(chkAD_VEL))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSetCanal, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -208,7 +220,9 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnConfCOM)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnTestConexion)))
+                                .addComponent(btnTestConexion)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblStateConexion)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -222,7 +236,8 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConfCOM)
-                    .addComponent(btnTestConexion))
+                    .addComponent(btnTestConexion)
+                    .addComponent(lblStateConexion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
@@ -277,7 +292,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         dialog.setVisible(true);
         try {
             if (CommManager.isCommReady()) {
-                this.manager = new ConfigurationManager(CommManager.getComm());
+                this.manager = new ConfigurationDeviceManager(CommManager.getComm());
                 //this.activarCampos();
                 this.getDeviceData();
             }
@@ -290,6 +305,26 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.testConexionDialog();
     }//GEN-LAST:event_btnTestConexionActionPerformed
+
+    private void btnSetFechaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetFechaHoraActionPerformed
+        try {
+            // TODO add your handling code here:
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+            String fechaHora = txtFecha.getText()+" "+txtHora.getText();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dateFormat.parse(fechaHora));
+            int hora = calendar.get(Calendar.HOUR_OF_DAY);
+            int min = calendar.get(Calendar.MINUTE);
+            int seg = calendar.get(Calendar.SECOND);
+            int dia = calendar.get(Calendar.DAY_OF_MONTH);
+            int mes = calendar.get(Calendar.MONTH)+1;
+            int anio = (calendar.get(Calendar.YEAR) % 1000) % 100;
+            
+            this.setHoraFecha(dia, mes, anio, hora, min, seg);
+        } catch (ParseException ex) {
+            Logger.getLogger(SerialDeviceConfigForm.class.getName()).log(Level.SEVERE, "Error a parsear la fecha", ex);
+        }
+    }//GEN-LAST:event_btnSetFechaHoraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -317,6 +352,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblStateConexion;
     private javax.swing.JFormattedTextField txtFecha;
     private javax.swing.JFormattedTextField txtHora;
     private javax.swing.JTextField txtHoraFecha;
@@ -362,7 +398,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
                 this.getDeviceChanelActive();
             }
         } catch (SerialPortTimeoutException | InterruptedException ex) {
-            Logger.getLogger(SerialDeviceConfigForm.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            error("Error al adquirir datos", ex);
         }
     }
     private void testConexionDialog() {
@@ -371,14 +407,14 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
             if (this.manager.test()) {
                 JOptionPane.showMessageDialog(this, "Conexion OK", "Conexion con el dispositivo", JOptionPane.INFORMATION_MESSAGE);
                 this.activarCampos();
+                this.setStateConexion(1);
             } else {
                 JOptionPane.showMessageDialog(this, "Conexion Fallida", "Conexion con el dispositivo", JOptionPane.ERROR_MESSAGE);
-                this.desactivarCampos();
+                this.desactivarCampos();                
+                this.setStateConexion(0);
             }
         } catch (SerialPortTimeoutException ex) {
-            Logger.getLogger(SerialDeviceConfigForm.class.getName()).log(Level.SEVERE, "E R R O R: " + ex.getMessage(), ex);
-            this.desactivarCampos();
-            JOptionPane.showMessageDialog(this, "E R R O R: Error de tranferencia de datos", "Conexion con el dispositivo", JOptionPane.ERROR_MESSAGE);
+            error("prueba de conexion", ex);
         }
     }
 
@@ -410,8 +446,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
                 
             }
         } catch (SerialPortException | SerialPortTimeoutException ex) {
-            Logger.getLogger(SerialDeviceConfigForm.class.getName()).log(Level.SEVERE, null, ex);
-            //JOptionPane.showMessageDialog(this, "E R R O R: Error de tranferencia de datos", "Conexion con el dispositivo", JOptionPane.ERROR_MESSAGE);
+            error("transmicion de fecha", ex);
         }
     }
     
@@ -421,8 +456,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
             this.txtIdActual.setText(Long.toString(ID));
             
         } catch (SerialPortException | SerialPortTimeoutException ex) {
-            Logger.getLogger(SerialConfigDialog.class.getName()).log(Level.SEVERE, null, ex);
-            //JOptionPane.showMessageDialog(this, "E R R O R: Error de tranferencia de datos", "Conexion con el dispositivo", JOptionPane.ERROR_MESSAGE);
+            error("Transferencia de ID", ex);
         }
     }
     
@@ -436,8 +470,46 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
                 this.chkCCP_VEL.setSelected(canales.get("CCP_VEL"));
             }
         } catch (SerialPortException | SerialPortTimeoutException ex) {
-            Logger.getLogger(SerialDeviceConfigForm.class.getName()).log(Level.SEVERE, null, ex);
-            //JOptionPane.showMessageDialog(this, "E R R O R: Error de tranferencia de datos", "Conexion con el dispositivo", JOptionPane.ERROR_MESSAGE);
+            error("transmicion de datos", ex);
         }
     }
+    
+    private void setStateConexion(final int state){
+        switch(state){
+            case 1:
+                this.lblStateConexion.setForeground(Color.GREEN);
+                this.lblStateConexion.setText(ConfiguracionManager.getString("serial.deviceConfig.stateConexion.ok"));
+                break;
+            case 0:
+                this.lblStateConexion.setForeground(Color.RED);
+                this.lblStateConexion.setText(ConfiguracionManager.getString("serial.deviceConfig.stateConexion.fail"));
+                break;
+            default:
+                this.lblStateConexion.setForeground(Color.BLACK);
+                this.lblStateConexion.setText(ConfiguracionManager.getString("serial.deviceConfig.stateConexion.noConect"));
+                break;
+        }
+    }
+
+    private void setHoraFecha(int dia, int mes, int anio, int hora, int min, int seg) {
+        int vic = 0;
+        try {
+            if (manager.setFecha(dia, mes, anio, vic, hora, min, seg)) {
+                JOptionPane.showMessageDialog(this, "fecha configurada", null, JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "fecha configurada", null, JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SerialPortException | SerialPortTimeoutException ex) {
+            error("transmicion de fecha", ex);
+        }
+    }
+    
+    private void error(String mensaje, Exception ex){
+        mensaje = (mensaje == null)? "Error Desconocido": mensaje;
+        Logger.getLogger(SerialConfigDialog.class.getName()).log(Level.SEVERE, mensaje, ex);
+        this.desactivarCampos();
+        setStateConexion(0);
+        JOptionPane.showMessageDialog(this,"ERROR: "+mensaje, null, JOptionPane.ERROR_MESSAGE);
+    }
+    
 }

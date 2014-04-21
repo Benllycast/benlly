@@ -21,10 +21,10 @@ import com.udec.device.serial.SerialConfigDialog;
  */
 public class GuiTestConfigurationManager extends javax.swing.JFrame {
 
-    ConfigurationManager manager = null;
+    ConfigurationDeviceManager manager = null;
 
     /**
-     * Creates new form GuiTestConfigurationManager
+     * Creates newGuiTestConfigurationDeviceManageranager
      */
     public GuiTestConfigurationManager() {
         initComponents();
@@ -215,7 +215,7 @@ public class GuiTestConfigurationManager extends javax.swing.JFrame {
         SerialConfigDialog dialog = new SerialConfigDialog(this, true);
         dialog.setVisible(true);
         try {
-            this.manager = (CommManager.isCommReady()) ? new ConfigurationManager(CommManager.getComm()) : null;
+            this.manager = (CommManager.isCommReady())? new ConfigurationDeviceManager(CommManager.getComm()) : null;
             activarTodo();
         } catch (Exception ex) {
             Logger.getLogger(GuiTestConfigurationManager.class.getName()).log(Level.SEVERE, null, ex);
