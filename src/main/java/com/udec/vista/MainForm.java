@@ -5,6 +5,7 @@
  */
 package com.udec.vista;
 
+import com.udec.device.SerialDeviceConfigForm;
 import java.awt.Container;
 import java.awt.event.MouseListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -37,8 +38,11 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -90,6 +94,15 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem3);
+        jMenu2.add(jSeparator1);
+
+        jMenuItem4.setText("Dispositivo");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
 
@@ -102,6 +115,14 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItem5);
+
+        jMenuItem10.setText("Analisis");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem10);
 
         jMenuBar1.add(jMenu3);
 
@@ -209,6 +230,22 @@ public class MainForm extends javax.swing.JFrame {
         cb.show();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        this.jDesktopPane1.removeAll();
+        SerialDeviceConfigForm configForm = new SerialDeviceConfigForm();
+        this.jDesktopPane1.add(configForm);
+        configForm.show();
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+        this.jDesktopPane1.removeAll();
+        AnalisisForm analisis = new AnalisisForm();
+        this.jDesktopPane1.add(analisis);
+        analisis.show();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -252,12 +289,15 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

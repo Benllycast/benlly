@@ -71,5 +71,15 @@
             <artifactId>jfreechart</artifactId>
             <version>1.0.13</version>
         </dependency>
+        <dependency>
+            <groupId>jssc</groupId>
+            <artifactId>jSSC-2.6.0</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>unknown.binary</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
