@@ -291,9 +291,9 @@ public class VehiculoForm extends JInternalFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int[] selected = masterTable.getSelectedRows();
-        List<com.udec.benlly.Vehiculo> toRemove = new ArrayList<com.udec.benlly.Vehiculo>(selected.length);
+        List<com.udec.persistencia.Vehiculo> toRemove = new ArrayList<com.udec.persistencia.Vehiculo>(selected.length);
         for (int idx = 0; idx < selected.length; idx++) {
-            com.udec.benlly.Vehiculo v = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            com.udec.persistencia.Vehiculo v = list.get(masterTable.convertRowIndexToModel(selected[idx]));
             toRemove.add(v);
             entityManager.remove(v);
         }
@@ -301,7 +301,7 @@ public class VehiculoForm extends JInternalFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        com.udec.benlly.Vehiculo v = new com.udec.benlly.Vehiculo();
+        com.udec.persistencia.Vehiculo v = new com.udec.persistencia.Vehiculo();
         entityManager.persist(v);
         list.add(v);
         int row = list.size() - 1;
@@ -316,8 +316,8 @@ public class VehiculoForm extends JInternalFrame {
         } catch (RollbackException rex) {
             rex.printStackTrace();
             entityManager.getTransaction().begin();
-            List<com.udec.benlly.Vehiculo> merged = new ArrayList<com.udec.benlly.Vehiculo>(list.size());
-            for (com.udec.benlly.Vehiculo v : list) {
+            List<com.udec.persistencia.Vehiculo> merged = new ArrayList<com.udec.persistencia.Vehiculo>(list.size());
+            for (com.udec.persistencia.Vehiculo v : list) {
                 merged.add(entityManager.merge(v));
             }
             list.clear();
@@ -329,7 +329,7 @@ public class VehiculoForm extends JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
-    private java.util.List<com.udec.benlly.Vehiculo> list;
+    private java.util.List<com.udec.persistencia.Vehiculo> list;
     private javax.swing.JTextField marcaField;
     private javax.swing.JLabel marcaLabel;
     private javax.swing.JScrollPane masterScrollPane;

@@ -2,13 +2,17 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="proyecto?zeroDateTimeBehavior=convertToNullPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.udec.benlly.Conductor</class>
     <class>com.udec.benlly.Vehiculo</class>
     <class>com.udec.benlly.Recorrido</class>
     <class>com.udec.benlly.Log</class>
     <class>com.udec.benlly.Sensor</class>
     <class>com.udec.benlly.Sensoranalogo</class>
     <class>com.udec.benlly.Sensordigital</class>
+    <class>com.udec.persistencia.Conductor</class>
+    <class>com.udec.persistencia.Log</class>
+    <class>com.udec.persistencia.Recorrido</class>
+    <class>com.udec.persistencia.Sensor</class>
+    <class>com.udec.persistencia.Vehiculo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/proyecto?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.password" value=""/>

@@ -6,13 +6,13 @@
 
 package com.udec.controlador;
 
-import com.udec.benlly.Log;
+import com.udec.persistencia.Log;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import com.udec.benlly.Recorrido;
+import com.udec.persistencia.Recorrido;
 import com.udec.connection.jpaConnection;
 import com.udec.controlador.exceptions.NonexistentEntityException;
 import java.util.List;

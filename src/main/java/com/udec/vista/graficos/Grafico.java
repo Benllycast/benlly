@@ -5,10 +5,10 @@
  */
 package com.udec.vista.graficos;
 
-import com.udec.benlly.Conductor;
-import com.udec.benlly.Recorrido;
-import com.udec.benlly.Sensor;
-import com.udec.benlly.Vehiculo;
+import com.udec.persistencia.Conductor;
+import com.udec.persistencia.Recorrido;
+import com.udec.persistencia.Sensor;
+import com.udec.persistencia.Vehiculo;
 import com.udec.model.ConfiguracionManager;
 import com.udec.model.Valor;
 import java.awt.Color;

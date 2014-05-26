@@ -6,9 +6,9 @@
 
 package com.udec.model.filtros;
 
-import com.udec.benlly.Log;
-import com.udec.benlly.Sensor;
-import com.udec.benlly.Vehiculo;
+import com.udec.persistencia.Log;
+import com.udec.persistencia.Sensor;
+import com.udec.persistencia.Vehiculo;
 import junit.framework.TestCase;
 
 /**

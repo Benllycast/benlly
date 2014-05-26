@@ -6,7 +6,7 @@
 
 package com.udec.model;
 
-import com.udec.benlly.Log;
+import com.udec.persistencia.Log;
 import com.udec.controlador.LogJpaController;
 import java.text.SimpleDateFormat;
 import junit.framework.TestCase;

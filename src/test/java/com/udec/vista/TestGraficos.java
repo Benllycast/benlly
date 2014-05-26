@@ -6,8 +6,8 @@
 
 package com.udec.vista;
 
-import com.udec.benlly.Recorrido;
-import com.udec.benlly.Sensor;
+import com.udec.persistencia.Recorrido;
+import com.udec.persistencia.Sensor;
 import com.udec.controlador.RecorridoJpaController;
 import com.udec.controlador.SensorJpaController;
 import com.udec.model.ConfiguracionManager;

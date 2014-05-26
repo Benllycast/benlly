@@ -5,9 +5,9 @@
  */
 package com.udec.model.filtros;
 
-import com.udec.benlly.Log;
-import com.udec.benlly.Sensor;
-import com.udec.benlly.Vehiculo;
+import com.udec.persistencia.Log;
+import com.udec.persistencia.Sensor;
+import com.udec.persistencia.Vehiculo;
 
 /**
  *
@@ -33,7 +33,7 @@ public abstract class Filtro {
         return lineaLog;
     }
 
-    public void setLog(com.udec.benlly.Log log) {
+    public void setLog(com.udec.persistencia.Log log) {
         this.lineaLog = log;
     }
 

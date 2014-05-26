@@ -6,7 +6,7 @@
 
 package com.udec.model;
 
-import com.udec.benlly.Sensor;
+import com.udec.persistencia.Sensor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

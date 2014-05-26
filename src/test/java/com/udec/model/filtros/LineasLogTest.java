@@ -6,7 +6,7 @@
 
 package com.udec.model.filtros;
 
-import com.udec.benlly.Log;
+import com.udec.persistencia.Log;
 import junit.framework.TestCase;
 
 /**

@@ -5,10 +5,10 @@
  */
 package com.udec.vista;
 
-import com.udec.benlly.Conductor;
-import com.udec.benlly.Recorrido;
-import com.udec.benlly.Sensor;
-import com.udec.benlly.Vehiculo;
+import com.udec.persistencia.Conductor;
+import com.udec.persistencia.Recorrido;
+import com.udec.persistencia.Sensor;
+import com.udec.persistencia.Vehiculo;
 import com.udec.model.ConfiguracionManager;
 import com.udec.model.Motor;
 import com.udec.model.Valor;
@@ -298,7 +298,7 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JPanel pnlInformacion;
-    private java.util.List<com.udec.benlly.Recorrido> recorridoList;
+    private java.util.List<com.udec.persistencia.Recorrido> recorridoList;
     private javax.persistence.Query recorridoQuery;
     private javax.swing.JTextArea txaConductor;
     private javax.swing.JTextArea txaRecorrido;

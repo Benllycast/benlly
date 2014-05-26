@@ -5,7 +5,7 @@
  */
 package com.udec.vista;
 
-import com.udec.benlly.Vehiculo;
+import com.udec.persistencia.Vehiculo;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.beans.Beans;
@@ -442,9 +442,9 @@ public class SensorForm extends JInternalFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int[] selected = masterTable.getSelectedRows();
-        List<com.udec.benlly.Sensor> toRemove = new ArrayList<com.udec.benlly.Sensor>(selected.length);
+        List<com.udec.persistencia.Sensor> toRemove = new ArrayList<com.udec.persistencia.Sensor>(selected.length);
         for (int idx = 0; idx < selected.length; idx++) {
-            com.udec.benlly.Sensor s = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            com.udec.persistencia.Sensor s = list.get(masterTable.convertRowIndexToModel(selected[idx]));
             toRemove.add(s);
             entityManager.remove(s);
         }
@@ -452,7 +452,7 @@ public class SensorForm extends JInternalFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        com.udec.benlly.Sensor s = new com.udec.benlly.Sensor();
+        com.udec.persistencia.Sensor s = new com.udec.persistencia.Sensor();
         entityManager.persist(s);
         list.add(s);
         int row = list.size() - 1;
@@ -467,8 +467,8 @@ public class SensorForm extends JInternalFrame {
         } catch (RollbackException rex) {
             rex.printStackTrace();
             entityManager.getTransaction().begin();
-            List<com.udec.benlly.Sensor> merged = new ArrayList<com.udec.benlly.Sensor>(list.size());
-            for (com.udec.benlly.Sensor s : list) {
+            List<com.udec.persistencia.Sensor> merged = new ArrayList<com.udec.persistencia.Sensor>(list.size());
+            for (com.udec.persistencia.Sensor s : list) {
                 merged.add(entityManager.merge(s));
             }
             list.clear();
@@ -531,7 +531,7 @@ public class SensorForm extends JInternalFrame {
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private java.util.List<com.udec.benlly.Sensor> list;
+    private java.util.List<com.udec.persistencia.Sensor> list;
     private javax.swing.JTextField magnitudField;
     private javax.swing.JLabel magnitudLabel;
     private javax.swing.JTextField magnitudMaximaField;
@@ -557,7 +557,7 @@ public class SensorForm extends JInternalFrame {
     private javax.swing.JLabel tipoLabel;
     private javax.swing.JTextField uvicacionField;
     private javax.swing.JLabel uvicacionLabel;
-    private java.util.List<com.udec.benlly.Vehiculo> vehiculoList;
+    private java.util.List<com.udec.persistencia.Vehiculo> vehiculoList;
     private javax.persistence.Query vehiculoQuery;
     private javax.swing.JLabel vehiculoidVehiculoLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

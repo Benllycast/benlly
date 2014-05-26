@@ -291,9 +291,9 @@ public class ConductorForm extends JInternalFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int[] selected = masterTable.getSelectedRows();
-        List<com.udec.benlly.Conductor> toRemove = new ArrayList<com.udec.benlly.Conductor>(selected.length);
+        List<com.udec.persistencia.Conductor> toRemove = new ArrayList<com.udec.persistencia.Conductor>(selected.length);
         for (int idx = 0; idx < selected.length; idx++) {
-            com.udec.benlly.Conductor c = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            com.udec.persistencia.Conductor c = list.get(masterTable.convertRowIndexToModel(selected[idx]));
             toRemove.add(c);
             entityManager.remove(c);
         }
@@ -301,7 +301,7 @@ public class ConductorForm extends JInternalFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        com.udec.benlly.Conductor c = new com.udec.benlly.Conductor();
+        com.udec.persistencia.Conductor c = new com.udec.persistencia.Conductor();
         entityManager.persist(c);
         list.add(c);
         int row = list.size() - 1;
@@ -316,8 +316,8 @@ public class ConductorForm extends JInternalFrame {
         } catch (RollbackException rex) {
             rex.printStackTrace();
             entityManager.getTransaction().begin();
-            List<com.udec.benlly.Conductor> merged = new ArrayList<com.udec.benlly.Conductor>(list.size());
-            for (com.udec.benlly.Conductor c : list) {
+            List<com.udec.persistencia.Conductor> merged = new ArrayList<com.udec.persistencia.Conductor>(list.size());
+            for (com.udec.persistencia.Conductor c : list) {
                 merged.add(entityManager.merge(c));
             }
             list.clear();
@@ -333,7 +333,7 @@ public class ConductorForm extends JInternalFrame {
     private javax.swing.JLabel identificacionLabel;
     private javax.swing.JTextField licenciaField;
     private javax.swing.JLabel licenciaLabel;
-    private java.util.List<com.udec.benlly.Conductor> list;
+    private java.util.List<com.udec.persistencia.Conductor> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JButton newButton;

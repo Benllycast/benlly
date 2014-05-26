@@ -5,10 +5,10 @@
  */
 package com.udec.model;
 
-import com.udec.benlly.Log;
-import com.udec.benlly.Recorrido;
-import com.udec.benlly.Sensor;
-import com.udec.benlly.Vehiculo;
+import com.udec.persistencia.Log;
+import com.udec.persistencia.Recorrido;
+import com.udec.persistencia.Sensor;
+import com.udec.persistencia.Vehiculo;
 import com.udec.controlador.RecorridoJpaController;
 import com.udec.controlador.SensorJpaController;
 import com.udec.controlador.VehiculoJpaController;

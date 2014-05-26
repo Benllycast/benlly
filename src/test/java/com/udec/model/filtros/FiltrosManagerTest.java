@@ -6,7 +6,7 @@
 
 package com.udec.model.filtros;
 
-import com.udec.benlly.Sensor;
+import com.udec.persistencia.Sensor;
 import junit.framework.TestCase;
 /**
  *

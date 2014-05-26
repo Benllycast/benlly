@@ -5,9 +5,9 @@
  */
 package com.udec.util;
 
-import com.udec.benlly.Conductor;
-import com.udec.benlly.Recorrido;
-import com.udec.benlly.Vehiculo;
+import com.udec.persistencia.Conductor;
+import com.udec.persistencia.Recorrido;
+import com.udec.persistencia.Vehiculo;
 
 /**
  *

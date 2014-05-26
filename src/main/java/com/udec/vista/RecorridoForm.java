@@ -5,9 +5,9 @@
  */
 package com.udec.vista;
 
-import com.udec.benlly.Conductor;
-import com.udec.benlly.Log;
-import com.udec.benlly.Vehiculo;
+import com.udec.persistencia.Conductor;
+import com.udec.persistencia.Log;
+import com.udec.persistencia.Vehiculo;
 import com.udec.controlador.LogJpaController;
 import java.awt.Component;
 import java.beans.Beans;
@@ -479,9 +479,9 @@ public class RecorridoForm extends JInternalFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         int[] selected = masterTable.getSelectedRows();
-        List<com.udec.benlly.Recorrido> toRemove = new ArrayList<com.udec.benlly.Recorrido>(selected.length);
+        List<com.udec.persistencia.Recorrido> toRemove = new ArrayList<com.udec.persistencia.Recorrido>(selected.length);
         for (int idx = 0; idx < selected.length; idx++) {
-            com.udec.benlly.Recorrido r = list.get(masterTable.convertRowIndexToModel(selected[idx]));
+            com.udec.persistencia.Recorrido r = list.get(masterTable.convertRowIndexToModel(selected[idx]));
             toRemove.add(r);
             entityManager.remove(r);
         }
@@ -489,7 +489,7 @@ public class RecorridoForm extends JInternalFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        com.udec.benlly.Recorrido r = new com.udec.benlly.Recorrido();
+        com.udec.persistencia.Recorrido r = new com.udec.persistencia.Recorrido();
         r.setHoraFinalizacion(new Date());
         r.setHoraInicio(new Date());
         r.setHoraLlegadaProgramada(new Date());
@@ -508,8 +508,8 @@ public class RecorridoForm extends JInternalFrame {
         } catch (RollbackException rex) {
             rex.printStackTrace();
             entityManager.getTransaction().begin();
-            List<com.udec.benlly.Recorrido> merged = new ArrayList<com.udec.benlly.Recorrido>(list.size());
-            for (com.udec.benlly.Recorrido r : list) {
+            List<com.udec.persistencia.Recorrido> merged = new ArrayList<com.udec.persistencia.Recorrido>(list.size());
+            for (com.udec.persistencia.Recorrido r : list) {
                 merged.add(entityManager.merge(r));
             }
             list.clear();
@@ -532,7 +532,7 @@ public class RecorridoForm extends JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int selected = masterTable.getSelectedRow();
-        com.udec.benlly.Recorrido r = list.get(masterTable.convertRowIndexToModel(selected));
+        com.udec.persistencia.Recorrido r = list.get(masterTable.convertRowIndexToModel(selected));
         File file;
         FileReader reader;
         BufferedReader buffer;
@@ -615,7 +615,7 @@ public class RecorridoForm extends JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.util.List<com.udec.benlly.Conductor> conductorList;
+    private java.util.List<com.udec.persistencia.Conductor> conductorList;
     private javax.persistence.Query conductorQuery;
     private javax.swing.JLabel conductoridConductorLabel;
     private javax.swing.JButton deleteButton;
@@ -637,7 +637,7 @@ public class RecorridoForm extends JInternalFrame {
     private javax.swing.JSpinner jSpinner4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private java.util.List<com.udec.benlly.Recorrido> list;
+    private java.util.List<com.udec.persistencia.Recorrido> list;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JButton newButton;
@@ -648,7 +648,7 @@ public class RecorridoForm extends JInternalFrame {
     private javax.persistence.Query query;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton saveButton;
-    private java.util.List<com.udec.benlly.Vehiculo> vehiculoList;
+    private java.util.List<com.udec.persistencia.Vehiculo> vehiculoList;
     private javax.persistence.Query vehiculoQuery;
     private javax.swing.JLabel vehiculoidVehiculoLabel;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

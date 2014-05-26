@@ -27,7 +27,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;com.udec.benlly.Recorrido&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;com.udec.persistencia.Recorrido&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>
