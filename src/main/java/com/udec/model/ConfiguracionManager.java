@@ -3,29 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.udec.model;
 
 import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author windows7
  */
 public final class ConfiguracionManager {
-    public static final short CANAL_ACC_1 = 0;
-    public static final short CANAL_ACC_2 = 1;
-    public static final short CANAL_ACC_3 = 2;
+
+    public static final short CANAL_ACC_X = 0;
+    public static final short CANAL_ACC_Y = 1;
+    public static final short CANAL_ACC_Z = 2;
     public static final short CANAL_AD_VEL = 3;
     public static final short CANAL_AD_RPM = 4;
     public static final short CANAL_DIG_VEL = 5;
     public static final short CANAL_DIG_RPM = 6;
     public static final String CONEXION = "proyecto?zeroDateTimeBehavior=convertToNullPU";
     private static final ResourceBundle bundle = ResourceBundle.getBundle("config/config");
-    
+
     private static EntityManagerFactory emf = null;
 
     public static void createEntityManagerFactory() {
@@ -52,24 +53,26 @@ public final class ConfiguracionManager {
         }
         return em;
     }
-    
+
     public static EntityManagerFactory getEntityManagerFactory() {
         if (emf == null) {
             createEntityManagerFactory();
         }
         return emf;
     }
-    
-    public static String getString(String s){
+
+    public static String getString(String s) {
         return ConfiguracionManager.bundle.getString(s);
     }
-    
-    public static String getTitleForGrafic(Short canal){
-        switch(canal){
-            case ConfiguracionManager.CANAL_ACC_1:
-            case ConfiguracionManager.CANAL_ACC_2:
-            case ConfiguracionManager.CANAL_ACC_3:
-                return ConfiguracionManager.bundle.getString("com.config.graficos.titulo.canalAceleracion");
+
+    public static String getTitleForGrafic(Short canal) {
+        switch (canal) {
+            case ConfiguracionManager.CANAL_ACC_X:
+                return ConfiguracionManager.bundle.getString("com.config.graficos.titulo.canalAceleracion.X");
+            case ConfiguracionManager.CANAL_ACC_Y:
+                return ConfiguracionManager.bundle.getString("com.config.graficos.titulo.canalAceleracion.Y");
+            case ConfiguracionManager.CANAL_ACC_Z:
+                return ConfiguracionManager.bundle.getString("com.config.graficos.titulo.canalAceleracion.Z");
             case ConfiguracionManager.CANAL_AD_VEL:
                 return ConfiguracionManager.bundle.getString("com.config.graficos.titulo.canalVelocidad");
             case ConfiguracionManager.CANAL_AD_RPM:
@@ -80,6 +83,17 @@ public final class ConfiguracionManager {
                 return ConfiguracionManager.bundle.getString("com.config.graficos.titulo.canalRevoluciones");
             default:
                 return null;
+        }
+    }
+
+    public static void conectarBD() {
+        if (getEntityManager() == null) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "No se puede conectar a la base de datos",
+                    "Conexion a la base de datos",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 }

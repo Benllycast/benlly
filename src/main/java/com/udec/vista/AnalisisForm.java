@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -85,10 +86,15 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
         setClosable(true);
         setMaximizable(true);
         setTitle("Analisi de recorridos");
+        setMinimumSize(new java.awt.Dimension(1000, 580));
+        setPreferredSize(new java.awt.Dimension(1000, 580));
+
+        jScrollPane1.setDoubleBuffered(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Informacion de Recorrido:");
 
+        txaRecorrido.setEditable(false);
         txaRecorrido.setColumns(20);
         txaRecorrido.setRows(5);
         txaRecorrido.setTabSize(4);
@@ -97,6 +103,7 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Informacion del vehiculo");
 
+        txaVehiculo.setEditable(false);
         txaVehiculo.setColumns(20);
         txaVehiculo.setRows(5);
         txaVehiculo.setTabSize(4);
@@ -106,6 +113,7 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
         jLabel3.setText("Informacion de Conductor");
         jLabel3.setToolTipText("");
 
+        txaConductor.setEditable(false);
         txaConductor.setColumns(20);
         txaConductor.setRows(5);
         txaConductor.setTabSize(4);
@@ -113,9 +121,7 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jpnlGraficos.setMaximumSize(new java.awt.Dimension(622, 32767));
-        jpnlGraficos.setMinimumSize(new java.awt.Dimension(622, 10));
-        jpnlGraficos.setPreferredSize(new java.awt.Dimension(622, 0));
+        jpnlGraficos.setLayout(new javax.swing.BoxLayout(jpnlGraficos, javax.swing.BoxLayout.Y_AXIS));
 
         javax.swing.GroupLayout pnlInformacionLayout = new javax.swing.GroupLayout(pnlInformacion);
         pnlInformacion.setLayout(pnlInformacionLayout);
@@ -133,7 +139,7 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpnlGraficos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpnlGraficos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlInformacionLayout.setVerticalGroup(
@@ -143,19 +149,21 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpnlGraficos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator3)
                     .addGroup(pnlInformacionLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 29, Short.MAX_VALUE)))
+                        .addGroup(pnlInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jpnlGraficos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlInformacionLayout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -232,8 +240,8 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(masterScrollPane)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE)
+                    .addComponent(masterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -247,7 +255,7 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -259,25 +267,34 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int selected = masterTable.getSelectedRow();
+        if (selected < 0) {
+            JOptionPane.showMessageDialog(this, "Seleccione un recorrido", "Analisis de Recorridos", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         Recorrido recorrido = recorridoList.get(masterTable.convertRowIndexToModel(selected));
         Vehiculo vehiculo = recorrido.getVehiculoidVehiculo();
         List<Sensor> sensorList = vehiculo.getSensorList();
-        for (Sensor sensor : sensorList) {
-            try {
-                Motor.setRecorrido(recorrido);
-                Motor.init();
-                Motor.clasificarValores();
+        try {
+            Motor.setRecorrido(recorrido);
+            Motor.init();
+            Motor.clasificarValores();
+            for (Sensor sensor : sensorList) {
                 List<Valor> listValor = Motor.getListValorBySensor(sensor);
                 Grafico grafico = new Grafico(listValor, sensor, recorrido);
                 XYDataset dataset = grafico.createDataset();
                 JFreeChart chart = grafico.createChart(dataset);
                 JPanel panel = grafico.createCharPanel(chart);
                 this.jpnlGraficos.add(panel);
-                jpnlGraficos.validate();
+                this.jpnlGraficos.updateUI();
+                this.pack();
                 //break;
-            } catch (MotorException ex) {
-                Logger.getLogger(AnalisisForm.class.getName()).log(Level.SEVERE, null, ex);
             }
+            this.jpnlGraficos.revalidate();
+            this.jpnlGraficos.repaint();
+            this.jpnlGraficos.validate();
+            
+        } catch (MotorException ex) {
+            Logger.getLogger(AnalisisForm.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed

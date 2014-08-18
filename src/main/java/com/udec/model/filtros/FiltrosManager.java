@@ -64,9 +64,9 @@ public class FiltrosManager {
      */
     Filtro crearFiltro(Sensor sensor){
         switch(sensor.getCanal()){
-            case ConfiguracionManager.CANAL_ACC_1:
-            case ConfiguracionManager.CANAL_ACC_2:
-            case ConfiguracionManager.CANAL_ACC_3:
+            case ConfiguracionManager.CANAL_ACC_X:
+            case ConfiguracionManager.CANAL_ACC_Y:
+            case ConfiguracionManager.CANAL_ACC_Z:
                 return new FiltroAnalogoAceleracion();
             case ConfiguracionManager.CANAL_AD_VEL:
                 return new FiltroAnalogoVelocidad();

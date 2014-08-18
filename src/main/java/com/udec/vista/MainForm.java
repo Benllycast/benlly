@@ -6,6 +6,7 @@
 package com.udec.vista;
 
 import com.udec.device.SerialDeviceConfigForm;
+import com.udec.model.ConfiguracionManager;
 import java.awt.Container;
 import java.awt.event.MouseListener;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -261,7 +262,9 @@ public class MainForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
+                ConfiguracionManager.conectarBD();
                 new MainForm().setVisible(true);
             }
         });

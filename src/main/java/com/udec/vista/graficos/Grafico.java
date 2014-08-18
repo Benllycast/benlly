@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -119,7 +120,7 @@ public class Grafico {
 
     public JPanel createCharPanel(JFreeChart chart) {
         ChartPanel charPanel = new ChartPanel(chart);
-        charPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        charPanel.setPreferredSize(new java.awt.Dimension(600, 270));
         charPanel.setMouseZoomable(true, false);
         //this.frame.setContentPane(charPanel);
         return charPanel;

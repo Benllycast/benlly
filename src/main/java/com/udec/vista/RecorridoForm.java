@@ -14,6 +14,8 @@ import java.beans.Beans;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -608,7 +610,7 @@ public class RecorridoForm extends JInternalFrame {
             //entrada.close();
             reader.close();
             System.out.println("ha terminado!!!!");
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException | ParseException e) {
             System.err.println("Ocurrio un error: " + e.getMessage());
         }
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -16,7 +16,6 @@ import com.udec.model.exceptions.MotorException;
 import com.udec.model.filtros.Filtro;
 import com.udec.model.filtros.FiltroAnalogoAceleracion;
 import com.udec.model.filtros.FiltrosManager;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,7 +50,7 @@ public class MotorTest extends TestCase {
         s = new SensorJpaController(emf);
         v = new VehiculoJpaController(emf);
         this.recorrido = r.findRecorrido(1);
-        this.sensor = s.findSensor(1);
+        this.sensor = s.findSensor(3);
         this.vehiculo = v.findVehiculo(1);
         Motor.reset();
     }
@@ -130,9 +129,9 @@ public class MotorTest extends TestCase {
     }
 
     public void testGetListValorBySensor() {
-        System.out.println("\n///////// testGetListBySensor////////");
+        System.out.println("\n///////// testGetListValoresBySensor////////");
         try {
-            Sensor sen = this.s.findSensor(2);
+            Sensor sen = this.s.findSensor(3);
             Motor.setRecorrido(this.recorrido);
             boolean init = Motor.init();
             if (init) {
@@ -149,5 +148,4 @@ public class MotorTest extends TestCase {
             Logger.getLogger(MotorTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

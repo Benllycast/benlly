@@ -6,7 +6,10 @@
 
 package com.udec.model.filtros;
 
+import com.udec.model.ConfiguracionManager;
+import com.udec.persistencia.Log;
 import com.udec.persistencia.Sensor;
+import javax.persistence.EntityManager;
 import junit.framework.TestCase;
 /**
  *
@@ -30,52 +33,51 @@ public class FiltrosManagerTest extends TestCase {
 
     public void testGetFiltroAcceleracion() {
         System.out.println("getFiltro aceleracion");
-        Sensor linea = new Sensor();
+        Sensor sensor = new Sensor();
         
         FiltrosManager instance = new FiltrosManager();
         Filtro expResult = null;
-        linea.setCanal((short)0);
-        Filtro result = instance.crearFiltro(linea);
+        sensor.setCanal((short)0);
+        Filtro result = instance.crearFiltro(sensor);
         assertTrue(result instanceof FiltroAnalogoAceleracion);
-        linea.setCanal((short)1);
-        result = instance.crearFiltro(linea);
+        sensor.setCanal((short)1);
+        result = instance.crearFiltro(sensor);
         assertTrue(result instanceof FiltroAnalogoAceleracion);
-        linea.setCanal((short)2);
-        result = instance.crearFiltro(linea);
+        sensor.setCanal((short)2);
+        result = instance.crearFiltro(sensor);
         assertTrue(result instanceof FiltroAnalogoAceleracion);
     }
     public void testGetFiltroAnalogoVelocidad() {
         System.out.println("getFiltro Analogo Velocidad");
-        Sensor linea = new Sensor();
-        linea.setCanal((short)3);
+        Sensor sensor = new Sensor();
+        sensor.setCanal((short)3);
         FiltrosManager instance = new FiltrosManager();
-        Filtro result = instance.crearFiltro(linea);
+        Filtro result = instance.crearFiltro(sensor);
         assertTrue(result instanceof FiltroAnalogoVelocidad);
     }
     public void testGetFiltroAnalogoRPM() {
         System.out.println("getFiltro Analogo RPM");
-        Sensor linea = new Sensor();
-        linea.setCanal((short)4);
+        Sensor sensor = new Sensor();
+        sensor.setCanal((short)4);
         FiltrosManager instance = new FiltrosManager();
-        Filtro result = instance.crearFiltro(linea);
+        Filtro result = instance.crearFiltro(sensor);
         assertTrue(result instanceof FiltroAnalogoRPM);
     }
     public void testGetFiltroDigitalVelocidad() {
         System.out.println("getFiltro Digital Velocidad");
-        Sensor linea = new Sensor();
-        linea.setCanal((short)5);
+        Sensor sensor = new Sensor();
+        sensor.setCanal((short)5);
         FiltrosManager instance = new FiltrosManager();
-        Filtro result = instance.crearFiltro(linea);
+        Filtro result = instance.crearFiltro(sensor);
         assertTrue(result instanceof FiltroDigitalVelocidad);
     }
     public void testGetFiltroDigitalRPM() {
         System.out.println("getFiltro Digital RPM");
-        Sensor linea = new Sensor();
-        linea.setCanal((short)6);
+        Sensor sensor = new Sensor();
+        sensor.setCanal((short)6);
         FiltrosManager fm = new FiltrosManager();
-        Filtro result = fm.crearFiltro(linea);
+        Filtro result = fm.crearFiltro(sensor);
         assertTrue(result instanceof FiltroDigitalRPM);
     }
-    
     
 }

@@ -123,7 +123,8 @@ public class Motor {
         List<Valor> listValor = new ArrayList<>();
         for (Log linea : logList) {
             try {
-                listValor.add(Motor.manager.aplicarFiltro(linea));
+                Valor v = Motor.manager.aplicarFiltro(linea);
+                listValor.add(v);
             } catch (Exception ex) {
                 Logger.getLogger(Motor.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
                 throw new MotorException("E R R O R: No se puede convertir Log: " + linea.toString()+" ["+ex.getMessage()+"]");
