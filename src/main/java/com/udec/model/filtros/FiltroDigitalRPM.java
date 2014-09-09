@@ -32,5 +32,10 @@ public class FiltroDigitalRPM extends FiltroDigital implements InterfaceFiltroRP
     public float getValor() {
         return this.getRPM();
     }
+
+    @Override
+    public void execute() {
+        super.configurarValores();
+    }
     
 }

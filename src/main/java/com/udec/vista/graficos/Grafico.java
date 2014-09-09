@@ -25,10 +25,12 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Millisecond;
+import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.ui.RectangleInsets;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 /**
  *
@@ -78,11 +80,14 @@ public class Grafico {
             Object[] point = val.getPoint();
             Date fecha = (Date) point[0];
             double y = ((Float)point[1]).doubleValue();
-            s1.add(new Millisecond(fecha), y);
+            Millisecond x = new Millisecond(fecha);
+            System.err.println("===="+x.toString());
+            s1.add(x, y);
         }
         TimeSeriesCollection dataset = new TimeSeriesCollection();
-        dataset.addSeries(s1);
         dataset.setDomainIsPointsInTime(true);
+        dataset.addSeries(s1);
+        
         return dataset;
 
     }

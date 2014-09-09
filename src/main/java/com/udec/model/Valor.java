@@ -97,6 +97,7 @@ public class Valor {
         calFecha.set(Calendar.MILLISECOND, log.getNumeroDato());
         point[0] = calFecha.getTime();
         point[1] = this.getValorReal();
+        System.out.println("valor=>"+ point[1]+"\t fecha => "+point[0]);
         return point;
     }
     

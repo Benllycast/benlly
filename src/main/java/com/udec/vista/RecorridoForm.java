@@ -555,6 +555,8 @@ public class RecorridoForm extends JInternalFrame {
             // Leer el archivo linea por linea
             Log l = new Log();
             while ((strLinea = buffer.readLine()) != null) {
+                
+                if (strLinea.isEmpty()) continue;
 
                 String aux[] = strLinea.split(":");
 
@@ -583,7 +585,7 @@ public class RecorridoForm extends JInternalFrame {
                 l.setCrc(crc);
                 l.setRecorridoidRecorrido(r);
 
-                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yy/MM/dd");
+                SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yy");
                 String strFecha = "" + strDia + "/" + strMes + "/" + strAnio;
                 Date fecha = null;
 
@@ -612,6 +614,7 @@ public class RecorridoForm extends JInternalFrame {
             System.out.println("ha terminado!!!!");
         } catch (IOException | NumberFormatException | ParseException e) {
             System.err.println("Ocurrio un error: " + e.getMessage());
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

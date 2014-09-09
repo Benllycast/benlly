@@ -102,7 +102,7 @@ public class TestGraficos extends javax.swing.JDialog {
             RecorridoJpaController recorridoController = new RecorridoJpaController(ConfiguracionManager.getEntityManagerFactory());
             SensorJpaController sensorJpaController = new SensorJpaController(ConfiguracionManager.getEntityManagerFactory());
             Recorrido recorrido = recorridoController.findRecorrido(1);
-            Sensor sensor = sensorJpaController.findSensor(1);
+            Sensor sensor = sensorJpaController.findSensor(5);
             Motor.setRecorrido(recorrido);
             Motor.init();
             Motor.clasificarValores();

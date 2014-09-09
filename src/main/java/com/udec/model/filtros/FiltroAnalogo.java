@@ -40,4 +40,8 @@ public abstract class FiltroAnalogo extends Filtro{
                 (this.getSensor().getMagnitudMaxima()-this.getSensor().getMagnitudMinima())
                 );
     }
+    
+    @Override
+    public void execute() {
+    }
 }

@@ -111,6 +111,7 @@ public class FiltrosManager {
                 throw new Exception("No hay filtro para la linea: " + linea.toString());
             }
             filtro.setLog(linea);
+            filtro.execute();
             Valor valor = new Valor(filtro);
             return valor;
         }else

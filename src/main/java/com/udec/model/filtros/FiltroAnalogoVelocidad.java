@@ -29,5 +29,6 @@ public class FiltroAnalogoVelocidad extends FiltroAnalogo implements InterfaceFi
     public float getValor() {
         return this.getVelocidad();
     }
+
     
 }

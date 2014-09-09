@@ -131,7 +131,7 @@ public class MotorTest extends TestCase {
     public void testGetListValorBySensor() {
         System.out.println("\n///////// testGetListValoresBySensor////////");
         try {
-            Sensor sen = this.s.findSensor(3);
+            Sensor sen = this.s.findSensor(5);
             Motor.setRecorrido(this.recorrido);
             boolean init = Motor.init();
             if (init) {

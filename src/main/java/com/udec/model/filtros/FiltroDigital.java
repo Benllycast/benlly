@@ -20,18 +20,16 @@ public abstract class FiltroDigital extends Filtro {
     private static final float PREESCALER = 8.0f;
     private static final float MULTIPLICADOR = 4.0f;
     private final float tiempoTic = TOSC * MULTIPLICADOR * PREESCALER;
-    private float periodoPulso = 0.0f;
-    private float frecuenciaPulso = 0.0f;
-    private float pulsosPorMinuto = 0.0f;
+    private float periodoPulso;// = 0.0f;
+    private float frecuenciaPulso;// = 0.0f;
+    private float pulsosPorMinuto;// = 0.0f;
 
     public FiltroDigital() {
     }
 
     public FiltroDigital(Vehiculo vehiculo1, Log log, Sensor sensor) {
         super(vehiculo1, log, sensor);
-        this.periodoPulso = this.getLog().getValor().floatValue() * this.tiempoTic;
-        this.frecuenciaPulso = 1.0f / this.getPeriodoDePulso();
-        this.pulsosPorMinuto = this.getFrecuenciaDePulso() * MINUTO;
+        this.configurarValores();
     }
 
     float getPulsosPorMinuto() {
@@ -44,6 +42,12 @@ public abstract class FiltroDigital extends Filtro {
 
     private float getPeriodoDePulso() {
         return this.periodoPulso;
+    }
+
+    protected void configurarValores() {
+        this.periodoPulso = this.tiempoTic * this.getLog().getValor().floatValue();
+        this.frecuenciaPulso = 1.0f / this.periodoPulso;
+        this.pulsosPorMinuto = this.frecuenciaPulso * MINUTO;
     }
 
 

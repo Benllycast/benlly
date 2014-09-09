@@ -77,6 +77,23 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("Configuracion de dispositivo");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+                cerrarVentana(evt);
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         btnConfCOM.setText("CONFIGURAR PUERTO SERIAL");
         btnConfCOM.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +103,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         });
 
         btnTestConexion.setText("TEST CONEXION");
+        btnTestConexion.setEnabled(false);
         btnTestConexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTestConexionActionPerformed(evt);
@@ -297,14 +315,18 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
     private void btnConfCOMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfCOMActionPerformed
         // TODO add your handling code here:
         SerialConfigDialog dialog;
-        dialog = new SerialConfigDialog(null, true);
-        dialog.setVisible(true);
         try {
-            if (CommManager.isCommReady()) {
-                this.manager = new ConfigurationDeviceManager(CommManager.getComm());
-                //this.activarCampos();
-                this.getDeviceData();
+            if (!CommManager.isCommReady()) {
+                dialog = new SerialConfigDialog(null, true);
+                dialog.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(SerialDeviceConfigForm.this, "ya existe una conexion", "Conexion con Dispositivo ", JOptionPane.WARNING_MESSAGE);
             }
+            this.manager = new ConfigurationDeviceManager(CommManager.getComm());
+            //this.activarCampos();
+            this.getDeviceData();
+            this.btnTestConexion.setEnabled(true);
+            this.setStateConexion(1);
         } catch (Exception ex) {
             Logger.getLogger(SerialDeviceConfigForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -354,7 +376,13 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int ID = Integer.parseInt(txtID.getText());
         this.setID(ID);
+        this.getDeviceID();
     }//GEN-LAST:event_btnSetIDActionPerformed
+
+    private void cerrarVentana(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_cerrarVentana
+        // TODO add your handling code here:
+        System.out.println("---------Cerrando ventanas----------");
+    }//GEN-LAST:event_cerrarVentana
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -508,7 +536,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
     private void setStateConexion(final int state) {
         switch (state) {
             case 1:
-                this.lblStateConexion.setForeground(Color.GREEN);
+                this.lblStateConexion.setForeground(new Color(0, 128, 0));
                 this.lblStateConexion.setText(ConfiguracionManager.getString("serial.deviceConfig.stateConexion.ok"));
                 break;
             case 0:
@@ -553,7 +581,7 @@ public class SerialDeviceConfigForm extends javax.swing.JInternalFrame {
 
     private void setID(int ID) {
         try {
-            if(this.manager.setID(ID)){
+            if (this.manager.setID(ID)) {
                 JOptionPane.showMessageDialog(null, "ID configurado", title, JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SerialPortException | SerialPortTimeoutException ex) {

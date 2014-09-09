@@ -54,7 +54,7 @@ public final class CommManager {
         try {
             if (comm != null) {
                 respuesta = comm.closePort();
-                comm = null;
+                comm = (respuesta)? null: comm;
                 return respuesta;
             }
         } catch (SerialPortException ex) {

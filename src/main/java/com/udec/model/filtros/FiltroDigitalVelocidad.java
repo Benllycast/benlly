@@ -24,8 +24,7 @@ public class FiltroDigitalVelocidad extends FiltroDigitalRPM implements Interfac
 
     @Override
     public float getVelocidad() {
-        float velocidad = super.getVehiculo().getRadioRueda() * 
-                (this.getVelocidadAngular()/(this.getVehiculo().getRelacionCaja()*this.getVehiculo().getRelacionDiferencial()));
+        float velocidad = super.getVehiculo().getRadioRueda() * (this.getVelocidadAngular()/(this.getVehiculo().getRelacionCaja()*this.getVehiculo().getRelacionDiferencial()));
         return velocidad;
     }
 
@@ -35,6 +34,11 @@ public class FiltroDigitalVelocidad extends FiltroDigitalRPM implements Interfac
 
     private float getRevolucionesPorSegundo() {
         return getRPM()/MINUTO;
+    }
+    
+    @Override
+    public float getValor() {
+        return this.getVelocidad();
     }
 
 }

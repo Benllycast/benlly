@@ -169,7 +169,7 @@ public class AnalisisForm extends javax.swing.JInternalFrame {
 
         jScrollPane1.setViewportView(pnlInformacion);
 
-        masterTable.setColumnSelectionAllowed(true);
+        masterTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         masterTable.getTableHeader().setReorderingAllowed(false);
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, recorridoList, masterTable);

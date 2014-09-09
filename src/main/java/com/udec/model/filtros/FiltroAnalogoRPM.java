@@ -26,5 +26,6 @@ public class FiltroAnalogoRPM extends FiltroAnalogo implements InterfaceFiltroRP
     public float getValor() {
         return getRPM();
     }
+
     
 }

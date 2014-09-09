@@ -54,4 +54,6 @@ public abstract class Filtro {
     }
     
     public abstract float getValor();
+
+    public abstract void execute();
 }
