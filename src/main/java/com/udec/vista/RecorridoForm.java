@@ -9,12 +9,22 @@ import com.udec.persistencia.Conductor;
 import com.udec.persistencia.Log;
 import com.udec.persistencia.Vehiculo;
 import com.udec.controlador.LogJpaController;
+import com.udec.persistencia.Recorrido;
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.beans.Beans;
-import java.io.BufferedReader;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.LineNumberReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,13 +33,21 @@ import java.util.Date;
 
 import java.util.List;
 import javax.persistence.RollbackException;
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
@@ -533,30 +551,59 @@ public class RecorridoForm extends JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int selected = masterTable.getSelectedRow();
-        com.udec.persistencia.Recorrido r = list.get(masterTable.convertRowIndexToModel(selected));
+
+        ProgressBar barra = new ProgressBar();
+        //barra.setModal(true);
+        barra.setVisible(true);
+        barra.ejecutarTarea();
+        //barra.dispose();
+        //ingreserDatos();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void ingreserDatos() {
+
+        int totalLineas = 0;
+        int selected = -1;
+        int numeroLinea = -1;
+        String nombreDeArchivo;
+        String strLinea;
+        Recorrido r;
         File file;
         FileReader reader;
-        BufferedReader buffer;
+        //BufferedReader buffer;
+        LineNumberReader buffer;
         LogJpaController ljc;
+        Log l;
+
         try {
+
             ljc = new LogJpaController();
+            l = new Log();
+            selected = masterTable.getSelectedRow();
+            r = list.get(masterTable.convertRowIndexToModel(selected));
+            nombreDeArchivo = jTextField1.getText();
+            totalLineas = countLines(nombreDeArchivo);
+
             /*
              FileInputStream fstream = new FileInputStream(jTextField1.getText());
              // Creamos el objeto de entrada
              DataInputStream entrada = new DataInputStream(fstream);
              */
             // Abrimos el archivo
-            file = new File(jTextField1.getText());
+            file = new File(nombreDeArchivo);
             reader = new FileReader(file);
+
             // Creamos el Buffer de Lectura
-            buffer = new BufferedReader(reader);
-            String strLinea;
+            //buffer = new BufferedReader(reader);
+            buffer = new LineNumberReader(reader);
+
             // Leer el archivo linea por linea
-            Log l = new Log();
             while ((strLinea = buffer.readLine()) != null) {
-                
-                if (strLinea.isEmpty()) continue;
+                numeroLinea = buffer.getLineNumber() / 2;
+
+                if (strLinea.isEmpty()) {
+                    continue;
+                }
 
                 String aux[] = strLinea.split(":");
 
@@ -606,18 +653,19 @@ public class RecorridoForm extends JInternalFrame {
                 hora = calendar.getTime();
                 l.setTiempo(hora);
 
-                ljc.create(l);
+                //ljc.create(l);
+                System.err.println("=== " + numeroLinea + " de " + totalLineas + " ==> " + l.toString());
             }
             // Cerramos el archivo
             //entrada.close();
+            buffer.close();
             reader.close();
-            System.out.println("ha terminado!!!!");
+            System.err.println("ha terminado!!!!");
         } catch (IOException | NumberFormatException | ParseException e) {
             System.err.println("Ocurrio un error: " + e.getMessage());
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.util.List<com.udec.persistencia.Conductor> conductorList;
@@ -659,4 +707,190 @@ public class RecorridoForm extends JInternalFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
+    public class ProgressBar extends JDialog implements PropertyChangeListener {
+
+        private JProgressBar progressBar;
+        private JTextArea taskOutput;
+        private Task task;
+
+        public ProgressBar() {
+
+            progressBar = new JProgressBar(0, 100);
+            progressBar.setValue(0);
+            progressBar.setStringPainted(true);
+
+            taskOutput = new JTextArea(5, 20);
+            taskOutput.setMargin(new Insets(5, 5, 5, 5));
+            taskOutput.setEditable(false);
+
+            JPanel panel = new JPanel();
+
+            panel.add(progressBar);
+
+            this.setLayout(new BorderLayout());
+            add(panel, BorderLayout.PAGE_START);
+            add(new JScrollPane(taskOutput), BorderLayout.CENTER);
+            setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            this.pack();
+
+        }
+
+        class Task extends SwingWorker<Void, Void> {
+
+            @Override
+            public Void doInBackground() {
+                int totalLineas = 0;
+                int selected = -1;
+                int numeroLinea = -1;
+                String nombreDeArchivo;
+                String strLinea;
+                Recorrido r;
+                File file;
+                FileReader reader;
+                LineNumberReader buffer;
+                LogJpaController ljc;
+                Log l;
+
+                try {
+
+                    ljc = new LogJpaController();
+                    l = new Log();
+                    selected = masterTable.getSelectedRow();
+                    r = list.get(masterTable.convertRowIndexToModel(selected));
+                    nombreDeArchivo = jTextField1.getText();
+                    totalLineas = countLines(nombreDeArchivo);
+
+                    // Abrimos el archivo
+                    file = new File(nombreDeArchivo);
+                    reader = new FileReader(file);
+
+                    // Creamos el Buffer de Lectura
+                    //buffer = new BufferedReader(reader);
+                    buffer = new LineNumberReader(reader);
+
+                    progressBar.setMaximum(totalLineas);
+
+                    // Leer el archivo linea por linea
+                    while ((strLinea = buffer.readLine()) != null) {
+                        numeroLinea = buffer.getLineNumber() / 2;
+
+                        if (strLinea.isEmpty()) {
+                            continue;
+                        }
+
+                        String aux[] = strLinea.split(":");
+
+                        int dia = Integer.parseInt(aux[0].trim(), 16);
+                        int mes = Integer.parseInt(aux[1].trim(), 16);
+                        int anio = Integer.parseInt(aux[2].trim(), 16);
+                        int horas = Integer.parseInt(aux[3].trim(), 16);
+                        int minutos = Integer.parseInt(aux[4].trim(), 16);
+                        int segundos = Integer.parseInt(aux[5].trim(), 16);
+                        short consecutivo_sensor = Short.parseShort(aux[6].trim(), 16);
+                        short dato = Short.parseShort(aux[7].trim(), 16);
+                        int valor = Integer.parseInt(aux[8].trim(), 16);
+                        int crc = Integer.parseInt(aux[9].trim(), 16);
+
+                        String strDia = (dia > 9 ? "" + dia : "0" + dia);
+                        String strMes = (mes > 9 ? "" + mes : "0" + mes);
+                        String strAnio = (anio > 9 ? "" + anio : "0" + anio);
+
+                        String strHoras = (horas > 9 ? "" + horas : "0" + horas);
+                        String strMinutos = (minutos > 9 ? "" + minutos : "0" + minutos);
+                        String strSegundos = (segundos > 9 ? "" + segundos : "0" + segundos);
+
+                        l.setCanal(consecutivo_sensor);
+                        l.setNumeroDato(dato);
+                        l.setValor(valor);
+                        l.setCrc(crc);
+                        l.setRecorridoidRecorrido(r);
+
+                        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("dd/MM/yy");
+                        String strFecha = "" + strDia + "/" + strMes + "/" + strAnio;
+                        Date fecha = null;
+
+                        fecha = formatoDelTexto.parse(strFecha);
+
+                        l.setFecha(fecha);
+
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(fecha);
+                        calendar.add(Calendar.HOUR_OF_DAY, horas);
+                        calendar.add(Calendar.MINUTE, minutos);
+                        calendar.add(Calendar.SECOND, segundos);
+
+                        Date hora = null;
+
+                        hora = calendar.getTime();
+                        l.setTiempo(hora);
+
+                        ljc.create(l);
+                        System.err.println("=== " + numeroLinea + " de " + totalLineas + " ==> " + l.toString());
+                        taskOutput.append("\nLinea " + numeroLinea + " de " + totalLineas);
+                        progressBar.setValue(numeroLinea);
+                        //setProgress((numeroLinea/totalLineas));
+                    }
+
+                    // Cerramos el archivo
+                    buffer.close();
+                    reader.close();
+                    System.err.println("ha terminado!!!!");
+
+                } catch (IOException | NumberFormatException | ParseException e) {
+                    System.err.println("Ocurrio un error: " + e.getMessage());
+                    taskOutput.append("\nError al cargar el archivo");
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            public void done() {
+                Toolkit.getDefaultToolkit().beep();
+                taskOutput.append("\n=== Archivo cargado ===");
+                JOptionPane.showMessageDialog(ProgressBar.this, "Carga terminada");
+                //ProgressBar.this.dispose();
+                setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            }
+        }
+
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            if ("progress" == evt.getPropertyName()) {
+                int progress = (Integer) evt.getNewValue();
+                progressBar.setValue(progress);
+                taskOutput.append(String.format("Completed %d%% of task.\n", task.getProgress()));
+            }
+        }
+
+        public void ejecutarTarea() {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            task = new Task();
+            task.addPropertyChangeListener(ProgressBar.this);
+            task.execute();
+
+        }
+
+    }
+
+    public static int countLines(String filename) throws IOException {
+        InputStream is = new BufferedInputStream(new FileInputStream(filename));
+        try {
+            byte[] c = new byte[1024];
+            int count = 0;
+            int readChars = 0;
+            boolean empty = true;
+            while ((readChars = is.read(c)) != -1) {
+                empty = false;
+                for (int i = 0; i < readChars; ++i) {
+                    if (c[i] == '\n') {
+                        ++count;
+                    }
+                }
+            }
+            return (count == 0 && !empty) ? 1 : count;
+        } finally {
+            is.close();
+        }
+    }
 }
